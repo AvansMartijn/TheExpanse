@@ -27,7 +27,21 @@ void drawStuff() {
     window.clear();
     /*window.drawRect(50, 50, 50, 50);
     window.drawLine(Vector{ 50, 50 }, Vector{ 200, 250 });*/
-    window.drawRect(5, 5, 0 + offset, 0 + offset);
+    //window.drawRect(5, 5, 0 + offset, 0 + offset);
+
+    //TODO FIX OFFSETS AND SCALES TO PAINTING
+
+    //Vec A
+    Vector vecA{ (2 * scale) + offset,(3 * scale * -1) + offset };
+    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecA, false);
+
+    //Vec B
+    Vector vecB{ (1 * scale) + offset,(-3 * scale * -1) + offset };
+    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecB, false);
+
+    //Vec A + B
+    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecB+vecA, false);
+
     drawGraph();
     window.renderPresent();
 }
