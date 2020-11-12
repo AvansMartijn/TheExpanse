@@ -13,11 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{2e164545-3fd9-4eb1-9ad0-56b281a44dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{82388805-4a50-40c6-9c86-b08e2a494209}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TheExpanse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -25,6 +32,15 @@
   <ItemGroup>
     <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
+
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Screen</Filter>
+
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,12 +1,45 @@
 // TheExpanse.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include <iostream>
+#include <SDL.h>
+#undef main
+#include "Window.h"
+
+
+Window window{1080, 720};
+void drawStuff() {
+    // Render the rect to the screen
+    window.clear();
+    window.drawRect(50, 50, 50, 50);
+    window.renderPresent();
+}
+
+void programLoop() {
+    
+    while (true)
+    {
+        // Get the next event
+        SDL_Event event;
+        if (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                // Break out of the loop on quit
+                break;
+            }
+        }
+        drawStuff();
+    }
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    programLoop();
+    return 0;
 }
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
