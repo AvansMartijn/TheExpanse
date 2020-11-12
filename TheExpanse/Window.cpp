@@ -9,6 +9,8 @@ Window::Window(int width, int height) {
         680, 480,
         0);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    offset = 100.0f;
+    scale = 20.0f;
 }
 
 void Window::drawRect(float width, float height, float x, float y) {
@@ -24,6 +26,16 @@ void Window::drawRect(float width, float height, float x, float y) {
 
     // Render rect
     SDL_RenderFillRect(renderer, &r);
+}
+
+void Window::drawLine(const Vector& start, const Vector& end, bool highlighted) {
+    if (highlighted) {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    }
+    else {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    }
+    SDL_RenderDrawLine(renderer, start.x, start.y, end.x, end.y);
 }
 
 void Window::clear() {

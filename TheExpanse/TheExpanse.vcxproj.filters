@@ -32,7 +32,7 @@
   <ItemGroup>
     <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
-
+</ClInclude>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
@@ -40,7 +40,6 @@
   <ItemGroup>
     <ClInclude Include="Window.h">
       <Filter>Header Files\Screen</Filter>
-
-    </ClInclude>
+</ClInclude>
   </ItemGroup>
 </Project>

@@ -7,10 +7,28 @@
 
 
 Window window{1080, 720};
+float offset = 100.0f;
+float scale = 20.0f;
+
+void drawGraph() {
+    for (int i =-5; i < 6; i++) {
+        bool highlighted = false;
+        if (i == 0) {
+            highlighted = true;
+        }
+        //x scale
+        window.drawLine(Vector{ offset + (i * scale), 0}, Vector{ offset + (i * scale), offset + (5 * scale) }, highlighted);
+        // y scale
+        window.drawLine(Vector{ 0, offset + (i * scale) }, Vector{ offset + (5 * scale), offset + (i * scale) }, highlighted);
+    }
+}
 void drawStuff() {
     // Render the rect to the screen
     window.clear();
-    window.drawRect(50, 50, 50, 50);
+    /*window.drawRect(50, 50, 50, 50);
+    window.drawLine(Vector{ 50, 50 }, Vector{ 200, 250 });*/
+    window.drawRect(5, 5, 0 + offset, 0 + offset);
+    drawGraph();
     window.renderPresent();
 }
 

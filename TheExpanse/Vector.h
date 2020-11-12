@@ -2,10 +2,10 @@
 class Vector
 {
 private:
-	int x;
-	int y;
 
 public:
+	int x;
+	int y;
 	Vector();
 	Vector(float x, float y);
 	Vector operator+(const Vector& operand);
