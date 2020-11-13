@@ -6,41 +6,35 @@
 #include "Window.h"
 
 
-Window window{1080, 720};
-float offset = 100.0f;
-float scale = 20.0f;
+Window window{1080, 720, 20.0f, 200.0f };
+//float offset = 100.0f;
+//float scale = 20.0f;
 
 void drawGraph() {
-    for (int i =-5; i < 6; i++) {
+    for (int i =-10; i < 11; i++) {
         bool highlighted = false;
         if (i == 0) {
             highlighted = true;
         }
-        //x scale
-        window.drawLine(Vector{ offset + (i * scale), 0}, Vector{ offset + (i * scale), offset + (5 * scale) }, highlighted);
-        // y scale
-        window.drawLine(Vector{ 0, offset + (i * scale) }, Vector{ offset + (5 * scale), offset + (i * scale) }, highlighted);
+
+        window.drawLine(Vector{ (float)i, -10 }, Vector{ (float)i, 10 }, highlighted);
+        window.drawLine(Vector{ -10, (float)i }, Vector{ 10, (float)i}, highlighted);
     }
 }
 void drawStuff() {
     // Render the rect to the screen
     window.clear();
-    /*window.drawRect(50, 50, 50, 50);
-    window.drawLine(Vector{ 50, 50 }, Vector{ 200, 250 });*/
-    //window.drawRect(5, 5, 0 + offset, 0 + offset);
-
-    //TODO FIX OFFSETS AND SCALES TO PAINTING
-
+   
     //Vec A
-    Vector vecA{ (2 * scale) + offset,(3 * scale * -1) + offset };
-    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecA, false);
+    Vector vecA{ 2, 3 };
+    window.drawLine(vecA);
 
-    //Vec B
-    Vector vecB{ (1 * scale) + offset,(-3 * scale * -1) + offset };
-    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecB, false);
+    ////Vec B
+    Vector vecB{ 1, -4 };
+    window.drawLine(vecB);
 
-    //Vec A + B
-    window.drawLine(Vector{ 0 + offset ,0 + offset }, vecB+vecA, false);
+    ////Vec A + B
+    window.drawLine(vecA-vecB);
 
     drawGraph();
     window.renderPresent();
