@@ -53,7 +53,7 @@ void drawStuff() {
     rows.push_back(cols);
     rows.push_back(cols);
     Matrix matrix3by2{ rows };*/
-    std::vector<std::vector<int>> row;
+    std::vector<std::vector<int>> matrix;
     std::vector<int> cols;
     cols.push_back(1);
     cols.push_back(-2);
