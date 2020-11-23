@@ -11,5 +11,8 @@ public:
 	Vector operator+(const Vector& operand);
 	Vector operator-(const Vector& operand);
 	Vector operator*(const Vector& operand);
+	Vector operator+(int operand);
+	Vector operator-(int operand);
+	Vector operator*(int operand);
 };
 

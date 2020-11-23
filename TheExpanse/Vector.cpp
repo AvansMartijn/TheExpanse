@@ -8,6 +8,9 @@
 Vector::Vector() : x(0), y(0) {}
 Vector::Vector(float x, float y) : x(x), y(y) {}
 
+
+// operator with vector
+
 //Optellen
 Vector Vector::operator+ (const Vector& operand) {
     return Vector(this->x + operand.x, this->y + operand.y);
@@ -21,4 +24,20 @@ Vector Vector::operator- (const Vector& operand) {
 //Vermenigvuldigen
 Vector Vector::operator* (const Vector& operand) {
     return Vector(this->x * operand.x, this->y * operand.y);
+}
+
+//operator with scalar
+//Optellen
+Vector Vector::operator+ (int operand) {
+    return Vector(this->x + operand, this->y + operand);
+}
+
+//Aftrekken
+Vector Vector::operator- (int operand) {
+    return Vector(this->x - operand, this->y - operand);
+}
+
+//Vermenigvuldigen
+Vector Vector::operator* (int operand) {
+    return Vector(this->x * operand, this->y * operand);
 }

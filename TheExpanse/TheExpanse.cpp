@@ -4,6 +4,8 @@
 #include <SDL.h>
 #undef main
 #include "Window.h"
+#include <vector>
+#include "Matrix.h"
 
 
 Window window{1080, 720, 20.0f, 200.0f };
@@ -26,15 +28,39 @@ void drawStuff() {
     window.clear();
    
     //Vec A
-    Vector vecA{ 2, 3 };
-    window.drawLine(vecA);
+   /* Vector vecA{ 2, 3 };
+    window.drawLine(vecA + 3);*/
 
     ////Vec B
-    Vector vecB{ 1, -4 };
-    window.drawLine(vecB);
+    //Vector vecB{ 1, -4 };
+    //window.drawLine(vecB);
 
-    ////Vec A + B
-    window.drawLine(vecA-vecB);
+    //////Vec A + B
+     //window.drawLine(vecA-vecB);
+    /*std::vector<int> cols;
+    cols.push_back(1);
+    cols.push_back(2);
+    std::vector<std::vector<int>> rows;
+    rows.push_back(cols);
+    rows.push_back(cols);
+    rows.push_back(cols);
+    Matrix matrix2by3{ rows };
+    rows.pop_back();
+    rows.pop_back();
+    rows.pop_back();
+    cols.push_back(3);
+    rows.push_back(cols);
+    rows.push_back(cols);
+    rows.push_back(cols);
+    Matrix matrix3by2{ rows };*/
+    std::vector<std::vector<int>> row;
+    std::vector<int> cols;
+    cols.push_back(1);
+    cols.push_back(-2);
+
+    /*matrix.printMatrixToConsole();
+    matrix = matrix * 3;
+    matrix.printMatrixToConsole();*/
 
     drawGraph();
     window.renderPresent();
