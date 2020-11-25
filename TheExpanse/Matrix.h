@@ -4,20 +4,21 @@
 class Matrix
 {
 public:
-	int matrix[10][10];
-	Matrix();
-	Matrix operator*(int operand);
-	//int getAmountOfRows();
-	//int getAmountOfCols();
-	//Matrix(std::vector<std::vector<int>> values);
-	//std::vector<std::vector<int>> values;
-	///*Vector operator+(const Vector& operand);
-	//Vector operator-(const Vector& operand);*/
-	///*Vector operator+(int operand);
-	//Vector operator-(int operand);*/
-	//Matrix operator*(const Vector& operand);
-	//Matrix operator*(const Matrix& operand);
-	//Matrix operator*(int operand);
-	//void printMatrixToConsole();
+	Matrix(int rows, int cols);
+	Matrix(std::vector<std::vector<double>> data);
+	double getValue(int row, int col);
+	void setValue(int row, int col, double value);
+	Matrix operator*(int scalar);
+	Matrix operator*(Matrix operand);
+
+	void printMatrix();
+	std::vector<std::vector<double>> mData;
+
+private:
+	/*						Second ->
+	* First Direction Down	[ 0 5 8]
+	*						[ 2 8 9]
+	* So mData[0][1] = 5
+	*/
 };
 

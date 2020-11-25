@@ -37,26 +37,25 @@ void drawStuff() {
 
     //////Vec A + B
      //window.drawLine(vecA-vecB);
-    /*std::vector<int> cols;
-    cols.push_back(1);
-    cols.push_back(2);
-    std::vector<std::vector<int>> rows;
-    rows.push_back(cols);
-    rows.push_back(cols);
-    rows.push_back(cols);
-    Matrix matrix2by3{ rows };
-    rows.pop_back();
-    rows.pop_back();
-    rows.pop_back();
-    cols.push_back(3);
-    rows.push_back(cols);
-    rows.push_back(cols);
-    rows.push_back(cols);
-    Matrix matrix3by2{ rows };*/
-    std::vector<std::vector<int>> matrix;
-    std::vector<int> cols;
-    cols.push_back(1);
-    cols.push_back(-2);
+
+    Matrix matrix(3, 3);
+
+    matrix.mData[0][0] = 1;
+    matrix.mData[0][1] = 2;
+    matrix.mData[0][2] = 3;
+    matrix.mData[1][0] = 1;
+    matrix.mData[1][1] = 2;
+    matrix.mData[1][2] = 3;
+    matrix.mData[2][0] = 1;
+    matrix.mData[2][1] = 2;
+    matrix.mData[2][2] = 3;
+
+    matrix.printMatrix();
+
+    matrix = matrix * 3;
+
+    matrix.printMatrix();
+   
 
     /*matrix.printMatrixToConsole();
     matrix = matrix * 3;
