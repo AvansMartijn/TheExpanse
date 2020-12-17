@@ -43,9 +43,11 @@ void drawStuff() {
     matrix.mData[0][0] = 1;
     matrix.mData[0][1] = 2;
     matrix.mData[0][2] = 3;
+    
     matrix.mData[1][0] = 1;
     matrix.mData[1][1] = 2;
     matrix.mData[1][2] = 3;
+
     matrix.mData[2][0] = 1;
     matrix.mData[2][1] = 2;
     matrix.mData[2][2] = 3;
