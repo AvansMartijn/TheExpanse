@@ -6,7 +6,7 @@
 
 //Constructors
 Vector::Vector() : x(0), y(0) {}
-Vector::Vector(float x, float y) : x(x), y(y) {}
+Vector::Vector(double x, double y) : x(x), y(y) {}
 
 
 // operator with vector

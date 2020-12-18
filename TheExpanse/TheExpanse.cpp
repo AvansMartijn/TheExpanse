@@ -6,7 +6,8 @@
 #include "Window.h"
 #include <vector>
 #include "Matrix.h"
-
+//Helper Class
+#include "ExpanseHelper.h"
 
 Window window{1080, 720, 20.0f, 200.0f };
 //float offset = 100.0f;
@@ -37,33 +38,18 @@ void drawStuff() {
 
     //////Vec A + B
      //window.drawLine(vecA-vecB);
-
-    Matrix matrix(3, 3);
-
-    matrix.mData[0][0] = 1;
-    matrix.mData[0][1] = 2;
-    matrix.mData[0][2] = 3;
-    
-    matrix.mData[1][0] = 1;
-    matrix.mData[1][1] = 2;
-    matrix.mData[1][2] = 3;
-
-    matrix.mData[2][0] = 1;
-    matrix.mData[2][1] = 2;
-    matrix.mData[2][2] = 3;
-
-    matrix.printMatrix();
-
-    matrix = matrix * 3;
-
-    matrix.printMatrix();
-   
-
-    /*matrix.printMatrixToConsole();
-    matrix = matrix * 3;
-    matrix.printMatrixToConsole();*/
-
     drawGraph();
+
+    ExpanseHelper helper;
+    Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
+
+    TwoDObject tdobj;
+    for (int i = 0; i < tdobj.lines.size(); i++)
+    {
+        tdobj.lines[i] = { translationMatrix * std::get<0>(tdobj.lines[i]), translationMatrix * std::get<1>(tdobj.lines[i]) };
+    }
+    window.drawTwoDObject(tdobj);
+   
     window.renderPresent();
 }
 

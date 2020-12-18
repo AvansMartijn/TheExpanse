@@ -163,12 +163,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExpanseHelper.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="TheExpanse.cpp" />
+    <ClCompile Include="TwoDObject.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExpanseHelper.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="TwoDObject.h" />
     <ClInclude Include="Vector.h" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

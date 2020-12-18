@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "Vector.h"
+#include "TwoDObject.h"
 
 #pragma once
 class Window
@@ -17,5 +18,6 @@ public:
 	void renderPresent();
 	void drawLine(const Vector& start, const Vector& end, bool highlighted);
 	void drawLine(const Vector& end);
+	void drawTwoDObject(const TwoDObject& object);
 };
 
