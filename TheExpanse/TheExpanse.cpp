@@ -41,7 +41,8 @@ void drawStuff() {
     drawGraph();
 
     ExpanseHelper helper;
-    Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
+    //Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
+    Matrix translationMatrix = helper.getTranslationMatrix(0, 0);
 
     TwoDObject tdobj;
     for (int i = 0; i < tdobj.lines.size(); i++)
