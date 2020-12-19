@@ -35,5 +35,37 @@ std::tuple<double, double> TwoDObject::getCenter()
 
 		
 	}*/
-	return std::tuple<double, double>({1.5, 1.5});
+
+
+	std::tuple<double, double> centroid = { 0, 0 };
+	double signedArea = 0.0;
+	double x0 = 0.0; // Current vertex X
+	double y0 = 0.0; // Current vertex Y
+	double x1 = 0.0; // Next vertex X
+	double y1 = 0.0; // Next vertex Y
+	double a = 0.0;  // Partial signed area
+
+	// For all vertices
+	int i = 0;
+	for (i = 0; i < lines.size(); ++i)
+	{
+		x0 = (std::get<0>(lines[i])).x;
+		y0 = (std::get<0>(lines[i])).y;
+		x1 = (std::get<1>(lines[i])).x;
+		y1 = (std::get<1>(lines[i])).y;
+		a = x0 * y1 - x1 * y0;
+		signedArea += a;
+		double centroidX = std::get<0>(centroid) + (x0 + x1) * a;
+		double centroidY = std::get<1>(centroid) + (y0 + y1) * a;
+		centroid = { centroidX, centroidY };
+	}
+
+	signedArea *= 0.5;
+
+	double centroidX = std::get<0>(centroid) / (6.0 * signedArea);
+	double centroidY = std::get<1>(centroid) / (6.0 * signedArea);
+	centroid = { centroidX, centroidY };
+	return centroid;
+
+	//return std::tuple<double, double>({1.5, 1.5});
 }

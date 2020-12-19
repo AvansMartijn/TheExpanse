@@ -50,7 +50,7 @@ void drawStuff() {
         tdobj.lines[i] = { translationMatrix * std::get<0>(tdobj.lines[i]), translationMatrix * std::get<1>(tdobj.lines[i]) };
     }*/
 
-    tdobj = helper.scaleOnLocation(tdobj, 3, 3);
+    tdobj = helper.scaleOnLocation(tdobj, 6, 6);
     
 
     window.drawTwoDObject(tdobj);
