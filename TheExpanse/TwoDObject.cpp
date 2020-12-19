@@ -15,16 +15,11 @@ TwoDObject::TwoDObject()
 	lines.push_back({ { 2, 1 }, {1, 1 } });
 
 	// STAR
-	/*lines.push_back({ { 6.5, 0 }, { 9, 5 } });
-	lines.push_back({ { 9, 5 }, {14, 5.5 } });
-	lines.push_back({ { 14, 5.5 }, {10.5, 9 } });
-	lines.push_back({ { 10.5, 9 }, {12, 14 } });
-	lines.push_back({ { 12, 14 }, {6.5, 11.5 } });
-	lines.push_back({ { 6.5, 11.5 }, {2, 14 } });
-	lines.push_back({ { 2, 14 }, {3.5, 9 } });
-	lines.push_back({ { 3.5, 9 }, {0, 5.5 } });
-	lines.push_back({ { 0, 5.5 }, {5, 5 } });
-	lines.push_back({ { 5, 5 }, {6.5, 0 } });*/
+	/*lines.push_back({ { 4, 4 }, { 0, 4 } });
+	lines.push_back({ { 0, 4 }, { 3.5, 1 } });
+	lines.push_back({ { 3.5, 1 }, { 2, 6 } });
+	lines.push_back({ { 2, 6 }, { 0.5, 1 } });
+	lines.push_back({ { 0.5, 1 }, { 4, 4 } });*/
 }
 
 std::tuple<int, int> TwoDObject::getCenter()
