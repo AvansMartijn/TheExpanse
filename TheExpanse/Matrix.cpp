@@ -85,16 +85,18 @@ Matrix Matrix::operator*(int scalar)
 
 Vector Matrix::operator*(const Vector& operand)
 {
-	Matrix tempMatrix(3, 1);
+	Matrix tempMatrix(_rows, 1);
 	tempMatrix.mData[0][0] = operand.x;
 	tempMatrix.mData[1][0] = operand.y;
-	tempMatrix.mData[2][0] = 1;
+	for (int r = 2; r < _rows; r++) {
+		tempMatrix.mData[r][0] = 1;
+	}
 
 	if (_cols != tempMatrix._rows) {
 		throw std::invalid_argument("Columns of A do not match Rows of B");
 	}
 
-	Matrix newMatrix(3, 1);
+	Matrix newMatrix(_rows, 1);
 
 	for (int i = 0; i < _rows; ++i)
 		for (int k = 0; k < _cols; ++k)

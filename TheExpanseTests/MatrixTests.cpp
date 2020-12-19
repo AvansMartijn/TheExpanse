@@ -226,5 +226,22 @@ namespace TheExpanseTests
 			Assert::AreEqual(b.y, v.y);
 
 		}
+		TEST_METHOD(M2x2_Can_Multiply_Vector)
+		{
+			//1. Arrange
+			ExpanseHelper helpert;
+			Matrix a = helpert.getScalingMatrix(2, 2);
+			Vector b{ 1, 3 };
+
+			//2. Act
+			b = a * b;
+
+			//3. Assert
+			Vector v{ 2, 6 };
+
+			Assert::AreEqual(b.x, v.x);
+			Assert::AreEqual(b.y, v.y);
+
+		}
 	};
 }
