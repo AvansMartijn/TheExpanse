@@ -8,6 +8,9 @@
 #include "../TheExpanse/ExpanseHelper.h"
 #include "../TheExpanse/ExpanseHelper.cpp"
 
+#include "../TheExpanse/TwoDObject.h"
+#include "../TheExpanse/TwoDObject.cpp"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TheExpanseTests
@@ -26,7 +29,7 @@ namespace TheExpanseTests
 
 			a.mData[1][0] = 4;
 			a.mData[1][1] = 0;
-
+			
 			a.mData[2][0] = -1;
 			a.mData[2][1] = 7;
 
@@ -243,5 +246,59 @@ namespace TheExpanseTests
 			Assert::AreEqual(b.y, v.y);
 
 		}
+		TEST_METHOD(TranslationMatrix)
+		{
+			//1. Arrange
+			ExpanseHelper helpert;
+			Matrix a = helpert.getTranslationMatrix(2, 3);
+			Vector b{ 1, 3 };
+
+			//2. Act
+			b = a * b;
+
+			//3. Assert
+			Vector v{ 3, 6 };
+
+			Assert::AreEqual(b.x, v.x);
+			Assert::AreEqual(b.y, v.y);
+
+		}
+
+		TEST_METHOD(ScalingMatrix)
+		{
+			//1. Arrange
+			ExpanseHelper helpert;
+			Matrix a = helpert.getScalingMatrix(2, 2);
+			Vector b{ 0, 3 };
+
+			//2. Act
+			b = a * b;
+
+			//3. Assert
+			Vector v{ 0, 6 };
+
+			Assert::AreEqual(b.x, v.x);
+			Assert::AreEqual(b.y, v.y);
+
+		}
+
+		//TEST_METHOD(ScaleOnSameLocation)
+		//{
+		//	//1. Arrange
+		//	ExpanseHelper helpert;
+		//	Vector b{ 3, 3 };
+
+		//	//helpert.scaleOnLocation()
+
+		//	//2. Act
+		//	b = a * b;
+
+		//	//3. Assert
+		//	Vector v{ 0, 6 };
+
+		//	Assert::AreEqual(b.x, v.x);
+		//	Assert::AreEqual(b.y, v.y);
+
+		//}
 	};
 }
