@@ -7,8 +7,8 @@ class TwoDObject
 {
 public:
 	TwoDObject();
-	std::vector<std::tuple<int, int>> points;
+	//std::vector<std::tuple<int, int>> points;
 	std::vector<std::tuple<Vector, Vector>> lines;
-	std::tuple<int, int> getCenter();
+	std::tuple<double, double> getCenter();
 };
 

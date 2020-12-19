@@ -15,7 +15,7 @@ void ExpanseHelper::printMatrix(const Matrix& m)
 	std::cout << "\n";
 }
 
-Matrix ExpanseHelper::getTranslationMatrix(int xChange, int yChange)
+Matrix ExpanseHelper::getTranslationMatrix(double xChange, double yChange)
 {
 	Matrix translationMatrix(3, 3);
 	translationMatrix.mData[0][0] = 1;
@@ -33,7 +33,7 @@ Matrix ExpanseHelper::getTranslationMatrix(int xChange, int yChange)
 	return translationMatrix;
 }
 
-Matrix ExpanseHelper::getScalingMatrix(int xScale, int yScale)
+Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale)
 {
 	Matrix scalingMatrix(2, 2);
 	scalingMatrix.mData[0][0] = xScale;
@@ -45,13 +45,13 @@ Matrix ExpanseHelper::getScalingMatrix(int xScale, int yScale)
 	return scalingMatrix;
 }
 
-TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, int xScale, int yScale)
+TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, double yScale)
 {
 	TwoDObject newObject;
-	std::tuple<int, int> center = object.getCenter();
-	Matrix translationMatrixToOrigin = getTranslationMatrix(-std::get<0>(object.getCenter()), -std::get<1>(object.getCenter()));
-	Matrix translationMatrixBack = getTranslationMatrix(std::get<0>(object.getCenter()), std::get<1>(object.getCenter()));
-	Matrix scalingMatrix = getScalingMatrix(2, 2);
+	std::tuple<double, double> center = object.getCenter();
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-std::get<0>(center), -std::get<1>(center));
+	Matrix translationMatrixBack = getTranslationMatrix(std::get<0>(center), std::get<1>(center));
+	Matrix scalingMatrix = getScalingMatrix(xScale, yScale);
 
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
@@ -65,10 +65,10 @@ TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, int xScale, int yS
 		newObject.lines[i] = { scalingMatrix * std::get<0>(newObject.lines[i]), scalingMatrix * std::get<1>(newObject.lines[i]) };
 	}
 
-	//Tanslate back
+	////Tanslate back
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixBack * std::get<0>(newObject.lines[i]), translationMatrixToOrigin * std::get<1>(newObject.lines[i]) };
+		newObject.lines[i] = { translationMatrixBack * std::get<0>(newObject.lines[i]), translationMatrixBack * std::get<1>(newObject.lines[i]) };
 	}
 
 	return newObject;

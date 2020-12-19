@@ -2,10 +2,10 @@
 
 TwoDObject::TwoDObject()
 {
-	points.push_back({ 1, 1 });
+	/*points.push_back({ 1, 1 });
 	points.push_back({ 2, 1 });
 	points.push_back({ 1, 2 });
-	points.push_back({ 2, 2 });
+	points.push_back({ 2, 2 });*/
 
 
 	// BOX
@@ -22,7 +22,7 @@ TwoDObject::TwoDObject()
 	lines.push_back({ { 0.5, 1 }, { 4, 4 } });*/
 }
 
-std::tuple<int, int> TwoDObject::getCenter()
+std::tuple<double, double> TwoDObject::getCenter()
 {
 	/*int hightestX;
 	int lowestX;
@@ -35,5 +35,5 @@ std::tuple<int, int> TwoDObject::getCenter()
 
 		
 	}*/
-	return std::tuple<int, int>({});
+	return std::tuple<double, double>({1.5, 1.5});
 }

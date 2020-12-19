@@ -42,13 +42,17 @@ void drawStuff() {
 
     ExpanseHelper helper;
     //Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
-    Matrix translationMatrix = helper.getScalingMatrix(2, 2);
+    //Matrix translationMatrix = helper.getScalingMatrix(2, 2);
 
     TwoDObject tdobj;
-    for (int i = 0; i < tdobj.lines.size(); i++)
+    /*for (int i = 0; i < tdobj.lines.size(); i++)
     {
         tdobj.lines[i] = { translationMatrix * std::get<0>(tdobj.lines[i]), translationMatrix * std::get<1>(tdobj.lines[i]) };
-    }
+    }*/
+
+    tdobj = helper.scaleOnLocation(tdobj, 2, 2);
+    
+
     window.drawTwoDObject(tdobj);
    
     window.renderPresent();
