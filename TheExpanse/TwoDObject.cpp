@@ -24,19 +24,6 @@ TwoDObject::TwoDObject()
 
 std::tuple<double, double> TwoDObject::getCenter()
 {
-	/*int hightestX;
-	int lowestX;
-
-	int hightestY;
-	int lowestX;
-	for (int i = 0; i < points.size(); i++)
-	{
-		const std::tuple<int, int> coordinate = points[i];
-
-		
-	}*/
-
-
 	std::tuple<double, double> centroid = { 0, 0 };
 	double signedArea = 0.0;
 	double x0 = 0.0; // Current vertex X
@@ -49,10 +36,10 @@ std::tuple<double, double> TwoDObject::getCenter()
 	int i = 0;
 	for (i = 0; i < lines.size(); ++i)
 	{
-		x0 = (std::get<0>(lines[i])).x;
-		y0 = (std::get<0>(lines[i])).y;
-		x1 = (std::get<1>(lines[i])).x;
-		y1 = (std::get<1>(lines[i])).y;
+		x0 = lines[i].start.x;
+		y0 = lines[i].start.y;
+		x1 = lines[i].end.x;
+		y1 = lines[i].end.y;
 		a = x0 * y1 - x1 * y0;
 		signedArea += a;
 		double centroidX = std::get<0>(centroid) + (x0 + x1) * a;

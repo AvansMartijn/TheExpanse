@@ -3,7 +3,7 @@
 
 Window::Window(int width, int height, float s, float o) {
     SDL_Init(SDL_INIT_VIDEO);
-    window = SDL_CreateWindow("SDL2 Window",
+    window = SDL_CreateWindow("The Expanse",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         680, 480,
@@ -47,10 +47,10 @@ void Window::drawTwoDObject(const TwoDObject& object)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     for (int i = 0; i < object.lines.size(); i++) {
-        double xS = (std::get<0>(object.lines[i])).x;
-        double yS = (std::get<0>(object.lines[i])).y;
-        double xE = (std::get<1>(object.lines[i])).x;
-        double yE = (std::get<1>(object.lines[i])).y;
+        double xS = object.lines[i].start.x;
+        double yS = object.lines[i].start.y;
+        double xE = object.lines[i].end.x;
+        double yE = object.lines[i].end.y;
 
         int xStart = (int)(offset + (xS * scale));
         int yStart = (int)(offset + (yS * -1 * scale));

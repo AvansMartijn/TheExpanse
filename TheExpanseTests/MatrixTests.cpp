@@ -11,6 +11,9 @@
 #include "../TheExpanse/TwoDObject.h"
 #include "../TheExpanse/TwoDObject.cpp"
 
+#include "../TheExpanse/Line.h"
+#include "../TheExpanse/Line.cpp"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TheExpanseTests

@@ -56,19 +56,19 @@ TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, dou
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixToOrigin * std::get<0>(object.lines[i]), translationMatrixToOrigin * std::get<1>(object.lines[i]) };
+		newObject.lines[i] = { translationMatrixToOrigin * object.lines[i].start, translationMatrixToOrigin * object.lines[i].end };
 	}
 
 	//Scale
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { scalingMatrix * std::get<0>(newObject.lines[i]), scalingMatrix * std::get<1>(newObject.lines[i]) };
+		newObject.lines[i] = { scalingMatrix * newObject.lines[i].start, scalingMatrix * newObject.lines[i].end };
 	}
 
 	////Tanslate back
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixBack * std::get<0>(newObject.lines[i]), translationMatrixBack * std::get<1>(newObject.lines[i]) };
+		newObject.lines[i] = { translationMatrixBack * newObject.lines[i].start, translationMatrixBack * newObject.lines[i].end };
 	}
 
 	return newObject;
@@ -105,19 +105,19 @@ TwoDObject ExpanseHelper::rotate(TwoDObject& object, double degrees)
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixToOrigin * std::get<0>(object.lines[i]), translationMatrixToOrigin * std::get<1>(object.lines[i]) };
+		newObject.lines[i] = { translationMatrixToOrigin * object.lines[i].start, translationMatrixToOrigin * object.lines[i].end };
 	}
 
 	//Rotate
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { rotationMatrix * std::get<0>(newObject.lines[i]), rotationMatrix * std::get<1>(newObject.lines[i]) };
+		newObject.lines[i] = { rotationMatrix * newObject.lines[i].start, rotationMatrix * newObject.lines[i].end };
 	}
 
 	//Translate back
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixBack * std::get<0>(newObject.lines[i]), translationMatrixBack * std::get<1>(newObject.lines[i]) };
+		newObject.lines[i] = { translationMatrixBack * newObject.lines[i].start, translationMatrixBack * newObject.lines[i].end };
 	}
 
 	
@@ -132,7 +132,7 @@ TwoDObject ExpanseHelper::rotateAroundOrigin(TwoDObject& object, double degrees)
 	//Rotate
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { rotationMatrix * std::get<0>(object.lines[i]), rotationMatrix * std::get<1>(object.lines[i]) };
+		newObject.lines[i] = { rotationMatrix * object.lines[i].start, rotationMatrix * object.lines[i].end };
 	}
 
 	return newObject;
@@ -143,7 +143,7 @@ TwoDObject ExpanseHelper::translateMatrix(TwoDObject& object, double xChange, do
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange);
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrix * std::get<0>(object.lines[i]), translationMatrix * std::get<1>(object.lines[i]) };
+		newObject.lines[i] = { translationMatrix * object.lines[i].start, translationMatrix * object.lines[i].end };
 	}
 	return newObject;
 }

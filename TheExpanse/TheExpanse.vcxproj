@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ExpanseHelper.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="TheExpanse.cpp" />
     <ClCompile Include="TwoDObject.cpp" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExpanseHelper.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="TwoDObject.h" />
     <ClInclude Include="Vector.h" />
