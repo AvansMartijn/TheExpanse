@@ -10,7 +10,7 @@ public:
     Matrix getTranslationMatrix(double xChange, double yChange);
     Matrix getScalingMatrix(double xScale, double yScale);
     TwoDObject scaleOnLocation(TwoDObject& object, double xScale, double yScale);
-
+    TwoDObject translateMatrix(TwoDObject& object, double xChange, double yChange);
 private:
 
 };

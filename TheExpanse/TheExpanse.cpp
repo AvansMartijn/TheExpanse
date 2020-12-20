@@ -12,7 +12,8 @@
 Window window{1080, 720, 20.0f, 200.0f };
 //float offset = 100.0f;
 //float scale = 20.0f;
-
+ExpanseHelper helper;
+TwoDObject tdobj;
 void drawGraph() {
     for (int i =-10; i < 11; i++) {
         bool highlighted = false;
@@ -40,17 +41,16 @@ void drawStuff() {
      //window.drawLine(vecA-vecB);
     drawGraph();
 
-    ExpanseHelper helper;
     //Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
     //Matrix translationMatrix = helper.getScalingMatrix(2, 2);
 
-    TwoDObject tdobj;
+    //TwoDObject tdobj;
     /*for (int i = 0; i < tdobj.lines.size(); i++)
     {
         tdobj.lines[i] = { translationMatrix * std::get<0>(tdobj.lines[i]), translationMatrix * std::get<1>(tdobj.lines[i]) };
     }*/
 
-    tdobj = helper.scaleOnLocation(tdobj, 6, 6);
+    //tdobj = helper.scaleOnLocation(tdobj, 6, 6);
     
 
     window.drawTwoDObject(tdobj);
@@ -71,6 +71,46 @@ void programLoop() {
                 // Break out of the loop on quit
                 break;
             }
+            if (event.type == SDL_KEYDOWN)
+            {
+                if (event.key.keysym.sym == SDLK_KP_PLUS)
+                {
+                    // A has been pressed
+                    tdobj = helper.scaleOnLocation(tdobj, 1.5, 1.5);
+
+                }
+                if (event.key.keysym.sym == SDLK_KP_MINUS)
+                {
+                    // A has been pressed
+                    tdobj = helper.scaleOnLocation(tdobj, 0.5, 0.5);
+                }
+                if (event.key.keysym.sym == SDLK_UP)
+                {
+                    // A has been pressed
+                    tdobj = helper.translateMatrix(tdobj, 0, 0.5);
+
+                }
+                if (event.key.keysym.sym == SDLK_DOWN)
+                {
+                    // A has been pressed
+                    tdobj = helper.translateMatrix(tdobj, 0, -0.5);
+
+                }
+                if (event.key.keysym.sym == SDLK_LEFT)
+                {
+                    // A has been pressed
+                    tdobj = helper.translateMatrix(tdobj, -0.5, 0);
+
+
+                }
+                if (event.key.keysym.sym == SDLK_RIGHT)
+                {
+                    // A has been pressed
+                    tdobj = helper.translateMatrix(tdobj, 0.5, 0);
+
+                }
+            }
+         
         }
         drawStuff();
     }

@@ -74,3 +74,13 @@ TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, dou
 	return newObject;
 }
 
+TwoDObject ExpanseHelper::translateMatrix(TwoDObject& object, double xChange, double yChange) {
+	TwoDObject newObject;
+	Matrix translationMatrix = getTranslationMatrix(xChange, yChange);
+	for (int i = 0; i < newObject.lines.size(); i++)
+	{
+		newObject.lines[i] = { translationMatrix * std::get<0>(object.lines[i]), translationMatrix * std::get<1>(object.lines[i]) };
+	}
+	return newObject;
+}
+
