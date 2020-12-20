@@ -22,9 +22,9 @@ TwoDObject::TwoDObject()
 	lines.push_back({ { 0.5, 1 }, { 4, 4 } });*/
 }
 
-std::tuple<double, double> TwoDObject::getCenter()
+Vector TwoDObject::getCenter()
 {
-	std::tuple<double, double> centroid = { 0, 0 };
+	Vector centroid = { 0, 0 };
 	double signedArea = 0.0;
 	double x0 = 0.0; // Current vertex X
 	double y0 = 0.0; // Current vertex Y
@@ -42,17 +42,15 @@ std::tuple<double, double> TwoDObject::getCenter()
 		y1 = lines[i].end.y;
 		a = x0 * y1 - x1 * y0;
 		signedArea += a;
-		double centroidX = std::get<0>(centroid) + (x0 + x1) * a;
-		double centroidY = std::get<1>(centroid) + (y0 + y1) * a;
+		double centroidX = centroid.x + (x0 + x1) * a;
+		double centroidY = centroid.y + (y0 + y1) * a;
 		centroid = { centroidX, centroidY };
 	}
 
 	signedArea *= 0.5;
 
-	double centroidX = std::get<0>(centroid) / (6.0 * signedArea);
-	double centroidY = std::get<1>(centroid) / (6.0 * signedArea);
+	double centroidX = centroid.x / (6.0 * signedArea);
+	double centroidY = centroid.y / (6.0 * signedArea);
 	centroid = { centroidX, centroidY };
 	return centroid;
-
-	//return std::tuple<double, double>({1.5, 1.5});
 }

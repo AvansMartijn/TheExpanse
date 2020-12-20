@@ -5,9 +5,8 @@
 #endif
 
 //Constructors
-Vector::Vector() : x(0), y(0) {}
-Vector::Vector(double x, double y) : x(x), y(y) {}
-
+Vector::Vector() : x(0), y(0), z(0) {}
+Vector::Vector(double x, double y, double z) : x(x), y(y), z(z) {}
 
 // operator with vector
 

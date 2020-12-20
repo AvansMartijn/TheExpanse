@@ -9,6 +9,6 @@ class TwoDObject
 public:
 	TwoDObject();
 	std::vector<Line> lines;
-	std::tuple<double, double> getCenter();
+	Vector getCenter();
 };
 

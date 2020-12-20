@@ -15,32 +15,54 @@ void ExpanseHelper::printMatrix(const Matrix& m)
 	std::cout << "\n";
 }
 
-Matrix ExpanseHelper::getTranslationMatrix(double xChange, double yChange)
+Matrix ExpanseHelper::getTranslationMatrix(double xChange, double yChange, double zChange)
 {
-	Matrix translationMatrix(3, 3);
+	Matrix translationMatrix(4, 4);
 	translationMatrix.mData[0][0] = 1;
 	translationMatrix.mData[0][1] = 0;
-	translationMatrix.mData[0][2] = xChange;
+	translationMatrix.mData[0][2] = 0;
+	translationMatrix.mData[0][3] = xChange;
 
 	translationMatrix.mData[1][0] = 0;
 	translationMatrix.mData[1][1] = 1;
+	translationMatrix.mData[1][2] = 0;
 	translationMatrix.mData[1][2] = yChange;
 
 	translationMatrix.mData[2][0] = 0;
 	translationMatrix.mData[2][1] = 0;
 	translationMatrix.mData[2][2] = 1;
+	translationMatrix.mData[2][2] = zChange;
+
+	translationMatrix.mData[3][0] = 0;
+	translationMatrix.mData[3][1] = 0;
+	translationMatrix.mData[3][2] = 0;
+	translationMatrix.mData[3][3] = 1;
 
 	return translationMatrix;
 }
 
-Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale)
+Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale, double zScale)
 {
-	Matrix scalingMatrix(2, 2);
+	Matrix scalingMatrix(4, 4);
 	scalingMatrix.mData[0][0] = xScale;
 	scalingMatrix.mData[0][1] = 0;
+	scalingMatrix.mData[0][2] = 0;
+	scalingMatrix.mData[0][3] = 0;
 
 	scalingMatrix.mData[1][0] = 0;
 	scalingMatrix.mData[1][1] = yScale;
+	scalingMatrix.mData[1][2] = 0;
+	scalingMatrix.mData[1][3] = 0;
+
+	scalingMatrix.mData[2][0] = 0;
+	scalingMatrix.mData[2][1] = 0;
+	scalingMatrix.mData[2][2] = zScale;
+	scalingMatrix.mData[2][3] = 0;
+
+	scalingMatrix.mData[3][0] = 0;
+	scalingMatrix.mData[3][1] = 0;
+	scalingMatrix.mData[3][2] = 0;
+	scalingMatrix.mData[3][3] = 1;
 
 	return scalingMatrix;
 }
@@ -48,10 +70,10 @@ Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale)
 TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, double yScale)
 {
 	TwoDObject newObject;
-	std::tuple<double, double> center = object.getCenter();
-	Matrix translationMatrixToOrigin = getTranslationMatrix(-std::get<0>(center), -std::get<1>(center));
-	Matrix translationMatrixBack = getTranslationMatrix(std::get<0>(center), std::get<1>(center));
-	Matrix scalingMatrix = getScalingMatrix(xScale, yScale);
+	Vector center = object.getCenter();
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
+	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
+	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, 1);
 
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
@@ -97,9 +119,9 @@ Matrix ExpanseHelper::getRotationMatrix(double degrees)
 TwoDObject ExpanseHelper::rotate(TwoDObject& object, double degrees)
 {
 	TwoDObject newObject;
-	std::tuple<double, double> center = object.getCenter();
-	Matrix translationMatrixToOrigin = getTranslationMatrix(-std::get<0>(center), -std::get<1>(center));
-	Matrix translationMatrixBack = getTranslationMatrix(std::get<0>(center), std::get<1>(center));
+	Vector center = object.getCenter();
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
+	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
 	Matrix rotationMatrix = getRotationMatrix(degrees);
 
 	//Translate to origin
@@ -140,7 +162,7 @@ TwoDObject ExpanseHelper::rotateAroundOrigin(TwoDObject& object, double degrees)
 
 TwoDObject ExpanseHelper::translateMatrix(TwoDObject& object, double xChange, double yChange) {
 	TwoDObject newObject;
-	Matrix translationMatrix = getTranslationMatrix(xChange, yChange);
+	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, 1);
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
 		newObject.lines[i] = { translationMatrix * object.lines[i].start, translationMatrix * object.lines[i].end };

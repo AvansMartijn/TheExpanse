@@ -8,11 +8,11 @@ class ExpanseHelper
 public:
     void printMatrix(const Matrix& m);
     //Translation
-    Matrix getTranslationMatrix(double xChange, double yChange);
+    Matrix getTranslationMatrix(double xChange, double yChange, double zChange);
     TwoDObject translateMatrix(TwoDObject& object, double xChange, double yChange);
 
     //Scale
-    Matrix getScalingMatrix(double xScale, double yScale);
+    Matrix getScalingMatrix(double xScale, double yScale, double zScale);
     TwoDObject scaleOnLocation(TwoDObject& object, double xScale, double yScale);
 
     //Rotate

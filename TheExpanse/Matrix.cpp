@@ -88,7 +88,8 @@ Vector Matrix::operator*(const Vector& operand)
 	Matrix tempMatrix(_rows, 1);
 	tempMatrix.mData[0][0] = operand.x;
 	tempMatrix.mData[1][0] = operand.y;
-	for (int r = 2; r < _rows; r++) {
+	tempMatrix.mData[2][0] = operand.z;
+	for (int r = 3; r < _rows; r++) {
 		tempMatrix.mData[r][0] = 1;
 	}
 
