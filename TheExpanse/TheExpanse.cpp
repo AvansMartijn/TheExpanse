@@ -76,7 +76,7 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_KP_PLUS)
                 {
                     // A has been pressed
-                    tdobj = helper.scaleOnLocation(tdobj, 1.5, 1.5);
+                    tdobj = helper.scaleOnLocation(tdobj, 2, 2);
 
                 }
                 if (event.key.keysym.sym == SDLK_KP_MINUS)
