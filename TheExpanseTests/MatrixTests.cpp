@@ -282,23 +282,23 @@ namespace TheExpanseTests
 
 		}
 
-		//TEST_METHOD(ScaleOnSameLocation)
-		//{
-		//	//1. Arrange
-		//	ExpanseHelper helpert;
-		//	Vector b{ 3, 3 };
+		TEST_METHOD(RotationMatrix)
+		{
+			//1. Arrange
+			ExpanseHelper helpert;
+			Vector b{ 3, 3 };
 
-		//	//helpert.scaleOnLocation()
+			Matrix a = helpert.getRotationMatrix(45);
 
-		//	//2. Act
-		//	b = a * b;
+			//2. Act
+			b = a * b;
 
-		//	//3. Assert
-		//	Vector v{ 0, 6 };
+			//3. Assert
+			Vector v{ 0, 6 };
 
-		//	Assert::AreEqual(b.x, v.x);
-		//	Assert::AreEqual(b.y, v.y);
+			Assert::AreEqual(b.x, v.x);
+			Assert::AreEqual(b.y, v.y);
 
-		//}
+		}
 	};
 }

@@ -74,6 +74,70 @@ TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, dou
 	return newObject;
 }
 
+Matrix ExpanseHelper::getRotationMatrix(double degrees)
+{
+	Matrix rotationMatrix(3, 3);
+	double PI = 3.14159265358979323846264338327950288419;
+
+	rotationMatrix.mData[0][0] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[0][1] = -sin(degrees * PI / 180.0);
+	rotationMatrix.mData[0][2] = 0;
+
+	rotationMatrix.mData[1][0] = sin(degrees * PI / 180.0);
+	rotationMatrix.mData[1][1] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[1][2] = 0;
+
+	rotationMatrix.mData[2][0] = 0;
+	rotationMatrix.mData[2][1] = 0;
+	rotationMatrix.mData[2][2] = 1;
+
+	return rotationMatrix;
+}
+
+TwoDObject ExpanseHelper::rotate(TwoDObject& object, double degrees)
+{
+	TwoDObject newObject;
+	std::tuple<double, double> center = object.getCenter();
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-std::get<0>(center), -std::get<1>(center));
+	Matrix translationMatrixBack = getTranslationMatrix(std::get<0>(center), std::get<1>(center));
+	Matrix rotationMatrix = getRotationMatrix(degrees);
+
+	//Translate to origin
+	for (int i = 0; i < newObject.lines.size(); i++)
+	{
+		newObject.lines[i] = { translationMatrixToOrigin * std::get<0>(object.lines[i]), translationMatrixToOrigin * std::get<1>(object.lines[i]) };
+	}
+
+	//Rotate
+	for (int i = 0; i < newObject.lines.size(); i++)
+	{
+		newObject.lines[i] = { rotationMatrix * std::get<0>(newObject.lines[i]), rotationMatrix * std::get<1>(newObject.lines[i]) };
+	}
+
+	//Translate back
+	for (int i = 0; i < newObject.lines.size(); i++)
+	{
+		newObject.lines[i] = { translationMatrixBack * std::get<0>(newObject.lines[i]), translationMatrixBack * std::get<1>(newObject.lines[i]) };
+	}
+
+	
+	return newObject;
+}
+
+TwoDObject ExpanseHelper::rotateAroundOrigin(TwoDObject& object, double degrees)
+{
+	TwoDObject newObject;
+	Matrix rotationMatrix = getRotationMatrix(degrees);
+
+	//Rotate
+	for (int i = 0; i < newObject.lines.size(); i++)
+	{
+		newObject.lines[i] = { rotationMatrix * std::get<0>(object.lines[i]), rotationMatrix * std::get<1>(object.lines[i]) };
+	}
+
+	return newObject;
+}
+
 TwoDObject ExpanseHelper::translateMatrix(TwoDObject& object, double xChange, double yChange) {
 	TwoDObject newObject;
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange);

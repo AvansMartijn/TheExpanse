@@ -7,10 +7,18 @@ class ExpanseHelper
 {
 public:
     void printMatrix(const Matrix& m);
+    //Translation
     Matrix getTranslationMatrix(double xChange, double yChange);
+    TwoDObject translateMatrix(TwoDObject& object, double xChange, double yChange);
+
+    //Scale
     Matrix getScalingMatrix(double xScale, double yScale);
     TwoDObject scaleOnLocation(TwoDObject& object, double xScale, double yScale);
-    TwoDObject translateMatrix(TwoDObject& object, double xChange, double yChange);
+
+    //Rotate
+    Matrix getRotationMatrix(double degrees);
+    TwoDObject rotate(TwoDObject& object, double degrees);
+    TwoDObject rotateAroundOrigin(TwoDObject& object, double degrees);
 private:
 
 };

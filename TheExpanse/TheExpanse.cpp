@@ -15,14 +15,14 @@ Window window{1080, 720, 20.0f, 200.0f };
 ExpanseHelper helper;
 TwoDObject tdobj;
 void drawGraph() {
-    for (int i =-10; i < 11; i++) {
+    for (double i =-10; i < 11; i++) {
         bool highlighted = false;
         if (i == 0) {
             highlighted = true;
         }
 
-        window.drawLine(Vector{ (float)i, -10 }, Vector{ (float)i, 10 }, highlighted);
-        window.drawLine(Vector{ -10, (float)i }, Vector{ 10, (float)i}, highlighted);
+        window.drawLine(Vector{ i, -10 }, Vector{ i, 10 }, highlighted);
+        window.drawLine(Vector{ -10, i }, Vector{ 10, i}, highlighted);
     }
 }
 void drawStuff() {
@@ -107,6 +107,24 @@ void programLoop() {
                 {
                     // A has been pressed
                     tdobj = helper.translateMatrix(tdobj, 0.5, 0);
+
+                }
+                if (event.key.keysym.sym == SDLK_r)
+                {
+                    // R has been pressed
+                    tdobj = helper.rotate(tdobj, 45);
+
+                }
+                if (event.key.keysym.sym == SDLK_e)
+                {
+                    // E has been pressed
+                    tdobj = helper.rotate(tdobj, -45);
+
+                }
+                if (event.key.keysym.sym == SDLK_t)
+                {
+                    // T has been pressed
+                    tdobj = helper.rotateAroundOrigin(tdobj, 45);
 
                 }
             }
