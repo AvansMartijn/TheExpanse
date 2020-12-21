@@ -12,31 +12,31 @@ Vector::Vector(double x, double y, double z) : x(x), y(y), z(z) {}
 
 //Optellen
 Vector Vector::operator+ (const Vector& operand) {
-    return Vector(this->x + operand.x, this->y + operand.y);
+    return Vector(this->x + operand.x, this->y + operand.y, this->z + operand.z);
 }
 
 //Aftrekken
 Vector Vector::operator- (const Vector& operand) {
-    return Vector(this->x - operand.x, this->y - operand.y);
+    return Vector(this->x - operand.x, this->y - operand.y, this->z - operand.z);
 }
 
 //Vermenigvuldigen
 Vector Vector::operator* (const Vector& operand) {
-    return Vector(this->x * operand.x, this->y * operand.y);
+    return Vector(this->x * operand.x, this->y * operand.y, this->z * operand.z);
 }
 
 //operator with scalar
 //Optellen
 Vector Vector::operator+ (int operand) {
-    return Vector(this->x + operand, this->y + operand);
+    return Vector(this->x + operand, this->y + operand, this->z + operand);
 }
 
 //Aftrekken
 Vector Vector::operator- (int operand) {
-    return Vector(this->x - operand, this->y - operand);
+    return Vector(this->x - operand, this->y - operand, this->z - operand);
 }
 
 //Vermenigvuldigen
 Vector Vector::operator* (int operand) {
-    return Vector(this->x * operand, this->y * operand);
+    return Vector(this->x * operand, this->y * operand, this->z * operand);
 }
