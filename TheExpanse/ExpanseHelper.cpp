@@ -67,13 +67,13 @@ Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale, double zSca
 	return scalingMatrix;
 }
 
-TwoDObject ExpanseHelper::scaleOnLocation(TwoDObject& object, double xScale, double yScale)
+ThreeDObject ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale)
 {
-	TwoDObject newObject;
+	ThreeDObject newObject;
 	Vector center = object.getCenter();
 	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
 	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
-	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, 1);
+	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, zScale);
 
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
@@ -116,9 +116,9 @@ Matrix ExpanseHelper::getRotationMatrix(double degrees)
 	return rotationMatrix;
 }
 
-TwoDObject ExpanseHelper::rotate(TwoDObject& object, double degrees)
+ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees)
 {
-	TwoDObject newObject;
+	ThreeDObject newObject;
 	Vector center = object.getCenter();
 	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
 	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
@@ -146,9 +146,9 @@ TwoDObject ExpanseHelper::rotate(TwoDObject& object, double degrees)
 	return newObject;
 }
 
-TwoDObject ExpanseHelper::rotateAroundOrigin(TwoDObject& object, double degrees)
+ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degrees)
 {
-	TwoDObject newObject;
+	ThreeDObject newObject;
 	Matrix rotationMatrix = getRotationMatrix(degrees);
 
 	//Rotate
@@ -160,9 +160,9 @@ TwoDObject ExpanseHelper::rotateAroundOrigin(TwoDObject& object, double degrees)
 	return newObject;
 }
 
-TwoDObject ExpanseHelper::translateMatrix(TwoDObject& object, double xChange, double yChange) {
-	TwoDObject newObject;
-	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, 1);
+ThreeDObject ExpanseHelper::translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange) {
+	ThreeDObject newObject;
+	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
 	for (int i = 0; i < newObject.lines.size(); i++)
 	{
 		newObject.lines[i] = { translationMatrix * object.lines[i].start, translationMatrix * object.lines[i].end };

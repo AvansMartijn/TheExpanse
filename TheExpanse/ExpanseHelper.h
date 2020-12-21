@@ -1,6 +1,7 @@
 #include "Matrix.h"
 #include <iostream>
 #include "TwoDObject.h"
+#include "ThreeDObject.h"
 
 #pragma once
 class ExpanseHelper
@@ -9,16 +10,16 @@ public:
     void printMatrix(const Matrix& m);
     //Translation
     Matrix getTranslationMatrix(double xChange, double yChange, double zChange);
-    TwoDObject translateMatrix(TwoDObject& object, double xChange, double yChange);
+    ThreeDObject translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange);
 
     //Scale
     Matrix getScalingMatrix(double xScale, double yScale, double zScale);
-    TwoDObject scaleOnLocation(TwoDObject& object, double xScale, double yScale);
+    ThreeDObject scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale);
 
     //Rotate
     Matrix getRotationMatrix(double degrees);
-    TwoDObject rotate(TwoDObject& object, double degrees);
-    TwoDObject rotateAroundOrigin(TwoDObject& object, double degrees);
+    ThreeDObject rotate(ThreeDObject& object, double degrees);
+    ThreeDObject rotateAroundOrigin(ThreeDObject& object, double degrees);
 private:
 
 };

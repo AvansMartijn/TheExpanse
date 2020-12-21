@@ -8,12 +8,23 @@
 #include "Matrix.h"
 //Helper Class
 #include "ExpanseHelper.h"
+#include "ThreeDObject.h"
 
-Window window{1080, 720, 20.0f, 200.0f };
+Window window{ 1080, 720, 20.0f, 200.0f };
+//Window window{ 1080, 720, 0, 200.0f };
+
 //float offset = 100.0f;
 //float scale = 20.0f;
 ExpanseHelper helper;
 TwoDObject tdobj;
+ThreeDObject threedobj;
+
+void initViews() {
+    window.addViewport("topLeft", 540, 360, 0, 0);
+    window.addViewport("topRight", 540, 360, 540, 0);
+    window.addViewport("bottomLeft", 540, 360, 0, 360);
+}
+
 void drawGraph() {
     for (double i =-10; i < 11; i++) {
         bool highlighted = false;
@@ -28,34 +39,18 @@ void drawGraph() {
 void drawStuff() {
     // Render the rect to the screen
     window.clear();
-   
-    //Vec A
-   /* Vector vecA{ 2, 3 };
-    window.drawLine(vecA + 3);*/
-
-    ////Vec B
-    //Vector vecB{ 1, -4 };
-    //window.drawLine(vecB);
-
-    //////Vec A + B
-     //window.drawLine(vecA-vecB);
+    window.renderSetViewport("topLeft");
     drawGraph();
-
-    //Matrix translationMatrix = helper.getTranslationMatrix(-5, -5);
-    //Matrix translationMatrix = helper.getScalingMatrix(2, 2);
-
-    //TwoDObject tdobj;
-    /*for (int i = 0; i < tdobj.lines.size(); i++)
-    {
-        tdobj.lines[i] = { translationMatrix * std::get<0>(tdobj.lines[i]), translationMatrix * std::get<1>(tdobj.lines[i]) };
-    }*/
-
-    //tdobj = helper.scaleOnLocation(tdobj, 6, 6);
-    
-
-    window.drawTwoDObject(tdobj);
+    window.drawThreeDObject(threedobj);
+    window.renderSetViewport("topRight");
+    drawGraph();
+    window.drawThreeDObject(threedobj, "right");
+    window.renderSetViewport("bottomLeft");
+    drawGraph();
+    window.drawThreeDObject(threedobj, "top");
    
     window.renderPresent();
+
 }
 
 void programLoop() {
@@ -76,55 +71,55 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_KP_PLUS)
                 {
                     // A has been pressed
-                    tdobj = helper.scaleOnLocation(tdobj, 2, 2);
+                    threedobj = helper.scaleOnLocation(threedobj, 2, 2, 2);
 
                 }
                 if (event.key.keysym.sym == SDLK_KP_MINUS)
                 {
                     // A has been pressed
-                    tdobj = helper.scaleOnLocation(tdobj, 0.5, 0.5);
+                    threedobj = helper.scaleOnLocation(threedobj, 0.5, 0.5, 0.5);
                 }
                 if (event.key.keysym.sym == SDLK_UP)
                 {
                     // A has been pressed
-                    tdobj = helper.translateMatrix(tdobj, 0, 0.5);
+                    threedobj = helper.translateMatrix(threedobj, 0, 0.5, 0);
 
                 }
                 if (event.key.keysym.sym == SDLK_DOWN)
                 {
                     // A has been pressed
-                    tdobj = helper.translateMatrix(tdobj, 0, -0.5);
+                    threedobj = helper.translateMatrix(threedobj, 0, -0.5, 0);
 
                 }
                 if (event.key.keysym.sym == SDLK_LEFT)
                 {
                     // A has been pressed
-                    tdobj = helper.translateMatrix(tdobj, -0.5, 0);
+                    threedobj = helper.translateMatrix(threedobj, -0.5, 0, 0);
 
 
                 }
                 if (event.key.keysym.sym == SDLK_RIGHT)
                 {
                     // A has been pressed
-                    tdobj = helper.translateMatrix(tdobj, 0.5, 0);
+                    threedobj = helper.translateMatrix(threedobj, 0.5, 0, 0);
 
                 }
                 if (event.key.keysym.sym == SDLK_r)
                 {
                     // R has been pressed
-                    tdobj = helper.rotate(tdobj, 45);
+                    threedobj = helper.rotate(threedobj, 45);
 
                 }
                 if (event.key.keysym.sym == SDLK_e)
                 {
                     // E has been pressed
-                    tdobj = helper.rotate(tdobj, -45);
+                    threedobj = helper.rotate(threedobj, -45);
 
                 }
                 if (event.key.keysym.sym == SDLK_t)
                 {
                     // T has been pressed
-                    tdobj = helper.rotateAroundOrigin(tdobj, 45);
+                    threedobj = helper.rotateAroundOrigin(threedobj, 45);
 
                 }
             }
@@ -137,6 +132,7 @@ void programLoop() {
 
 int main()
 {
+    initViews();
     programLoop();
     return 0;
 }
