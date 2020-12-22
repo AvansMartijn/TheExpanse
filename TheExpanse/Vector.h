@@ -12,7 +12,8 @@ public:
 	Vector(double x, double y, double z, double w = 1); //W=1 makes Vector a point instead of direction
 	Vector operator+(const Vector& operand);
 	Vector operator-(const Vector& operand);
-	Vector operator*(const Vector& operand);
+	//Inproduct
+	double operator*(const Vector& operand);
 	Vector operator+(int operand);
 	Vector operator-(int operand);
 	Vector operator*(int operand);

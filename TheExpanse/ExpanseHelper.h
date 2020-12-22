@@ -22,6 +22,7 @@ public:
     Matrix getRotationMatrixXAxis(double degrees);
     ThreeDObject rotate(ThreeDObject& object, double degrees, char axis);
     ThreeDObject rotateAroundOrigin(ThreeDObject& object, double degrees, char axis);
+
 private:
 
     const double PI = atan(1) * 4;

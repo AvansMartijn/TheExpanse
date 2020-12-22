@@ -20,9 +20,9 @@ Vector Vector::operator- (const Vector& operand) {
     return Vector(this->x - operand.x, this->y - operand.y, this->z - operand.z);
 }
 
-//Vermenigvuldigen
-Vector Vector::operator* (const Vector& operand) {
-    return Vector(this->x * operand.x, this->y * operand.y, this->z * operand.z);
+//Vermenigvuldigen = Inproduct
+double Vector::operator* (const Vector& operand) {
+    return (x * operand.x) + (y * operand.y) + (z * operand.z);
 }
 
 //operator with scalar
