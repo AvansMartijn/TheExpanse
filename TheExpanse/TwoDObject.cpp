@@ -9,10 +9,10 @@ TwoDObject::TwoDObject()
 
 
 	// BOX
-	lines.push_back({ { 1, 1 }, { 1, 2 } });
-	lines.push_back({ { 1, 2 }, {2, 2 } });
-	lines.push_back({ { 2, 2 }, {2, 1 } });
-	lines.push_back({ { 2, 1 }, {1, 1 } });
+	lines.push_back({ { 1, 1, 1 }, { 1, 2, 1 } });
+	lines.push_back({ { 1, 2, 1 }, {2, 2, 1 } });
+	lines.push_back({ { 2, 2, 1 }, {2, 1, 1 } });
+	lines.push_back({ { 2, 1, 1 }, {1, 1, 1 } });
 
 	// STAR
 	/*lines.push_back({ { 4, 4 }, { 0, 4 } });
@@ -24,7 +24,7 @@ TwoDObject::TwoDObject()
 
 Vector TwoDObject::getCenter()
 {
-	Vector centroid = { 0, 0 };
+	Vector centroid = { 0, 0, 1 };
 	double signedArea = 0.0;
 	double x0 = 0.0; // Current vertex X
 	double y0 = 0.0; // Current vertex Y
@@ -44,13 +44,13 @@ Vector TwoDObject::getCenter()
 		signedArea += a;
 		double centroidX = centroid.x + (x0 + x1) * a;
 		double centroidY = centroid.y + (y0 + y1) * a;
-		centroid = { centroidX, centroidY };
+		centroid = { centroidX, centroidY, 1 };
 	}
 
 	signedArea *= 0.5;
 
 	double centroidX = centroid.x / (6.0 * signedArea);
 	double centroidY = centroid.y / (6.0 * signedArea);
-	centroid = { centroidX, centroidY };
+	centroid = { centroidX, centroidY, 1 };
 	return centroid;
 }

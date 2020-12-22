@@ -2,13 +2,19 @@
 
 ThreeDObject::ThreeDObject()
 {
-	/*points.push_back({ 1, 1 });
-	points.push_back({ 2, 1 });
-	points.push_back({ 1, 2 });
-	points.push_back({ 2, 2 });*/
+	points.push_back({ -1, -1, 0 });
+	points.push_back({ -1, 1, 0 });
+	points.push_back({ 1, 1, 0 });
+	points.push_back({ 1, -1, 0 });
 
 
 	// BOX
+	/*lines.push_back({ { -1, -1, 0 }, {-1, 1, 0 } });
+	lines.push_back({ { -1, 1, 0 }, {1, 1, 0 } });
+	lines.push_back({ { 1, 1, 0 }, {1, -1, 0 } });
+	lines.push_back({ { 1, -1, 0 }, {-1, -1, 0 } });*/
+
+	//CHIEL
 	lines.push_back({ { 1, 1, 1 }, {1, 2, 1 } });
 	lines.push_back({ { 1, 2, 1 }, {2, 2, 1 } });
 	lines.push_back({ { 2, 2, 1 }, {2, 1, 1 } });

@@ -17,9 +17,11 @@ public:
     ThreeDObject scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale);
 
     //Rotate
-    Matrix getRotationMatrix(double degrees);
-    ThreeDObject rotate(ThreeDObject& object, double degrees);
-    ThreeDObject rotateAroundOrigin(ThreeDObject& object, double degrees);
+    Matrix getRotationMatrixZAxis(double degrees);
+    Matrix getRotationMatrixYAxis(double degrees);
+    Matrix getRotationMatrixXAxis(double degrees);
+    ThreeDObject rotate(ThreeDObject& object, double degrees, char axis);
+    ThreeDObject rotateAroundOrigin(ThreeDObject& object, double degrees, char axis);
 private:
 
 };

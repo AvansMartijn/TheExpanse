@@ -89,9 +89,7 @@ Vector Matrix::operator*(const Vector& operand)
 	tempMatrix.mData[0][0] = operand.x;
 	tempMatrix.mData[1][0] = operand.y;
 	tempMatrix.mData[2][0] = operand.z;
-	for (int r = 3; r < _rows; r++) {
-		tempMatrix.mData[r][0] = 1;
-	}
+	tempMatrix.mData[3][0] = operand.w;
 
 	if (_cols != tempMatrix._rows) {
 		throw std::invalid_argument("Columns of A do not match Rows of B");
@@ -102,10 +100,13 @@ Vector Matrix::operator*(const Vector& operand)
 	for (int i = 0; i < _rows; ++i)
 		for (int k = 0; k < _cols; ++k)
 		{
+			auto m1 = mData[i][k];
+			auto m2 = tempMatrix.mData[k][0];
+
 			newMatrix.mData[i][0] += mData[i][k] * tempMatrix.mData[k][0];
 		}
 
-	Vector newVector{ newMatrix.mData[0][0], newMatrix.mData[1][0] };
+	Vector newVector{ newMatrix.mData[0][0], newMatrix.mData[1][0], newMatrix.mData[2][0], newMatrix.mData[3][0] };
 
 	return newVector;
 }

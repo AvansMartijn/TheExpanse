@@ -1,13 +1,13 @@
 #pragma once
 #include "Vector.h"
 
-class Line
+class Vertice
 {
 public:
 	Vector start;
 	Vector end;
 
-	Line(Vector start, Vector end);
+	Vertice(Vector start, Vector end);
 
 };
 

@@ -11,6 +11,10 @@
 #include "../TheExpanse/TwoDObject.h"
 #include "../TheExpanse/TwoDObject.cpp"
 
+
+#include "../TheExpanse/ThreeDObject.h"
+#include "../TheExpanse/ThreeDObject.cpp"
+
 #include "../TheExpanse/Line.h"
 #include "../TheExpanse/Line.cpp"
 
@@ -226,7 +230,7 @@ namespace TheExpanseTests
 			b = a * b;
 
 			//3. Assert
-			Vector v{ 3, 6 };
+			Vector v{ 3, 6, 1 };
 
 			Assert::AreEqual(b.x, v.x);
 			Assert::AreEqual(b.y, v.y);
@@ -237,13 +241,13 @@ namespace TheExpanseTests
 			//1. Arrange
 			ExpanseHelper helpert;
 			Matrix a = helpert.getScalingMatrix(2, 2, 1);
-			Vector b{ 1, 3 };
+			Vector b{ 1, 3, 1 };
 
 			//2. Act
 			b = a * b;
 
 			//3. Assert
-			Vector v{ 2, 6 };
+			Vector v{ 2, 6, 1 };
 
 			Assert::AreEqual(b.x, v.x);
 			Assert::AreEqual(b.y, v.y);
@@ -254,31 +258,33 @@ namespace TheExpanseTests
 			//1. Arrange
 			ExpanseHelper helpert;
 			Matrix a = helpert.getTranslationMatrix(2, 3, 1);
-			Vector b{ 1, 3 };
+			Vector b{ 1, 3, 1 };
 
 			//2. Act
 			b = a * b;
 
 			//3. Assert
-			Vector v{ 3, 6 };
+			Vector v{ 3, 6, 1 };
 
 			Assert::AreEqual(b.x, v.x);
 			Assert::AreEqual(b.y, v.y);
 
 		}
 
+		
+
 		TEST_METHOD(ScalingMatrix)
 		{
 			//1. Arrange
 			ExpanseHelper helpert;
 			Matrix a = helpert.getScalingMatrix(2, 2, 1);
-			Vector b{ 0, 3 };
+			Vector b{ 0, 3, 1 };
 
 			//2. Act
 			b = a * b;
 
 			//3. Assert
-			Vector v{ 0, 6 };
+			Vector v{ 0, 6, 1 };
 
 			Assert::AreEqual(b.x, v.x);
 			Assert::AreEqual(b.y, v.y);

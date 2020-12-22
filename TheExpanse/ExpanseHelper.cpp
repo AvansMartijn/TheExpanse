@@ -26,12 +26,12 @@ Matrix ExpanseHelper::getTranslationMatrix(double xChange, double yChange, doubl
 	translationMatrix.mData[1][0] = 0;
 	translationMatrix.mData[1][1] = 1;
 	translationMatrix.mData[1][2] = 0;
-	translationMatrix.mData[1][2] = yChange;
+	translationMatrix.mData[1][3] = yChange;
 
 	translationMatrix.mData[2][0] = 0;
 	translationMatrix.mData[2][1] = 0;
 	translationMatrix.mData[2][2] = 1;
-	translationMatrix.mData[2][2] = zChange;
+	translationMatrix.mData[2][3] = zChange;
 
 	translationMatrix.mData[3][0] = 0;
 	translationMatrix.mData[3][1] = 0;
@@ -96,33 +96,106 @@ ThreeDObject ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale,
 	return newObject;
 }
 
-Matrix ExpanseHelper::getRotationMatrix(double degrees)
+Matrix ExpanseHelper::getRotationMatrixZAxis(double degrees)
 {
-	Matrix rotationMatrix(3, 3);
+	Matrix rotationMatrix(4, 4);
 	double PI = 3.14159265358979323846264338327950288419;
 
 	rotationMatrix.mData[0][0] = cos(degrees * PI / 180.0);
 	rotationMatrix.mData[0][1] = -sin(degrees * PI / 180.0);
 	rotationMatrix.mData[0][2] = 0;
+	rotationMatrix.mData[0][3] = 0;
 
 	rotationMatrix.mData[1][0] = sin(degrees * PI / 180.0);
 	rotationMatrix.mData[1][1] = cos(degrees * PI / 180.0);
 	rotationMatrix.mData[1][2] = 0;
+	rotationMatrix.mData[1][3] = 0;
 
 	rotationMatrix.mData[2][0] = 0;
 	rotationMatrix.mData[2][1] = 0;
 	rotationMatrix.mData[2][2] = 1;
+	rotationMatrix.mData[2][3] = 0;
+
+	rotationMatrix.mData[3][0] = 0;
+	rotationMatrix.mData[3][1] = 0;
+	rotationMatrix.mData[3][2] = 0;
+	rotationMatrix.mData[3][3] = 1;
+
+	return rotationMatrix;
+}
+Matrix ExpanseHelper::getRotationMatrixYAxis(double degrees)
+{
+	Matrix rotationMatrix(4, 4);
+	double PI = 3.14159265358979323846264338327950288419;
+
+	rotationMatrix.mData[0][0] = -sin(degrees * PI / 180.0);
+	rotationMatrix.mData[0][1] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[0][2] = 0;
+	rotationMatrix.mData[0][3] = 0;
+
+	rotationMatrix.mData[1][0] = 0;
+	rotationMatrix.mData[1][1] = 0;
+	rotationMatrix.mData[1][2] = 1;
+	rotationMatrix.mData[1][3] = 0;
+
+	rotationMatrix.mData[2][0] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[2][1] = sin(degrees * PI / 180.0);
+	rotationMatrix.mData[2][2] = 0;
+	rotationMatrix.mData[2][3] = 0;
+
+	rotationMatrix.mData[3][0] = 0;
+	rotationMatrix.mData[3][1] = 0;
+	rotationMatrix.mData[3][2] = 0;
+	rotationMatrix.mData[3][3] = 1;
+
+	return rotationMatrix;
+}
+Matrix ExpanseHelper::getRotationMatrixXAxis(double degrees)
+{
+	Matrix rotationMatrix(4, 4);
+	double PI = 3.14159265358979323846264338327950288419;
+
+	rotationMatrix.mData[0][0] = 0;
+	rotationMatrix.mData[0][1] = 0;
+	rotationMatrix.mData[0][2] = 1;
+	rotationMatrix.mData[0][3] = 0;
+
+	rotationMatrix.mData[1][0] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[1][1] = sin(degrees * PI / 180.0);
+	rotationMatrix.mData[1][2] = 0;
+	rotationMatrix.mData[1][3] = 0;
+
+	rotationMatrix.mData[2][0] = -sin(degrees * PI / 180.0);
+	rotationMatrix.mData[2][1] = cos(degrees * PI / 180.0);
+	rotationMatrix.mData[2][2] = 0;
+	rotationMatrix.mData[2][3] = 0;
+
+	rotationMatrix.mData[3][0] = 0;
+	rotationMatrix.mData[3][1] = 0;
+	rotationMatrix.mData[3][2] = 0;
+	rotationMatrix.mData[3][3] = 1;
 
 	return rotationMatrix;
 }
 
-ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees)
+ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees, char axis)
 {
 	ThreeDObject newObject;
 	Vector center = object.getCenter();
 	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
 	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
-	Matrix rotationMatrix = getRotationMatrix(degrees);
+	Matrix rotationMatrix(1,1);
+	switch (axis)
+	{
+	case 'X':
+		rotationMatrix = getRotationMatrixXAxis(degrees);
+	case 'Y':
+		rotationMatrix = getRotationMatrixYAxis(degrees);
+	case 'Z':
+		rotationMatrix = getRotationMatrixZAxis(degrees);
+	default:
+		break;
+	}
 
 	//Translate to origin
 	for (int i = 0; i < newObject.lines.size(); i++)
@@ -146,10 +219,24 @@ ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees)
 	return newObject;
 }
 
-ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degrees)
+ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degrees, char axis)
 {
 	ThreeDObject newObject;
-	Matrix rotationMatrix = getRotationMatrix(degrees);
+	Matrix rotationMatrix(1, 1);
+	switch (axis)
+	{
+	case 'X':
+		rotationMatrix = getRotationMatrixXAxis(degrees);
+		break;
+	case 'Y':
+		rotationMatrix = getRotationMatrixYAxis(degrees);
+		break;
+	case 'Z':
+		rotationMatrix = getRotationMatrixZAxis(degrees);
+		break;
+	default:
+		break;
+	}
 
 	//Rotate
 	for (int i = 0; i < newObject.lines.size(); i++)

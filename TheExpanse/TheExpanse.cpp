@@ -32,8 +32,8 @@ void drawGraph() {
             highlighted = true;
         }
 
-        window.drawLine(Vector{ i, -10 }, Vector{ i, 10 }, highlighted);
-        window.drawLine(Vector{ -10, i }, Vector{ 10, i}, highlighted);
+        window.drawLine(Vector{ i, -10, 1 }, Vector{ i, 10, 1 }, highlighted);
+        window.drawLine(Vector{ -10, i, 1 }, Vector{ 10, i, 1}, highlighted);
     }
 }
 void drawStuff() {
@@ -104,22 +104,34 @@ void programLoop() {
                     threedobj = helper.translateMatrix(threedobj, 0.5, 0, 0);
 
                 }
-                if (event.key.keysym.sym == SDLK_r)
+                if (event.key.keysym.sym == SDLK_1)
+                {
+                    // A has been pressed
+                    threedobj = helper.translateMatrix(threedobj, 0, 0, 0.5);
+
+                }
+                if (event.key.keysym.sym == SDLK_2)
+                {
+                    // A has been pressed
+                    threedobj = helper.translateMatrix(threedobj, 0, 0, -0.5);
+
+                }
+                if (event.key.keysym.sym == SDLK_x)
                 {
                     // R has been pressed
-                    threedobj = helper.rotate(threedobj, 45);
+                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'X');
 
                 }
-                if (event.key.keysym.sym == SDLK_e)
+                if (event.key.keysym.sym == SDLK_y)
                 {
                     // E has been pressed
-                    threedobj = helper.rotate(threedobj, -45);
+                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'Y');
 
                 }
-                if (event.key.keysym.sym == SDLK_t)
+                if (event.key.keysym.sym == SDLK_z)
                 {
                     // T has been pressed
-                    threedobj = helper.rotateAroundOrigin(threedobj, 45);
+                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'Z');
 
                 }
             }

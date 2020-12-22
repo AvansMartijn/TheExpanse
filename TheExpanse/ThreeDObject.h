@@ -8,6 +8,7 @@ class ThreeDObject
 {
 public:
 	ThreeDObject();
+	std::vector<Vector> points;
 	std::vector<Line> lines;
 	Vector getCenter();
 };

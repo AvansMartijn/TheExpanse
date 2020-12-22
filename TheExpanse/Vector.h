@@ -7,8 +7,9 @@ public:
 	double x;
 	double y;
 	double z;
+	double w;
 	Vector();
-	Vector(double x, double y, double z = 1); //Z=1 for 2d Compatibility
+	Vector(double x, double y, double z, double w = 1); //W=1 makes Vector a point instead of direction
 	Vector operator+(const Vector& operand);
 	Vector operator-(const Vector& operand);
 	Vector operator*(const Vector& operand);
