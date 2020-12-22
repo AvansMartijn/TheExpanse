@@ -1,3 +1,3 @@
 #include "Vertice.h"
 
-Vertice::Vertice(Vector start, Vector end) : start(start), end(end) {}
+Vertice::Vertice(const Vector& start, const Vector& end) : start(start), end(end) {}

@@ -2,14 +2,14 @@
 #include <tuple>
 #include <vector>
 #include "Vector.h"
-#include "Line.h"
+#include "Vertice.h"
 
 class ThreeDObject
 {
 public:
 	ThreeDObject();
 	std::vector<Vector> points;
-	std::vector<Line> lines;
+	std::vector<Vertice> lines;
 	Vector getCenter();
 };
 

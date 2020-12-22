@@ -2,13 +2,13 @@
 #include <tuple>
 #include <vector>
 #include "Vector.h"
-#include "Line.h"
+//#include "Line.h"
 
 class TwoDObject
 {
 public:
 	TwoDObject();
-	std::vector<Line> lines;
+	//std::vector<Line> lines;
 	Vector getCenter();
 };
 

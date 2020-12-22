@@ -45,7 +45,7 @@ void Window::drawLine(const Vector& end) {
 
 void Window::drawTwoDObject(const TwoDObject& object, std::string face)
 {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    /*SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     for (int i = 0; i < object.lines.size(); i++) {
         double xS = 0;
         double yS = 0;
@@ -77,7 +77,7 @@ void Window::drawTwoDObject(const TwoDObject& object, std::string face)
         int yEnd = (int)(offset + (yE * -1 * scale));
         SDL_RenderDrawLine(renderer, xStart, yStart, xEnd, yEnd);
     }
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);*/
 
 }
 

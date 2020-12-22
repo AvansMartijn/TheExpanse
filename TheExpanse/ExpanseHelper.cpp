@@ -76,21 +76,21 @@ ThreeDObject ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale,
 	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, zScale);
 
 	//Translate to origin
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixToOrigin * object.lines[i].start, translationMatrixToOrigin * object.lines[i].end };
+		newObject.points[i] = translationMatrixToOrigin * object.points[i];
 	}
 
 	//Scale
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { scalingMatrix * newObject.lines[i].start, scalingMatrix * newObject.lines[i].end };
+		newObject.points[i] = scalingMatrix * newObject.points[i];
 	}
 
-	////Tanslate back
-	for (int i = 0; i < newObject.lines.size(); i++)
+	//Tanslate back
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixBack * newObject.lines[i].start, translationMatrixBack * newObject.lines[i].end };
+		newObject.points[i] = translationMatrixBack * newObject.points[i];
 	}
 
 	return newObject;
@@ -198,24 +198,23 @@ ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees, char ax
 	}
 
 	//Translate to origin
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixToOrigin * object.lines[i].start, translationMatrixToOrigin * object.lines[i].end };
+		newObject.points[i] = translationMatrixToOrigin * object.points[i];
 	}
 
 	//Rotate
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { rotationMatrix * newObject.lines[i].start, rotationMatrix * newObject.lines[i].end };
+		newObject.points[i] = rotationMatrix * newObject.points[i];
 	}
 
 	//Translate back
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrixBack * newObject.lines[i].start, translationMatrixBack * newObject.lines[i].end };
+		newObject.points[i] = translationMatrixBack * newObject.points[i];
 	}
 
-	
 	return newObject;
 }
 
@@ -239,9 +238,9 @@ ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degr
 	}
 
 	//Rotate
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { rotationMatrix * object.lines[i].start, rotationMatrix * object.lines[i].end };
+		newObject.points[i] = rotationMatrix * object.points[i];
 	}
 
 	return newObject;
@@ -250,9 +249,9 @@ ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degr
 ThreeDObject ExpanseHelper::translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange) {
 	ThreeDObject newObject;
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
-	for (int i = 0; i < newObject.lines.size(); i++)
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.lines[i] = { translationMatrix * object.lines[i].start, translationMatrix * object.lines[i].end };
+		newObject.points[i] = translationMatrix * object.points[i];
 	}
 	return newObject;
 }

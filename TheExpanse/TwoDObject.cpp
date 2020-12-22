@@ -9,10 +9,10 @@ TwoDObject::TwoDObject()
 
 
 	// BOX
-	lines.push_back({ { 1, 1, 1 }, { 1, 2, 1 } });
+	/*lines.push_back({ { 1, 1, 1 }, { 1, 2, 1 } });
 	lines.push_back({ { 1, 2, 1 }, {2, 2, 1 } });
 	lines.push_back({ { 2, 2, 1 }, {2, 1, 1 } });
-	lines.push_back({ { 2, 1, 1 }, {1, 1, 1 } });
+	lines.push_back({ { 2, 1, 1 }, {1, 1, 1 } });*/
 
 	// STAR
 	/*lines.push_back({ { 4, 4 }, { 0, 4 } });
@@ -34,7 +34,7 @@ Vector TwoDObject::getCenter()
 
 	// For all vertices
 	int i = 0;
-	for (i = 0; i < lines.size(); ++i)
+	/*for (i = 0; i < lines.size(); ++i)
 	{
 		x0 = lines[i].start.x;
 		y0 = lines[i].start.y;
@@ -45,7 +45,7 @@ Vector TwoDObject::getCenter()
 		double centroidX = centroid.x + (x0 + x1) * a;
 		double centroidY = centroid.y + (y0 + y1) * a;
 		centroid = { centroidX, centroidY, 1 };
-	}
+	}*/
 
 	signedArea *= 0.5;
 

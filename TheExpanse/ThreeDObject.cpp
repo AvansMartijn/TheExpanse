@@ -2,10 +2,15 @@
 
 ThreeDObject::ThreeDObject()
 {
-	points.push_back({ -1, -1, 0 });
-	points.push_back({ -1, 1, 0 });
-	points.push_back({ 1, 1, 0 });
-	points.push_back({ 1, -1, 0 });
+	points.push_back({ -1, -1, -1 });
+	points.push_back({ -1, 1, -1 });
+	points.push_back({ 1, 1, -1 });
+	points.push_back({ 1, -1, -1 });
+
+	points.push_back({ -1, -1, 1 });
+	points.push_back({ -1, 1, 1 });
+	points.push_back({ 1, 1, 1 });
+	points.push_back({ 1, -1, 1 });
 
 
 	// BOX
@@ -15,20 +20,20 @@ ThreeDObject::ThreeDObject()
 	lines.push_back({ { 1, -1, 0 }, {-1, -1, 0 } });*/
 
 	//CHIEL
-	lines.push_back({ { 1, 1, 1 }, {1, 2, 1 } });
-	lines.push_back({ { 1, 2, 1 }, {2, 2, 1 } });
-	lines.push_back({ { 2, 2, 1 }, {2, 1, 1 } });
-	lines.push_back({ { 2, 1, 1 }, {1, 1, 1 } });
+	lines.push_back({ points[0], points[1] });
+	lines.push_back({ points[1], points[2] });
+	lines.push_back({ points[2], points[3] });
+	lines.push_back({ points[3], points[0] });
 
-	lines.push_back({ { 1, 1, 2 }, {1, 2, 2 } });
-	lines.push_back({ { 1, 2, 2 }, {2, 2, 2 } });
-	lines.push_back({ { 2, 2, 2 }, {2, 1, 2 } });
-	lines.push_back({ { 2, 1, 2 }, {1, 1, 2 } });
+	lines.push_back({ points[4], points[5] });
+	lines.push_back({ points[5], points[6] });
+	lines.push_back({ points[6], points[7] });
+	lines.push_back({ points[7], points[4] });
 
-	lines.push_back({ { 1, 1, 1 }, {1, 1, 2 } });
-	lines.push_back({ { 1, 2, 1 }, {1, 2, 2 } });
-	lines.push_back({ { 2, 2, 1 }, {2, 2, 2 } });
-	lines.push_back({ { 2, 1, 1 }, {2, 1, 2 } });
+	lines.push_back({ points[0], points[4] });
+	lines.push_back({ points[1], points[5] });
+	lines.push_back({ points[2], points[6] });
+	lines.push_back({ points[3], points[7] });
 
 	// STAR
 	/*lines.push_back({ { 4, 4 }, { 0, 4 } });
