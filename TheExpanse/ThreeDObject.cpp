@@ -2,15 +2,15 @@
 
 ThreeDObject::ThreeDObject()
 {
-	points.push_back({ -1, -1, -1 });
-	points.push_back({ -1, 1, -1 });
-	points.push_back({ 1, 1, -1 });
-	points.push_back({ 1, -1, -1 });
-
-	points.push_back({ -1, -1, 1 });
-	points.push_back({ -1, 1, 1 });
 	points.push_back({ 1, 1, 1 });
-	points.push_back({ 1, -1, 1 });
+	points.push_back({ 1, 3, 1 });
+	points.push_back({ 3, 3, 1 });
+	points.push_back({ 3, 1, 1 });
+
+	points.push_back({ 1, 1, 3 });
+	points.push_back({ 1, 3, 3 });
+	points.push_back({ 3, 3, 3 });
+	points.push_back({ 3, 1, 3 });
 
 
 	// BOX
@@ -35,15 +35,12 @@ ThreeDObject::ThreeDObject()
 	lines.push_back({ points[2], points[6] });
 	lines.push_back({ points[3], points[7] });
 
+	centerPoint = Vector( 2, 2, 2 );
+
 	// STAR
 	/*lines.push_back({ { 4, 4 }, { 0, 4 } });
 	lines.push_back({ { 0, 4 }, { 3.5, 1 } });
 	lines.push_back({ { 3.5, 1 }, { 2, 6 } });
 	lines.push_back({ { 2, 6 }, { 0.5, 1 } });
 	lines.push_back({ { 0.5, 1 }, { 4, 4 } });*/
-}
-
-Vector ThreeDObject::getCenter()
-{
-	return { 1.5, 1.5, 1.5 };
 }

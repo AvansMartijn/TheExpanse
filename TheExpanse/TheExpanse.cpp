@@ -119,19 +119,19 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_x)
                 {
                     // R has been pressed
-                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'X');
+                    threedobj = helper.rotate(threedobj, 45, 'X');
 
                 }
                 if (event.key.keysym.sym == SDLK_y)
                 {
                     // E has been pressed
-                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'Y');
+                    threedobj = helper.rotate(threedobj, 45, 'Y');
 
                 }
                 if (event.key.keysym.sym == SDLK_z)
                 {
                     // T has been pressed
-                    threedobj = helper.rotateAroundOrigin(threedobj, 45, 'Z');
+                    threedobj = helper.rotate(threedobj, 45, 'Z');
 
                 }
             }

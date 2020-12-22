@@ -117,7 +117,7 @@ Matrix Matrix::operator*(const Matrix& operand)
 		throw std::invalid_argument("Columns of A do not match Rows of B");
 	}
 
-	Matrix newMatrix(mData.size(), mData[0].size());
+	Matrix newMatrix(mData.size(), operand.mData[0].size());
 
 	for (int i = 0; i < _rows; ++i)
 		for (int j = 0; j < operand._cols; ++j)

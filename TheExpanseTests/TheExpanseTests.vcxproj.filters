@@ -21,9 +21,6 @@
     <ClCompile Include="MatrixTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TranslationMatrixTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

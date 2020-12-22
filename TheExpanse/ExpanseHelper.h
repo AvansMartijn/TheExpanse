@@ -24,4 +24,6 @@ public:
     ThreeDObject rotateAroundOrigin(ThreeDObject& object, double degrees, char axis);
 private:
 
+    const double PI = atan(1) * 4;
+
 };

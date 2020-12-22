@@ -70,27 +70,16 @@ Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale, double zSca
 ThreeDObject ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale)
 {
 	ThreeDObject newObject;
-	Vector center = object.getCenter();
-	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
-	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
+	newObject.centerPoint = object.centerPoint;
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
+	Matrix translationMatrixBack = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
 	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, zScale);
 
-	//Translate to origin
-	for (int i = 0; i < newObject.points.size(); i++)
-	{
-		newObject.points[i] = translationMatrixToOrigin * object.points[i];
-	}
+	Matrix superMatrix = translationMatrixBack * scalingMatrix * translationMatrixToOrigin;
 
-	//Scale
 	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.points[i] = scalingMatrix * newObject.points[i];
-	}
-
-	//Tanslate back
-	for (int i = 0; i < newObject.points.size(); i++)
-	{
-		newObject.points[i] = translationMatrixBack * newObject.points[i];
+		newObject.points[i] = superMatrix * object.points[i];
 	}
 
 	return newObject;
@@ -99,7 +88,6 @@ ThreeDObject ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale,
 Matrix ExpanseHelper::getRotationMatrixZAxis(double degrees)
 {
 	Matrix rotationMatrix(4, 4);
-	double PI = 3.14159265358979323846264338327950288419;
 
 	rotationMatrix.mData[0][0] = cos(degrees * PI / 180.0);
 	rotationMatrix.mData[0][1] = -sin(degrees * PI / 180.0);
@@ -126,54 +114,22 @@ Matrix ExpanseHelper::getRotationMatrixZAxis(double degrees)
 Matrix ExpanseHelper::getRotationMatrixYAxis(double degrees)
 {
 	Matrix rotationMatrix(4, 4);
-	double PI = 3.14159265358979323846264338327950288419;
 
-	rotationMatrix.mData[0][0] = -sin(degrees * PI / 180.0);
-	rotationMatrix.mData[0][1] = cos(degrees * PI / 180.0);
-	rotationMatrix.mData[0][2] = 0;
-	rotationMatrix.mData[0][3] = 0;
-
-	rotationMatrix.mData[1][0] = 0;
-	rotationMatrix.mData[1][1] = 0;
-	rotationMatrix.mData[1][2] = 1;
-	rotationMatrix.mData[1][3] = 0;
-
-	rotationMatrix.mData[2][0] = cos(degrees * PI / 180.0);
-	rotationMatrix.mData[2][1] = sin(degrees * PI / 180.0);
-	rotationMatrix.mData[2][2] = 0;
-	rotationMatrix.mData[2][3] = 0;
-
-	rotationMatrix.mData[3][0] = 0;
-	rotationMatrix.mData[3][1] = 0;
-	rotationMatrix.mData[3][2] = 0;
-	rotationMatrix.mData[3][3] = 1;
+	rotationMatrix.mData[0] = { cos(degrees * PI / 180.0), 0, -sin(degrees * PI / 180.0), 0 };
+	rotationMatrix.mData[1] = { 0, 1, 0, 0 };
+	rotationMatrix.mData[2] = { sin(degrees * PI / 180.0), 0, cos(degrees * PI / 180.0), 0 };
+	rotationMatrix.mData[3] = { 0, 0, 0, 1 };
 
 	return rotationMatrix;
 }
 Matrix ExpanseHelper::getRotationMatrixXAxis(double degrees)
 {
 	Matrix rotationMatrix(4, 4);
-	double PI = 3.14159265358979323846264338327950288419;
 
-	rotationMatrix.mData[0][0] = 0;
-	rotationMatrix.mData[0][1] = 0;
-	rotationMatrix.mData[0][2] = 1;
-	rotationMatrix.mData[0][3] = 0;
-
-	rotationMatrix.mData[1][0] = cos(degrees * PI / 180.0);
-	rotationMatrix.mData[1][1] = sin(degrees * PI / 180.0);
-	rotationMatrix.mData[1][2] = 0;
-	rotationMatrix.mData[1][3] = 0;
-
-	rotationMatrix.mData[2][0] = -sin(degrees * PI / 180.0);
-	rotationMatrix.mData[2][1] = cos(degrees * PI / 180.0);
-	rotationMatrix.mData[2][2] = 0;
-	rotationMatrix.mData[2][3] = 0;
-
-	rotationMatrix.mData[3][0] = 0;
-	rotationMatrix.mData[3][1] = 0;
-	rotationMatrix.mData[3][2] = 0;
-	rotationMatrix.mData[3][3] = 1;
+	rotationMatrix.mData[0] = { 1, 0, 0, 0 };
+	rotationMatrix.mData[1] = { 0, cos(degrees * PI / 180.0), sin(degrees * PI / 180.0), 0 };
+	rotationMatrix.mData[2] = { 0, -sin(degrees * PI / 180.0), cos(degrees * PI / 180.0), 0 };
+	rotationMatrix.mData[3] = { 0, 0, 0, 1 };
 
 	return rotationMatrix;
 }
@@ -181,38 +137,30 @@ Matrix ExpanseHelper::getRotationMatrixXAxis(double degrees)
 ThreeDObject ExpanseHelper::rotate(ThreeDObject& object, double degrees, char axis)
 {
 	ThreeDObject newObject;
-	Vector center = object.getCenter();
-	Matrix translationMatrixToOrigin = getTranslationMatrix(-center.x, -center.y, 1);
-	Matrix translationMatrixBack = getTranslationMatrix(center.x, center.y, 1);
+	newObject.centerPoint = object.centerPoint;
+	Matrix translationMatrixToOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
+	Matrix translationMatrixBack = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
+
 	Matrix rotationMatrix(1,1);
 	switch (axis)
 	{
 	case 'X':
 		rotationMatrix = getRotationMatrixXAxis(degrees);
+		break;
 	case 'Y':
 		rotationMatrix = getRotationMatrixYAxis(degrees);
+		break;
 	case 'Z':
 		rotationMatrix = getRotationMatrixZAxis(degrees);
+		break;
 	default:
 		break;
 	}
 
-	//Translate to origin
+	Matrix superMatrix = translationMatrixBack * rotationMatrix * translationMatrixToOrigin;
 	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		newObject.points[i] = translationMatrixToOrigin * object.points[i];
-	}
-
-	//Rotate
-	for (int i = 0; i < newObject.points.size(); i++)
-	{
-		newObject.points[i] = rotationMatrix * newObject.points[i];
-	}
-
-	//Translate back
-	for (int i = 0; i < newObject.points.size(); i++)
-	{
-		newObject.points[i] = translationMatrixBack * newObject.points[i];
+		newObject.points[i] = superMatrix * object.points[i];
 	}
 
 	return newObject;
@@ -249,6 +197,8 @@ ThreeDObject ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degr
 ThreeDObject ExpanseHelper::translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange) {
 	ThreeDObject newObject;
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
+
+	newObject.centerPoint = translationMatrix * object.centerPoint;
 	for (int i = 0; i < newObject.points.size(); i++)
 	{
 		newObject.points[i] = translationMatrix * object.points[i];
