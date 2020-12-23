@@ -17,5 +17,6 @@ public:
 	Vector operator+(int operand);
 	Vector operator-(int operand);
 	Vector operator*(int operand);
+	Vector crossProduct(const Vector& operand);
 };
 

@@ -25,6 +25,17 @@ double Vector::operator* (const Vector& operand) {
     return (x * operand.x) + (y * operand.y) + (z * operand.z);
 }
 
+
+//cross/outproduct 
+Vector Vector::crossProduct(const Vector& operand) {
+    Vector v;
+    v.x = this->y * operand.z - this->z * operand.y;
+    v.y = this->z * operand.x - this->x * operand.z;
+    v.z = this->x * operand.y - this->y * operand.x;
+
+    return v;
+}
+
 //operator with scalar
 //Optellen
 Vector Vector::operator+ (int operand) {
