@@ -447,14 +447,15 @@ namespace TheExpanseTests
 		TEST_METHOD(CrossProduct)
 		{
 			//1. Arrange
+			ExpanseHelper helper;
 			Vector a{ 1, 2, 3 };
 			Vector b{ 1, 5, 7};
 			Vector i{ -1, -2, 3 };
 			Vector j{ 4, 0, -8 };
 
 			//2. Act
-			Vector c = a.crossProduct(b);
-			Vector h = i.crossProduct(j);
+			Vector c = helper.getCrossProduct(a, b);
+			Vector h = helper.getCrossProduct(i, j);
 
 			//3. Assert
 			Vector v{ -1, -4, 3 };

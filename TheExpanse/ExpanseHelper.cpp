@@ -206,3 +206,12 @@ ThreeDObject ExpanseHelper::translateMatrix(ThreeDObject& object, double xChange
 	return newObject;
 }
 
+Vector ExpanseHelper::getCrossProduct(const Vector& vA, const Vector& vB) {
+	Vector v;
+	v.x = vA.y * vB.z - vA.z * vB.y;
+	v.y = vA.z * vB.x - vA.x * vB.z;
+	v.z = vA.x * vB.y - vA.y * vB.x;
+
+	return v;
+}
+
