@@ -449,16 +449,22 @@ namespace TheExpanseTests
 			//1. Arrange
 			Vector a{ 1, 2, 3 };
 			Vector b{ 1, 5, 7};
+			Vector i{ -1, -2, 3 };
+			Vector j{ 4, 0, -8 };
 
 			//2. Act
 			Vector c = a.crossProduct(b);
+			Vector h = i.crossProduct(j);
 
 			//3. Assert
 			Vector v{ -1, -4, 3 };
-
+			Vector k{ 16, 4, 8 };
 			Assert::AreEqual(v.x, c.x);
 			Assert::AreEqual(v.y, c.y);
 			Assert::AreEqual(v.z, c.z);
+			Assert::AreEqual(k.x, h.x);
+			Assert::AreEqual(k.y, h.y);
+			Assert::AreEqual(k.z, h.z);
 
 		}
 
