@@ -439,4 +439,29 @@ namespace TheExpanseTests
 		}
 
 	};
+
+	TEST_CLASS(VectorTestClass)
+	{
+	public:
+
+		TEST_METHOD(CrossProduct)
+		{
+			//1. Arrange
+			Vector a{ 1, 2, 3 };
+			Vector b{ 1, 5, 7};
+
+			//2. Act
+			Vector c = a.crossProduct(b);
+
+			//3. Assert
+			Vector v{ -1, -4, 3 };
+
+			Assert::AreEqual(v.x, c.x);
+			Assert::AreEqual(v.y, c.y);
+			Assert::AreEqual(v.z, c.z);
+
+		}
+
+		
+	};
 }

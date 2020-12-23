@@ -48,6 +48,10 @@ void drawStuff() {
     window.renderSetViewport("bottomLeft");
     drawGraph();
     window.drawThreeDObject(threedobj, "top");
+
+    Vector v(1, 2, 3);
+    Vector c = v.crossProduct({ 1, 5, 7 });
+    std::cout << c.x << " - " << c.y << " - " << c.z << "\n";
    
     window.renderPresent();
 
