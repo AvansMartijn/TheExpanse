@@ -163,7 +163,9 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ExpanseHelper.cpp" />
+    <ClCompile Include="ThreeDWindow.cpp" />
     <ClCompile Include="Vertice.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="TheExpanse.cpp" />
@@ -172,7 +174,9 @@
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="ExpanseHelper.h" />
+    <ClInclude Include="ThreeDWindow.h" />
     <ClInclude Include="Vertice.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="ThreeDObject.h" />

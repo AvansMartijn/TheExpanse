@@ -24,7 +24,7 @@ Camera::Camera() {
 	//translate to origin
 	Matrix toOrigin = helper.getTranslationMatrix(-eye.x, -eye.y, -eye.z);
 
-	Matrix newMatrix = inverseTransformationMatrix* toOrigin;
+	Matrix cameraPerspectiveMatrix = inverseTransformationMatrix* toOrigin;
 
 
 

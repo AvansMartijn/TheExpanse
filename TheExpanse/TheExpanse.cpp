@@ -9,36 +9,21 @@
 //Helper Class
 #include "ExpanseHelper.h"
 #include "ThreeDObject.h"
+#include "ThreeDWindow.h"
 
-Window window{ 1080, 720, 20.0f, 200.0f };
-//Window window{ 1080, 720, 0, 200.0f };
+ThreeDWindow window{ 1080, 720 };
 
-//float offset = 100.0f;
-//float scale = 20.0f;
 ExpanseHelper helper;
 TwoDObject tdobj;
 ThreeDObject threedobj;
 
-void initViews() {
-    window.addViewport("topLeft", 540, 360, 0, 0);
-    window.addViewport("topRight", 540, 360, 540, 0);
-    window.addViewport("bottomLeft", 540, 360, 0, 360);
-}
 
-void drawGraph() {
-    for (double i =-10; i < 11; i++) {
-        bool highlighted = false;
-        if (i == 0) {
-            highlighted = true;
-        }
-
-        window.drawLine(Vector{ i, -10, 1 }, Vector{ i, 10, 1 }, highlighted);
-        window.drawLine(Vector{ -10, i, 1 }, Vector{ 10, i, 1}, highlighted);
-    }
-}
 void drawStuff() {
-    // Render the rect to the screen
+
     window.clear();
+    window.renderPresent();
+    // Render the rect to the screen
+   /* window.clear();
     window.renderSetViewport("topLeft");
     drawGraph();
     window.drawThreeDObject(threedobj);
@@ -49,7 +34,7 @@ void drawStuff() {
     drawGraph();
     window.drawThreeDObject(threedobj, "top");
    
-    window.renderPresent();
+    window.renderPresent();*/
 
 }
 
@@ -144,7 +129,6 @@ void programLoop() {
 
 int main()
 {
-    initViews();
     programLoop();
     return 0;
 }
