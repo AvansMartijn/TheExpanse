@@ -25,6 +25,15 @@ public:
 
     //CrossProduct
     Vector getCrossProduct(const Vector& vA, const Vector& vB);
+    Vector normalize(const Vector& v);
+
+    //transformation
+    Matrix getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction);
+
+    //projection
+    Matrix getProjectionMatrix(double near, double far, double fovY);
+
+    Vector correctProjection(const Vector& vector, double screenSizeX, double screenSizeY);
 
 private:
 

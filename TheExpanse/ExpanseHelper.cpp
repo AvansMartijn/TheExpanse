@@ -215,3 +215,50 @@ Vector ExpanseHelper::getCrossProduct(const Vector& vA, const Vector& vB) {
 	return v;
 }
 
+Vector ExpanseHelper::normalize(const Vector& v) {
+	double length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+	Vector newVector;
+	if (length != 0.)
+	{
+		newVector.x = v.x / length;
+		newVector.y = v.y / length;
+		newVector.z = v.z / length;
+	}
+
+	return newVector;
+}
+
+Matrix ExpanseHelper::getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction) {
+	Matrix inverseTransformMatrix(4, 4);
+	inverseTransformMatrix.mData[0] = { right.x, right.y, right.z, 0 };
+	inverseTransformMatrix.mData[1] = { up.x, up.y, up.z, 0 };
+	inverseTransformMatrix.mData[2] = { direction.x, direction.y, direction.z, 0 };
+	inverseTransformMatrix.mData[3] = {	0, 0, 0, 1};
+
+	return inverseTransformMatrix;
+}
+
+Matrix ExpanseHelper::getProjectionMatrix(double near, double far, double fovY)
+{
+	Matrix projectionMatrix(4, 4);
+	double scale = near * tan((fovY * PI / 180.0) * 0.5);
+
+	projectionMatrix.mData[0] = { scale, 0, 0, 0 };
+	projectionMatrix.mData[0] = { 0, scale, 0, 0 };
+	projectionMatrix.mData[0] = { 0, 0, (-far/(far-near)), -1 };
+	projectionMatrix.mData[0] = { 0, 0, (-far*near/(far-near)), 0 };
+
+	return projectionMatrix;
+}
+
+Vector ExpanseHelper::correctProjection(const Vector& vector, double screenSizeX, double screenSizeY)
+{
+	Vector v;
+	v.x = (screenSizeX / 2) + (v.x / v.w) * (screenSizeX / 2);
+	v.y = (screenSizeY / 2) + (v.y / v.w) * (screenSizeY / 2);
+	
+	return v;
+}
+
+
+
