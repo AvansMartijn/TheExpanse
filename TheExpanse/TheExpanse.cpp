@@ -120,6 +120,20 @@ void programLoop() {
                     threedobj = helper.rotate(threedobj, 45, 'Z');
 
                 }
+                if (event.key.keysym.sym == SDLK_PAGEUP)
+                {
+                    // T has been pressed
+                    threedobj = helper.rotate(threedobj, 45, 'Z');
+                    window.camera.eye = helper.getTranslationMatrix(5, 0, 0) * window.camera.eye;
+
+                }
+                if (event.key.keysym.sym == SDLK_PAGEDOWN)
+                {
+                    // T has been pressed
+                    threedobj = helper.rotate(threedobj, 45, 'Z');
+                    window.camera.eye = helper.getTranslationMatrix(-5, 0, 0) * window.camera.eye;
+
+                }
             }
          
         }

@@ -2,47 +2,47 @@
 
 ThreeDObject::ThreeDObject()
 {
-	////BOX
-	//points.push_back({ 1, 1, -1 });
-	//points.push_back({ 1, 5, -1 });
-	//points.push_back({ 5, 5, -1 });
-	//points.push_back({ 5, 1, -1 });
+	//BOX
+	points.push_back({ 1, 1, -1 });
+	points.push_back({ 1, 5, -1 });
+	points.push_back({ 5, 5, -1 });
+	points.push_back({ 5, 1, -1 });
 
-	//points.push_back({ 1, 1, -3 });
-	//points.push_back({ 1, 5, -3 });
-	//points.push_back({ 5, 5, -3 });
-	//points.push_back({ 5, 1, -3 });
+	points.push_back({ 1, 1, -3 });
+	points.push_back({ 1, 5, -3 });
+	points.push_back({ 5, 5, -3 });
+	points.push_back({ 5, 1, -3 });
 
-	////BOX
-	//lines.push_back({ points[0], points[1] });
-	//lines.push_back({ points[1], points[2] });
-	//lines.push_back({ points[2], points[3] });
-	//lines.push_back({ points[3], points[0] });
-
-	//lines.push_back({ points[4], points[5] });
-	//lines.push_back({ points[5], points[6] });
-	//lines.push_back({ points[6], points[7] });
-	//lines.push_back({ points[7], points[4] });
-
-	//lines.push_back({ points[0], points[4] });
-	//lines.push_back({ points[1], points[5] });
-	//lines.push_back({ points[2], points[6] });
-	//lines.push_back({ points[3], points[7] });
-
-	//centerPoint = Vector( 2, 2, 2 );
-
-	//TOP
-	points.push_back({ 6, 1, -5 }); //0
-	points.push_back({ 7, 1, -5 }); //1
+	//BOX
 	lines.push_back({ points[0], points[1] });
-	points.push_back({ 4, 2, -5 }); //2
-	points.push_back({ 9, 2, -5 }); //3
-	lines.push_back({ points[0], points[2] });
-	lines.push_back({ points[1], points[3] });
-	points.push_back({ 1, 6, -5 }); //4
-	points.push_back({ 12, 6, -5 }); //5
-	lines.push_back({ points[2], points[4] });
-	lines.push_back({ points[3], points[5] });
+	lines.push_back({ points[1], points[2] });
+	lines.push_back({ points[2], points[3] });
+	lines.push_back({ points[3], points[0] });
+
+	lines.push_back({ points[4], points[5] });
+	lines.push_back({ points[5], points[6] });
+	lines.push_back({ points[6], points[7] });
+	lines.push_back({ points[7], points[4] });
+
+	lines.push_back({ points[0], points[4] });
+	lines.push_back({ points[1], points[5] });
+	lines.push_back({ points[2], points[6] });
+	lines.push_back({ points[3], points[7] });
+
+	centerPoint = Vector( 2, 3, 2 );
+
+	////TOP
+	//points.push_back({ 6, 1, -5 }); //0
+	//points.push_back({ 7, 1, -5 }); //1
+	//lines.push_back({ points[0], points[1] });
+	//points.push_back({ 4, 2, -5 }); //2
+	//points.push_back({ 9, 2, -5 }); //3
+	//lines.push_back({ points[0], points[2] });
+	//lines.push_back({ points[1], points[3] });
+	//points.push_back({ 1, 6, -5 }); //4
+	//points.push_back({ 12, 6, -5 }); //5
+	//lines.push_back({ points[2], points[4] });
+	//lines.push_back({ points[3], points[5] });
 
 	////BODY
 	//points.push_back({ 1, 22, -5 }); //6
@@ -114,7 +114,7 @@ ThreeDObject::ThreeDObject()
 	//lines.push_back({ points[12], points[26] });
 	//lines.push_back({ points[13], points[27] });
 
-	centerPoint = Vector(5, 12.5, -7);
+	//centerPoint = Vector(5, 12.5, -7);
 
 	
 }
