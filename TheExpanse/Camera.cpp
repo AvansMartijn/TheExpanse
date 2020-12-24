@@ -1,7 +1,5 @@
 #include "Camera.h"
-#include "ExpanseHelper.h"
 Camera::Camera() {
-	ExpanseHelper helper;
 	eye = { 0,0,0,1 };
 	lookAt = { 0,0,-5,1 };
 	up = { 0, 1, 0, 1 };
@@ -18,20 +16,39 @@ Camera::Camera() {
 	//normalize up
 	up = helper.normalize(up);
 
-	//put them in a transformationmatrix
-	Matrix inverseTransformationMatrix = helper.getInverseTransformationMatrix(right, up, direction);
-
-	//translate to origin
-	Matrix toOrigin = helper.getTranslationMatrix(-eye.x, -eye.y, -eye.z);
-
-	Matrix cameraPerspectiveMatrix = inverseTransformationMatrix* toOrigin;
-
-
-
 	//fov on y-axis 90 degrees
 	fovY = 90;
 	near = 5;
 	far = 10;
 
 
+}
+
+ThreeDObject Camera::createPerspective(const ThreeDObject& object)
+{
+	ThreeDObject viewObject;
+
+	//put them in a transformationmatrix
+	Matrix inverseTransformationMatrix = helper.getInverseTransformationMatrix(right, up, direction);
+
+	//translate to origin
+	Matrix toOrigin = helper.getTranslationMatrix(-eye.x, -eye.y, -eye.z);
+
+	Matrix cameraPerspectiveMatrix = inverseTransformationMatrix * toOrigin;
+
+	//Camera
+	viewObject.centerPoint = cameraPerspectiveMatrix * object.centerPoint;
+	for (size_t i = 0; i < object.points.size(); i++)
+	{
+		viewObject.points[i] = cameraPerspectiveMatrix * object.points[i];
+	}
+
+	//Perspectief
+	Matrix pers = helper.getProjectionMatrix(near, far, fovY);
+	for (size_t i = 0; i < object.points.size(); i++)
+	{
+		viewObject.points[i] = helper.correctProjection((pers * object.points[i]), 1080, 720);
+	}
+
+	return viewObject;
 }

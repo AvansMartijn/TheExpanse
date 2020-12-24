@@ -1,6 +1,9 @@
 
 #pragma once
 #include "Vector.h"
+#include "ThreeDObject.h"
+#include "ExpanseHelper.h"
+
 class Camera
 {
 public:
@@ -13,6 +16,11 @@ public:
 	double fovY;
 	double far;
 	double near;
+
+	ThreeDObject createPerspective(const ThreeDObject& object);
+
+private:
+	ExpanseHelper helper;
 
 };
 

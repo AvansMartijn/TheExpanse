@@ -21,6 +21,7 @@ ThreeDObject threedobj;
 void drawStuff() {
 
     window.clear();
+    window.drawObject(threedobj);
     window.renderPresent();
     // Render the rect to the screen
    /* window.clear();
