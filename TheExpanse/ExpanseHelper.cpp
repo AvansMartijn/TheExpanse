@@ -241,12 +241,12 @@ Matrix ExpanseHelper::getInverseTransformationMatrix(const Vector& right, const 
 Matrix ExpanseHelper::getProjectionMatrix(double near, double far, double fovY)
 {
 	Matrix projectionMatrix(4, 4);
-	double scale = near * tan((fovY * PI / 180.0) * 0.5);
+	double scale = near * tan((fovY/2) * (PI / 180.0));
 
 	projectionMatrix.mData[0] = { scale, 0, 0, 0 };
-	projectionMatrix.mData[0] = { 0, scale, 0, 0 };
-	projectionMatrix.mData[0] = { 0, 0, (-far/(far-near)), -1 };
-	projectionMatrix.mData[0] = { 0, 0, (-far*near/(far-near)), 0 };
+	projectionMatrix.mData[1] = { 0, scale, 0, 0 };
+	projectionMatrix.mData[2] = { 0, 0, (-far/(far-near)), -1 };
+	projectionMatrix.mData[3] = { 0, 0, (-far*near/(far-near)), 0 };
 
 	return projectionMatrix;
 }
@@ -254,8 +254,10 @@ Matrix ExpanseHelper::getProjectionMatrix(double near, double far, double fovY)
 Vector ExpanseHelper::correctProjection(const Vector& vector, double screenSizeX, double screenSizeY)
 {
 	Vector v;
-	v.x = (screenSizeX / 2) + (v.x / v.w) * (screenSizeX / 2);
-	v.y = (screenSizeY / 2) + (v.y / v.w) * (screenSizeY / 2);
+	v.x = (screenSizeX / 2) + (vector.x / vector.w) * (screenSizeX / 2);
+	v.y = (screenSizeY / 2) + (vector.y / vector.w) * (screenSizeY / 2);
+	v.z = vector.z;
+	v.w = vector.w;
 	
 	return v;
 }

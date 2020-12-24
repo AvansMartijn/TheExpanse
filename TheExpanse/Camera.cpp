@@ -18,8 +18,8 @@ Camera::Camera() {
 
 	//fov on y-axis 90 degrees
 	fovY = 90;
-	near = 5;
-	far = 10;
+	near = 0.1;
+	far = 100;
 
 
 }
@@ -45,9 +45,13 @@ ThreeDObject Camera::createPerspective(const ThreeDObject& object)
 
 	//Perspectief
 	Matrix pers = helper.getProjectionMatrix(near, far, fovY);
-	for (size_t i = 0; i < object.points.size(); i++)
+
+	viewObject.centerPoint = pers * viewObject.centerPoint;
+	viewObject.centerPoint = helper.correctProjection(viewObject.centerPoint, 1080, 720);
+	for (size_t i = 0; i < viewObject.points.size(); i++)
 	{
-		viewObject.points[i] = helper.correctProjection((pers * object.points[i]), 1080, 720);
+		Vector newView = pers * viewObject.points[i];
+		viewObject.points[i] = helper.correctProjection(newView, 1080, 720);
 	}
 
 	return viewObject;
