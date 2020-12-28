@@ -11,5 +11,6 @@ public:
 	std::vector<Vector> points;
 	Vector centerPoint;
 	std::vector<Vertice> lines;
+	Vector getDirectionVector();
 };
 

@@ -65,31 +65,31 @@ void programLoop() {
                     // A has been pressed
                     threedobj = helper.scaleOnLocation(threedobj, 0.5, 0.5, 0.5);
                 }
-                if (event.key.keysym.sym == SDLK_UP)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, 0, 0.5, 0);
+                //if (event.key.keysym.sym == SDLK_UP)
+                //{
+                //    // A has been pressed
+                //    threedobj = helper.translateMatrix(threedobj, 0, 0.5, 0);
 
-                }
-                if (event.key.keysym.sym == SDLK_DOWN)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, 0, -0.5, 0);
+                //}
+                //if (event.key.keysym.sym == SDLK_DOWN)
+                //{
+                //    // A has been pressed
+                //    threedobj = helper.translateMatrix(threedobj, 0, -0.5, 0);
 
-                }
-                if (event.key.keysym.sym == SDLK_LEFT)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, -0.5, 0, 0);
+                //}
+                //if (event.key.keysym.sym == SDLK_LEFT)
+                //{
+                //    // A has been pressed
+                //    threedobj = helper.translateMatrix(threedobj, -0.5, 0, 0);
 
 
-                }
-                if (event.key.keysym.sym == SDLK_RIGHT)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, 0.5, 0, 0);
+                //}
+                //if (event.key.keysym.sym == SDLK_RIGHT)
+                //{
+                //    // A has been pressed
+                //    threedobj = helper.translateMatrix(threedobj, 0.5, 0, 0);
 
-                }
+                //}
                 if (event.key.keysym.sym == SDLK_1)
                 {
                     // A has been pressed
@@ -102,38 +102,103 @@ void programLoop() {
                     threedobj = helper.translateMatrix(threedobj, 0, 0, -0.5);
 
                 }
-                if (event.key.keysym.sym == SDLK_x)
+                //PITCH bACK
+                if (event.key.keysym.sym == SDLK_s)
                 {
                     // R has been pressed
-                    threedobj = helper.rotate(threedobj, 45, 'X');
+                    threedobj = helper.rotate(threedobj, 1, 'X');
 
                 }
-                if (event.key.keysym.sym == SDLK_y)
+
+                //PITCH forward
+                if (event.key.keysym.sym == SDLK_w)
+                {
+                    // R has been pressed
+                    threedobj = helper.rotate(threedobj, -1, 'X');
+
+                }
+                //JAW RIGHT
+                if (event.key.keysym.sym == SDLK_d)
                 {
                     // E has been pressed
-                    threedobj = helper.rotate(threedobj, 45, 'Y');
+                    threedobj = helper.rotate(threedobj, 1, 'Y');
 
                 }
-                if (event.key.keysym.sym == SDLK_z)
+
+                //JAW left
+                if (event.key.keysym.sym == SDLK_a)
+                {
+                    // E has been pressed
+                    threedobj = helper.rotate(threedobj, -1, 'Y');
+
+                }
+                //ROLL RIGHT
+                if (event.key.keysym.sym == SDLK_e)
                 {
                     // T has been pressed
-                    threedobj = helper.rotate(threedobj, 45, 'Z');
+                    threedobj = helper.rotate(threedobj, 1, 'Z');
 
                 }
+
+                //ROLL LEFT
+                if (event.key.keysym.sym == SDLK_q)
+                {
+                    // T has been pressed
+                    threedobj = helper.rotate(threedobj, -1, 'Z');
+
+                }
+                //CAMERA UP
                 if (event.key.keysym.sym == SDLK_PAGEUP)
                 {
                     // T has been pressed
-                    threedobj = helper.rotate(threedobj, 45, 'Z');
-                    window.camera.eye = helper.getTranslationMatrix(5, 0, 0) * window.camera.eye;
+                    window.camera.eye = window.camera.eye - window.camera.up;
+
 
                 }
+                //CAMERA DOWN
                 if (event.key.keysym.sym == SDLK_PAGEDOWN)
                 {
                     // T has been pressed
-                    threedobj = helper.rotate(threedobj, 45, 'Z');
-                    window.camera.eye = helper.getTranslationMatrix(-5, 0, 0) * window.camera.eye;
+                    window.camera.eye = window.camera.eye + window.camera.up;
+
 
                 }
+                //camera forward
+                if (event.key.keysym.sym == SDLK_UP)
+               {
+                   // A has been pressed
+                   //window.camera.eye = helper.getTranslationMatrix(0, 0, -0.5) * window.camera.eye;
+                    window.camera.eye = window.camera.eye - window.camera.direction;
+               }
+                //camera backward
+               if (event.key.keysym.sym == SDLK_DOWN)
+               {
+                   // A has been pressed
+                   window.camera.eye = window.camera.eye + window.camera.direction;
+               }
+               //camera left
+               if (event.key.keysym.sym == SDLK_LEFT)
+               {
+                   // A has been pressed
+                   //window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
+                   window.camera.eye = window.camera.eye + window.camera.right;
+
+
+               }
+               //camera right
+               if (event.key.keysym.sym == SDLK_RIGHT)
+               {
+                   // A has been pressed
+                   window.camera.eye = window.camera.eye - window.camera.right;
+
+
+
+               }
+               if (event.key.keysym.sym == SDLK_LSHIFT) {
+                   Vector v = threedobj.getDirectionVector();
+                   v = helper.normalize(v);
+                   threedobj = helper.translateMatrix(threedobj, v.x,  v.y,  v.z);
+               }
             }
          
         }
@@ -144,6 +209,9 @@ void programLoop() {
 
 int main()
 {
+    //threedobj = helper.translateMatrix(threedobj,0, 0, -10);
+    
+   
     programLoop();
     return 0;
 }

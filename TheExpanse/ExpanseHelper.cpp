@@ -253,6 +253,9 @@ Matrix ExpanseHelper::getProjectionMatrix(double near, double far, double fovY)
 
 Vector ExpanseHelper::correctProjection(const Vector& vector, double screenSizeX, double screenSizeY)
 {
+	//if (vector.w <= 0) {
+	//	return {0,0,0};
+	//}
 	Vector v;
 	v.x = (screenSizeX / 2) + (vector.x / vector.w) * (screenSizeX / 2);
 	v.y = (screenSizeY / 2) + (vector.y / vector.w) * (screenSizeY / 2);
