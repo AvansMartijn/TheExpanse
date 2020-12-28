@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Screen">
       <UniqueIdentifier>{82388805-4a50-40c6-9c86-b08e2a494209}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{556b7cd6-0b48-46d2-9ed9-efa481d76dbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{355cd2d9-dbe8-4fab-908c-a9bfacd394aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpanseHelper.cpp">
@@ -30,13 +36,7 @@
     <ClCompile Include="Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TwoDObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ThreeDObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Vertice.cpp">
@@ -47,6 +47,21 @@
     </ClCompile>
     <ClCompile Include="ThreeDWindow.cpp">
       <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreeDObject.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TwoDObject.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Spaceship.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,13 +79,7 @@
     <ClInclude Include="Matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TwoDObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ThreeDObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vertice.h">
@@ -81,6 +90,21 @@
     </ClInclude>
     <ClInclude Include="ThreeDWindow.h">
       <Filter>Header Files\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="TwoDObject.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreeDObject.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceship.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

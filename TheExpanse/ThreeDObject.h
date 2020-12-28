@@ -7,10 +7,9 @@
 class ThreeDObject
 {
 public:
-	ThreeDObject();
+	//ThreeDObject();
 	std::vector<Vector> points;
 	Vector centerPoint;
 	std::vector<Vertice> lines;
-	Vector getDirectionVector();
 };
 

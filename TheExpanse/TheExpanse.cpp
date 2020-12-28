@@ -10,37 +10,31 @@
 #include "ExpanseHelper.h"
 #include "ThreeDObject.h"
 #include "ThreeDWindow.h"
+#include "Spaceship.h"
+#include "Cube.h"
+#include "Scene.h"
 
 ThreeDWindow window{ 1080, 720 };
-
+Scene scene;
 ExpanseHelper helper;
-TwoDObject tdobj;
-ThreeDObject threedobj;
+//std::vector<ThreeDObject> objectList;
 
 
 void drawStuff() {
 
     window.clear();
-    window.drawObject(threedobj);
+    for(ThreeDObject obj : scene.objectList)
+    {
+        window.drawObject(obj);
+    }
     window.renderPresent();
-    // Render the rect to the screen
-   /* window.clear();
-    window.renderSetViewport("topLeft");
-    drawGraph();
-    window.drawThreeDObject(threedobj);
-    window.renderSetViewport("topRight");
-    drawGraph();
-    window.drawThreeDObject(threedobj, "right");
-    window.renderSetViewport("bottomLeft");
-    drawGraph();
-    window.drawThreeDObject(threedobj, "top");
-   
-    window.renderPresent();*/
 
 }
 
 void programLoop() {
-    
+    Spaceship playership;
+    //Cube cube;
+    scene.objectList.push_back(playership);
     while (true)
     {
         // Get the next event
@@ -54,99 +48,64 @@ void programLoop() {
             }
             if (event.type == SDL_KEYDOWN)
             {
-                if (event.key.keysym.sym == SDLK_KP_PLUS)
-                {
-                    // A has been pressed
-                    threedobj = helper.scaleOnLocation(threedobj, 2, 2, 2);
-
-                }
-                if (event.key.keysym.sym == SDLK_KP_MINUS)
-                {
-                    // A has been pressed
-                    threedobj = helper.scaleOnLocation(threedobj, 0.5, 0.5, 0.5);
-                }
-                //if (event.key.keysym.sym == SDLK_UP)
+                //if (event.key.keysym.sym == SDLK_KP_PLUS)
                 //{
                 //    // A has been pressed
-                //    threedobj = helper.translateMatrix(threedobj, 0, 0.5, 0);
+                //    spaceShip = helper.scaleOnLocation(spaceShip, 2, 2, 2);
 
                 //}
-                //if (event.key.keysym.sym == SDLK_DOWN)
+                //if (event.key.keysym.sym == SDLK_KP_MINUS)
                 //{
                 //    // A has been pressed
-                //    threedobj = helper.translateMatrix(threedobj, 0, -0.5, 0);
-
+                //    spaceShip = helper.scaleOnLocation(spaceShip, 0.5, 0.5, 0.5);
                 //}
-                //if (event.key.keysym.sym == SDLK_LEFT)
+               
+
+                ////PITCH bACK
+                //if (event.key.keysym.sym == SDLK_s)
                 //{
-                //    // A has been pressed
-                //    threedobj = helper.translateMatrix(threedobj, -0.5, 0, 0);
-
+                //    // R has been pressed
+                //    spaceShip = helper.rotate(spaceShip, 3, 'X');
 
                 //}
-                //if (event.key.keysym.sym == SDLK_RIGHT)
+
+                ////PITCH forward
+                //if (event.key.keysym.sym == SDLK_w)
                 //{
-                //    // A has been pressed
-                //    threedobj = helper.translateMatrix(threedobj, 0.5, 0, 0);
+                //    // R has been pressed
+                //    spaceShip = helper.rotate(spaceShip, -3, 'X');
 
                 //}
-                if (event.key.keysym.sym == SDLK_1)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, 0, 0, 0.5);
+                ////JAW RIGHT
+                //if (event.key.keysym.sym == SDLK_d)
+                //{
+                //    // E has been pressed
+                //    spaceShip = helper.rotate(spaceShip, 3, 'Y');
 
-                }
-                if (event.key.keysym.sym == SDLK_2)
-                {
-                    // A has been pressed
-                    threedobj = helper.translateMatrix(threedobj, 0, 0, -0.5);
+                //}
 
-                }
-                //PITCH bACK
-                if (event.key.keysym.sym == SDLK_s)
-                {
-                    // R has been pressed
-                    threedobj = helper.rotate(threedobj, 3, 'X');
+                ////JAW left
+                //if (event.key.keysym.sym == SDLK_a)
+                //{
+                //    // E has been pressed
+                //    spaceShip = helper.rotate(spaceShip, -3, 'Y');
 
-                }
+                //}
+                ////ROLL RIGHT
+                //if (event.key.keysym.sym == SDLK_e)
+                //{
+                //    // T has been pressed
+                //    spaceShip = helper.rotate(spaceShip, 3, 'Z');
 
-                //PITCH forward
-                if (event.key.keysym.sym == SDLK_w)
-                {
-                    // R has been pressed
-                    threedobj = helper.rotate(threedobj, -3, 'X');
+                //}
 
-                }
-                //JAW RIGHT
-                if (event.key.keysym.sym == SDLK_d)
-                {
-                    // E has been pressed
-                    threedobj = helper.rotate(threedobj, 3, 'Y');
+                ////ROLL LEFT
+                //if (event.key.keysym.sym == SDLK_q)
+                //{
+                //    // T has been pressed
+                //    spaceShip = helper.rotate(spaceShip, -3, 'Z');
 
-                }
-
-                //JAW left
-                if (event.key.keysym.sym == SDLK_a)
-                {
-                    // E has been pressed
-                    threedobj = helper.rotate(threedobj, -3, 'Y');
-
-                }
-                //ROLL RIGHT
-                if (event.key.keysym.sym == SDLK_e)
-                {
-                    // T has been pressed
-                    threedobj = helper.rotate(threedobj, 3, 'Z');
-
-                }
-
-                //ROLL LEFT
-                if (event.key.keysym.sym == SDLK_q)
-                {
-                    // T has been pressed
-                    threedobj = helper.rotate(threedobj, -3, 'Z');
-
-                }
+                //}
                 //CAMERA UP
                 if (event.key.keysym.sym == SDLK_PAGEUP)
                 {
@@ -194,11 +153,7 @@ void programLoop() {
 
 
                }
-               if (event.key.keysym.sym == SDLK_LSHIFT) {
-                   Vector v = threedobj.getDirectionVector();
-                   v = helper.normalize(v);
-                   threedobj = helper.translateMatrix(threedobj, v.x,  v.y,  v.z);
-               }
+               
             }
          
         }
@@ -206,12 +161,22 @@ void programLoop() {
     }
 }
 
+void initWorld() {
+    
+    //scene.objectList.push_back(cube);
+    //scene.playerShip = playership;
+}
+
 
 int main()
 {
     //threedobj = helper.translateMatrix(threedobj,0, 0, -10);
-    
-   
+    //Spaceship ship;
+    ////spaceShip = ship;
+    //Cube cube;
+    //objectList.push_back(ship);
+    //objectList.push_back(cube);
+    initWorld();
     programLoop();
     return 0;
 }
