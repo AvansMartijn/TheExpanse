@@ -106,7 +106,7 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_s)
                 {
                     // R has been pressed
-                    threedobj = helper.rotate(threedobj, 1, 'X');
+                    threedobj = helper.rotate(threedobj, 3, 'X');
 
                 }
 
@@ -114,14 +114,14 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_w)
                 {
                     // R has been pressed
-                    threedobj = helper.rotate(threedobj, -1, 'X');
+                    threedobj = helper.rotate(threedobj, -3, 'X');
 
                 }
                 //JAW RIGHT
                 if (event.key.keysym.sym == SDLK_d)
                 {
                     // E has been pressed
-                    threedobj = helper.rotate(threedobj, 1, 'Y');
+                    threedobj = helper.rotate(threedobj, 3, 'Y');
 
                 }
 
@@ -129,14 +129,14 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_a)
                 {
                     // E has been pressed
-                    threedobj = helper.rotate(threedobj, -1, 'Y');
+                    threedobj = helper.rotate(threedobj, -3, 'Y');
 
                 }
                 //ROLL RIGHT
                 if (event.key.keysym.sym == SDLK_e)
                 {
                     // T has been pressed
-                    threedobj = helper.rotate(threedobj, 1, 'Z');
+                    threedobj = helper.rotate(threedobj, 3, 'Z');
 
                 }
 
@@ -144,7 +144,7 @@ void programLoop() {
                 if (event.key.keysym.sym == SDLK_q)
                 {
                     // T has been pressed
-                    threedobj = helper.rotate(threedobj, -1, 'Z');
+                    threedobj = helper.rotate(threedobj, -3, 'Z');
 
                 }
                 //CAMERA UP

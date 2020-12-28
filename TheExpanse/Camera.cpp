@@ -20,8 +20,6 @@ Camera::Camera() {
 	fovY = 90;
 	near = 0.1;
 	far = 100;
-
-
 }
 
 ThreeDObject Camera::createPerspective(const ThreeDObject& object)
