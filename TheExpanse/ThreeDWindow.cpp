@@ -12,7 +12,7 @@ ThreeDWindow::ThreeDWindow(int width, int height)
 }
 
 void ThreeDWindow::clear() {
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 }
 
@@ -25,7 +25,7 @@ void ThreeDWindow::renderPresent() {
 void ThreeDWindow::drawObject(const ThreeDObject& object) {
 
     ThreeDObject persObject = camera.createPerspective(object);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
    /* double offset = 200;
     double scale = 20;*/
 
