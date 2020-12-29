@@ -89,7 +89,7 @@ void Window::drawThreeDObject(const ThreeDObject& object, std::string face)
         double yS = 0;
         double xE = 0;
         double yE = 0;
-        if (face == "top") {
+       /* if (face == "top") {
             xS = object.lines[i].start.x;
             yS = object.lines[i].start.z;
             xE = object.lines[i].end.x;
@@ -107,7 +107,7 @@ void Window::drawThreeDObject(const ThreeDObject& object, std::string face)
             yS = object.lines[i].start.y;
             xE = object.lines[i].end.x;
             yE = object.lines[i].end.y;
-        }
+        }*/
 
         int xStart = (int)(offset + (xS * scale));
         int yStart = (int)(offset + (yS * -1 * scale));

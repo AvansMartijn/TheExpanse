@@ -4,10 +4,10 @@
 class Vertice
 {
 public:
-	const Vector& start;
-	const Vector& end;
+	int start;
+	int end;
 
-	Vertice(const Vector& start, const Vector& end);
+	Vertice(int start, int end);
 
 };
 

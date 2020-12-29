@@ -26,7 +26,7 @@ Camera::Camera() {
 
 ThreeDObject Camera::createPerspective(const ThreeDObject& object)
 {
-	ThreeDObject viewObject;
+	ThreeDObject viewObject = object;
 
 	//put them in a transformationmatrix
 	Matrix inverseTransformationMatrix = helper.getInverseTransformationMatrix(right, up, direction);

@@ -23,7 +23,7 @@ ExpanseHelper helper;
 void drawStuff() {
 
     window.clear();
-    for(ThreeDObject obj : scene.objectList)
+    for(const ThreeDObject& obj : scene.objectList)
     {
         window.drawObject(obj);
     }
