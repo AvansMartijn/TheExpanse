@@ -45,7 +45,7 @@ public:
 
     ThreeDObject pulseObject(const ThreeDObject& object);
 
-    Vector getForward(const ThreeDObject& object, int pointAIndex, int pointBIndex, int pointCIndex);
+    Vector getForwardVector(const ThreeDObject& object);
 
 
 private:
