@@ -137,7 +137,8 @@ void handlePlayerControls() {
 		window.camera.eye = window.camera.eye + window.camera.right;
 	}
 	if (keystate[SDL_SCANCODE_LSHIFT]) {
-		Vector v = helper.getForward(scene.getPlayerShip(), 12, 13, 15);
+		Vector v = helper.getForwardVector(scene.getPlayerShip());
+		v = helper.normalize(v);
 		scene.updatePlayerShip(helper.translateMatrix(scene.getPlayerShip(),v.x, v.y, v.z));
 	}
 }
