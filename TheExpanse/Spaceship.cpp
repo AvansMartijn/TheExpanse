@@ -1,4 +1,5 @@
 #include "Spaceship.h"
+#include "ExpanseHelper.h"
 
 Spaceship::Spaceship()
 {
@@ -20,7 +21,7 @@ Spaceship::Spaceship()
 	points.push_back({ 3, 3, -8 });//10
 	points.push_back({ 3, 1, -8 });//11
 
-	points.push_back({ 1.5, 1.5, -9 });//12
+	points.push_back({ 1.5, 1.5, -9 });//12 
 	points.push_back({ 1.5, 2.5, -9 });//13
 	points.push_back({ 2.5, 2.5, -9 });//14
 	points.push_back({ 2.5, 1.5, -9 });//15
@@ -107,3 +108,5 @@ Spaceship::Spaceship()
 
 	centerPoint = Vector(2, 2, -4.5);
 }
+
+

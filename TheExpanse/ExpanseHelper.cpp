@@ -293,5 +293,17 @@ ThreeDObject ExpanseHelper::pulseObject(const ThreeDObject& object)
 	}
 }
 
+Vector ExpanseHelper::getForward(const ThreeDObject& object, int pointAIndex, int pointBIndex, int pointCIndex)
+{
+
+	ThreeDObject obj;
+	obj.points = object.points;
+	obj.lines = object.lines;
+	Vector right = obj.points[pointAIndex] - obj.points[pointBIndex];
+	Vector up = obj.points[pointAIndex] - obj.points[pointCIndex];
+
+	return getCrossProduct(right, up);
+}
+
 
 
