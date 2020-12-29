@@ -13,6 +13,7 @@
 #include "Spaceship.h"
 #include "Cube.h"
 #include "Scene.h"
+#include "Icosahedron.h"
 
 ThreeDWindow window{ 1080, 720 };
 Scene scene;
@@ -177,7 +178,7 @@ void programLoop() {
 
 void initWorld() {
 	Spaceship theShip;
-	Cube target;
+	Icosahedron target;
 	ThreeDObject newTarget = helper.translateMatrix(target, 0, 0, -40);
 	newTarget.pulseData.growCounter = 0;
 	newTarget.pulseData.growMultiplier = 1.05;
@@ -197,6 +198,7 @@ void initWorld() {
 	ThreeDObject newBody5 = helper.translateMatrix(body1, 8, -30, -20);
 	Cube body6;
 	ThreeDObject newBody6 = helper.translateMatrix(body1, 15, -10, -15);
+
 
 	scene.objectList.push_back(newBody1);
 	scene.objectList.push_back(newBody2);

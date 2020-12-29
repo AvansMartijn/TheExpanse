@@ -66,6 +66,9 @@
     <ClCompile Include="PulseData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Icosahedron.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -111,6 +114,9 @@
     </ClInclude>
     <ClInclude Include="PulseData.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Icosahedron.h">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
