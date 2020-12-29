@@ -31,6 +31,120 @@ void drawStuff() {
 
 }
 
+void handlePlayerControls() {
+	const Uint8* keystate = SDL_GetKeyboardState(NULL);
+	if (keystate[SDL_SCANCODE_KP_PLUS])
+	{
+		// A has been pressed
+		scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 2, 2, 2));
+
+	}
+	if (keystate[SDL_SCANCODE_KP_MINUS])
+	{
+		// A has been pressed
+		scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 0.5, 0.5, 0.5));
+	}
+
+
+	//PITCH bACK
+	if (keystate[SDL_SCANCODE_S])
+	{
+		// R has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
+
+	}
+
+	//PITCH forward
+	if (keystate[SDL_SCANCODE_W])
+	{
+		// R has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
+
+	}
+	//JAW RIGHT
+	if (keystate[SDL_SCANCODE_D])
+	{
+		// E has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
+
+	}
+
+	//JAW left
+	if (keystate[SDL_SCANCODE_A])
+	{
+		// E has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
+
+	}
+	//ROLL RIGHT
+	if (keystate[SDL_SCANCODE_E])
+	{
+		// T has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
+
+	}
+
+	//ROLL LEFT
+	if (keystate[SDL_SCANCODE_Q])
+	{
+		// T has been pressed
+		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
+
+	}
+	//CAMERA UP
+	if (keystate[SDL_SCANCODE_PAGEUP])
+	{
+		// T has been pressed
+		window.camera.eye = window.camera.eye - window.camera.up;
+
+
+	}
+	//CAMERA DOWN
+	if (keystate[SDL_SCANCODE_PAGEDOWN])
+	{
+		// T has been pressed
+		window.camera.eye = window.camera.eye + window.camera.up;
+
+
+	}
+	//camera forward
+	if (keystate[SDL_SCANCODE_UP])
+	{
+		// A has been pressed
+		//window.camera.eye = helper.getTranslationMatrix(0, 0, -0.5) * window.camera.eye;
+		window.camera.eye = window.camera.eye - window.camera.direction;
+	}
+	//camera backward
+	if (keystate[SDL_SCANCODE_DOWN])
+	{
+		// A has been pressed
+		window.camera.eye = window.camera.eye + window.camera.direction;
+	}
+	//camera left
+	if (keystate[SDL_SCANCODE_LEFT])
+	{
+		// A has been pressed
+		//window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
+		window.camera.eye = window.camera.eye - window.camera.right;
+
+
+	}
+	//camera right
+	if (keystate[SDL_SCANCODE_RIGHT])
+	{
+		// A has been pressed
+		window.camera.eye = window.camera.eye + window.camera.right;
+
+
+
+	}
+}
+
+void onTick() {
+	handlePlayerControls();
+	scene.updateTarget(helper.pulseObject(scene.getTarget()));
+
+}
 void programLoop() {
 
 	unsigned int a = SDL_GetTicks();
@@ -43,7 +157,8 @@ void programLoop() {
 		delta = a - b;
 		if (delta > 1000 / 60) {
 			b = a;
-			scene.updateTarget(helper.pulseObject(scene.getTarget()));
+
+			onTick();
 			// Get the next event
 			SDL_Event event;
 			if (SDL_PollEvent(&event))
@@ -52,115 +167,6 @@ void programLoop() {
 				{
 					// Break out of the loop on quit
 					break;
-				}
-				if (event.type == SDL_KEYDOWN)
-				{
-					if (event.key.keysym.sym == SDLK_KP_PLUS)
-					{
-						// A has been pressed
-						scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 2, 2, 2));
-
-					}
-					if (event.key.keysym.sym == SDLK_KP_MINUS)
-					{
-						// A has been pressed
-						scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 0.5, 0.5, 0.5));
-					}
-
-
-					//PITCH bACK
-					if (event.key.keysym.sym == SDLK_s)
-					{
-						// R has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
-
-					}
-
-					//PITCH forward
-					if (event.key.keysym.sym == SDLK_w)
-					{
-						// R has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
-
-					}
-					//JAW RIGHT
-					if (event.key.keysym.sym == SDLK_d)
-					{
-						// E has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
-
-					}
-
-					//JAW left
-					if (event.key.keysym.sym == SDLK_a)
-					{
-						// E has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
-
-					}
-					//ROLL RIGHT
-					if (event.key.keysym.sym == SDLK_e)
-					{
-						// T has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
-
-					}
-
-					//ROLL LEFT
-					if (event.key.keysym.sym == SDLK_q)
-					{
-						// T has been pressed
-						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
-
-					}
-					//CAMERA UP
-					if (event.key.keysym.sym == SDLK_PAGEUP)
-					{
-						// T has been pressed
-						window.camera.eye = window.camera.eye - window.camera.up;
-
-
-					}
-					//CAMERA DOWN
-					if (event.key.keysym.sym == SDLK_PAGEDOWN)
-					{
-						// T has been pressed
-						window.camera.eye = window.camera.eye + window.camera.up;
-
-
-					}
-					//camera forward
-					if (event.key.keysym.sym == SDLK_UP)
-					{
-						// A has been pressed
-						//window.camera.eye = helper.getTranslationMatrix(0, 0, -0.5) * window.camera.eye;
-						window.camera.eye = window.camera.eye - window.camera.direction;
-					}
-					//camera backward
-					if (event.key.keysym.sym == SDLK_DOWN)
-					{
-						// A has been pressed
-						window.camera.eye = window.camera.eye + window.camera.direction;
-					}
-					//camera left
-					if (event.key.keysym.sym == SDLK_LEFT)
-					{
-						// A has been pressed
-						//window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
-						window.camera.eye = window.camera.eye - window.camera.right;
-
-
-					}
-					//camera right
-					if (event.key.keysym.sym == SDLK_RIGHT)
-					{
-						// A has been pressed
-						window.camera.eye = window.camera.eye + window.camera.right;
-
-
-
-					}
-
 				}
 
 			}
