@@ -32,9 +32,11 @@ void drawStuff() {
 }
 
 void programLoop() {
-    Spaceship playership;
-    //Cube cube;
-    scene.objectList.push_back(playership);
+    Spaceship theShip;
+    Cube cube;
+    scene.objectList.push_back(cube);
+    scene.setPlayerShip(theShip);
+
     while (true)
     {
         // Get the next event
@@ -48,64 +50,64 @@ void programLoop() {
             }
             if (event.type == SDL_KEYDOWN)
             {
-                //if (event.key.keysym.sym == SDLK_KP_PLUS)
-                //{
-                //    // A has been pressed
-                //    spaceShip = helper.scaleOnLocation(spaceShip, 2, 2, 2);
+                if (event.key.keysym.sym == SDLK_KP_PLUS)
+                {
+                    // A has been pressed
+                    scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 2, 2, 2));
 
-                //}
-                //if (event.key.keysym.sym == SDLK_KP_MINUS)
-                //{
-                //    // A has been pressed
-                //    spaceShip = helper.scaleOnLocation(spaceShip, 0.5, 0.5, 0.5);
-                //}
+                }
+                if (event.key.keysym.sym == SDLK_KP_MINUS)
+                {
+                    // A has been pressed
+                    scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 0.5, 0.5, 0.5));
+                }
                
 
-                ////PITCH bACK
-                //if (event.key.keysym.sym == SDLK_s)
-                //{
-                //    // R has been pressed
-                //    spaceShip = helper.rotate(spaceShip, 3, 'X');
+                //PITCH bACK
+                if (event.key.keysym.sym == SDLK_s)
+                {
+                    // R has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
 
-                //}
+                }
 
-                ////PITCH forward
-                //if (event.key.keysym.sym == SDLK_w)
-                //{
-                //    // R has been pressed
-                //    spaceShip = helper.rotate(spaceShip, -3, 'X');
+                //PITCH forward
+                if (event.key.keysym.sym == SDLK_w)
+                {
+                    // R has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
 
-                //}
-                ////JAW RIGHT
-                //if (event.key.keysym.sym == SDLK_d)
-                //{
-                //    // E has been pressed
-                //    spaceShip = helper.rotate(spaceShip, 3, 'Y');
+                }
+                //JAW RIGHT
+                if (event.key.keysym.sym == SDLK_d)
+                {
+                    // E has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
 
-                //}
+                }
 
-                ////JAW left
-                //if (event.key.keysym.sym == SDLK_a)
-                //{
-                //    // E has been pressed
-                //    spaceShip = helper.rotate(spaceShip, -3, 'Y');
+                //JAW left
+                if (event.key.keysym.sym == SDLK_a)
+                {
+                    // E has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
 
-                //}
-                ////ROLL RIGHT
-                //if (event.key.keysym.sym == SDLK_e)
-                //{
-                //    // T has been pressed
-                //    spaceShip = helper.rotate(spaceShip, 3, 'Z');
+                }
+                //ROLL RIGHT
+                if (event.key.keysym.sym == SDLK_e)
+                {
+                    // T has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
 
-                //}
+                }
 
-                ////ROLL LEFT
-                //if (event.key.keysym.sym == SDLK_q)
-                //{
-                //    // T has been pressed
-                //    spaceShip = helper.rotate(spaceShip, -3, 'Z');
+                //ROLL LEFT
+                if (event.key.keysym.sym == SDLK_q)
+                {
+                    // T has been pressed
+                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
 
-                //}
+                }
                 //CAMERA UP
                 if (event.key.keysym.sym == SDLK_PAGEUP)
                 {
@@ -140,7 +142,7 @@ void programLoop() {
                {
                    // A has been pressed
                    //window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
-                   window.camera.eye = window.camera.eye + window.camera.right;
+                   window.camera.eye = window.camera.eye - window.camera.right;
 
 
                }
@@ -148,7 +150,7 @@ void programLoop() {
                if (event.key.keysym.sym == SDLK_RIGHT)
                {
                    // A has been pressed
-                   window.camera.eye = window.camera.eye - window.camera.right;
+                   window.camera.eye = window.camera.eye + window.camera.right;
 
 
 

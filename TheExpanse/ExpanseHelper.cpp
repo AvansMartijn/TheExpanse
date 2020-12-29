@@ -67,22 +67,22 @@ Matrix ExpanseHelper::getScalingMatrix(double xScale, double yScale, double zSca
 	return scalingMatrix;
 }
 
-void ExpanseHelper::scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale)
+ThreeDObject ExpanseHelper::scaleOnLocation(const ThreeDObject& object, double xScale, double yScale, double zScale)
 {
-	//ThreeDObject newObject;
-	//newObject.centerPoint = object.centerPoint;
+	ThreeDObject newObject = object;
 	Matrix translationMatrixToOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
 	Matrix translationMatrixBack = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
 	Matrix scalingMatrix = getScalingMatrix(xScale, yScale, zScale);
 
 	Matrix superMatrix = translationMatrixBack * scalingMatrix * translationMatrixToOrigin;
 
-	for (int i = 0; i < object.points.size(); i++)
+	//Scaling around centerpoint does not change centerpoint
+	for (int i = 0; i < newObject.points.size(); i++)
 	{
-		object.points[i] = superMatrix * object.points[i];
+		newObject.points[i] = superMatrix * object.points[i];
 	}
 
-	//return object;
+	return newObject;
 }
 
 Matrix ExpanseHelper::getRotationMatrixZAxis(double degrees)
@@ -134,10 +134,10 @@ Matrix ExpanseHelper::getRotationMatrixXAxis(double degrees)
 	return rotationMatrix;
 }
 
-void ExpanseHelper::rotate(ThreeDObject& object, double degrees, char axis)
+ThreeDObject ExpanseHelper::rotate(const ThreeDObject& object, double degrees, char axis)
 {
-	//ThreeDObject newObject;
-	//newObject.centerPoint = object.centerPoint;
+	ThreeDObject newObject = object;
+
 	Matrix translationMatrixToOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
 	Matrix translationMatrixBack = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
 
@@ -158,16 +158,18 @@ void ExpanseHelper::rotate(ThreeDObject& object, double degrees, char axis)
 	}
 
 	Matrix superMatrix = translationMatrixBack * rotationMatrix * translationMatrixToOrigin;
+	//Rotating around centerpoint does not change centerpoint
 	for (int i = 0; i < object.points.size(); i++)
 	{
-		object.points[i] = superMatrix * object.points[i];
+		newObject.points[i] = superMatrix * object.points[i];
 	}
 
-	//return newObject;
+	return newObject;
 }
 
-void ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degrees, char axis)
+ThreeDObject ExpanseHelper::rotateAroundOrigin(const ThreeDObject& object, double degrees, char axis)
 {
+	ThreeDObject newObject = object;
 	Matrix rotationMatrix(1, 1);
 	switch (axis)
 	{
@@ -185,22 +187,25 @@ void ExpanseHelper::rotateAroundOrigin(ThreeDObject& object, double degrees, cha
 	}
 
 	//Rotate
+	newObject.centerPoint = rotationMatrix * object.centerPoint;
 	for (int i = 0; i < object.points.size(); i++)
 	{
-		object.points[i] = rotationMatrix * object.points[i];
+		newObject.points[i] = rotationMatrix * object.points[i];
 	}
 
-	
+	return newObject;
 }
 
-void ExpanseHelper::translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange) {
+ThreeDObject ExpanseHelper::translateMatrix(const ThreeDObject& object, double xChange, double yChange, double zChange) {
+	ThreeDObject newObject = object;
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
 
-	object.centerPoint = translationMatrix * object.centerPoint;
+	newObject.centerPoint = translationMatrix * object.centerPoint;
 	for (int i = 0; i < object.points.size(); i++)
 	{
-		object.points[i] = translationMatrix * object.points[i];
+		newObject.points[i] = translationMatrix * object.points[i];
 	}
+	return newObject;
 }
 
 Vector ExpanseHelper::getCrossProduct(const Vector& vA, const Vector& vB) {

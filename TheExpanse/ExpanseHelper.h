@@ -10,18 +10,18 @@ public:
     void printMatrix(const Matrix& m);
     //Translation
     Matrix getTranslationMatrix(double xChange, double yChange, double zChange);
-    void translateMatrix(ThreeDObject& object, double xChange, double yChange, double zChange);
+    ThreeDObject translateMatrix(const ThreeDObject& object, double xChange, double yChange, double zChange);
 
     //Scale
     Matrix getScalingMatrix(double xScale, double yScale, double zScale);
-    void scaleOnLocation(ThreeDObject& object, double xScale, double yScale, double zScale);
+    ThreeDObject scaleOnLocation(const ThreeDObject& object, double xScale, double yScale, double zScale);
 
     //Rotate
     Matrix getRotationMatrixZAxis(double degrees);
     Matrix getRotationMatrixYAxis(double degrees);
     Matrix getRotationMatrixXAxis(double degrees);
-    void rotate(ThreeDObject& object, double degrees, char axis);
-    void rotateAroundOrigin(ThreeDObject& object, double degrees, char axis);
+    ThreeDObject rotate(const ThreeDObject& object, double degrees, char axis);
+    ThreeDObject rotateAroundOrigin(const ThreeDObject& object, double degrees, char axis);
 
     //CrossProduct
     Vector getCrossProduct(const Vector& vA, const Vector& vB);
