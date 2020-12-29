@@ -35,6 +35,8 @@ public:
 
     Vector correctProjection(const Vector& vector, double screenSizeX, double screenSizeY);
 
+    ThreeDObject pulseObject(const ThreeDObject& object);
+
 private:
 
     const double PI = atan(1) * 4;

@@ -3,6 +3,7 @@
 #include <vector>
 #include "Vector.h"
 #include "Vertice.h"
+#include "PulseData.h"
 
 class ThreeDObject
 {
@@ -11,5 +12,7 @@ public:
 	std::vector<Vector> points;
 	Vector centerPoint;
 	std::vector<Vertice> lines;
+	void pulseObject();
+	PulseData pulseData;
 };
 

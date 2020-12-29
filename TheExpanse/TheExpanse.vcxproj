@@ -166,6 +166,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="ExpanseHelper.cpp" />
+    <ClCompile Include="PulseData.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Spaceship.cpp" />
     <ClCompile Include="ThreeDWindow.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="ExpanseHelper.h" />
+    <ClInclude Include="PulseData.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Spaceship.h" />
     <ClInclude Include="ThreeDWindow.h" />

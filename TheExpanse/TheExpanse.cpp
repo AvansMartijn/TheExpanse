@@ -22,181 +22,194 @@ ExpanseHelper helper;
 
 void drawStuff() {
 
-    window.clear();
-    for(const ThreeDObject& obj : scene.objectList)
-    {
-        window.drawObject(obj);
-    }
-    window.renderPresent();
+	window.clear();
+	for (const ThreeDObject& obj : scene.objectList)
+	{
+		window.drawObject(obj);
+	}
+	window.renderPresent();
 
 }
 
 void programLoop() {
-    
 
-    while (true)
-    {
-        // Get the next event
-        SDL_Event event;
-        if (SDL_PollEvent(&event))
-        {
-            if (event.type == SDL_QUIT)
-            {
-                // Break out of the loop on quit
-                break;
-            }
-            if (event.type == SDL_KEYDOWN)
-            {
-                if (event.key.keysym.sym == SDLK_KP_PLUS)
-                {
-                    // A has been pressed
-                    scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 2, 2, 2));
+	unsigned int a = SDL_GetTicks();
+	unsigned int b = SDL_GetTicks();
+	double delta = 0;
 
-                }
-                if (event.key.keysym.sym == SDLK_KP_MINUS)
-                {
-                    // A has been pressed
-                    scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 0.5, 0.5, 0.5));
-                }
-               
+	while (true)
+	{
+		a = SDL_GetTicks();
+		delta = a - b;
+		if (delta > 1000 / 60) {
+			b = a;
+			scene.updateTarget(helper.pulseObject(scene.getTarget()));
+			// Get the next event
+			SDL_Event event;
+			if (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					// Break out of the loop on quit
+					break;
+				}
+				if (event.type == SDL_KEYDOWN)
+				{
+					if (event.key.keysym.sym == SDLK_KP_PLUS)
+					{
+						// A has been pressed
+						scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 2, 2, 2));
 
-                //PITCH bACK
-                if (event.key.keysym.sym == SDLK_s)
-                {
-                    // R has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
-
-                }
-
-                //PITCH forward
-                if (event.key.keysym.sym == SDLK_w)
-                {
-                    // R has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
-
-                }
-                //JAW RIGHT
-                if (event.key.keysym.sym == SDLK_d)
-                {
-                    // E has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
-
-                }
-
-                //JAW left
-                if (event.key.keysym.sym == SDLK_a)
-                {
-                    // E has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
-
-                }
-                //ROLL RIGHT
-                if (event.key.keysym.sym == SDLK_e)
-                {
-                    // T has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
-
-                }
-
-                //ROLL LEFT
-                if (event.key.keysym.sym == SDLK_q)
-                {
-                    // T has been pressed
-                    scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
-
-                }
-                //CAMERA UP
-                if (event.key.keysym.sym == SDLK_PAGEUP)
-                {
-                    // T has been pressed
-                    window.camera.eye = window.camera.eye - window.camera.up;
+					}
+					if (event.key.keysym.sym == SDLK_KP_MINUS)
+					{
+						// A has been pressed
+						scene.updatePlayerShip(helper.scaleOnLocation(scene.getPlayerShip(), 0.5, 0.5, 0.5));
+					}
 
 
-                }
-                //CAMERA DOWN
-                if (event.key.keysym.sym == SDLK_PAGEDOWN)
-                {
-                    // T has been pressed
-                    window.camera.eye = window.camera.eye + window.camera.up;
+					//PITCH bACK
+					if (event.key.keysym.sym == SDLK_s)
+					{
+						// R has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
+
+					}
+
+					//PITCH forward
+					if (event.key.keysym.sym == SDLK_w)
+					{
+						// R has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
+
+					}
+					//JAW RIGHT
+					if (event.key.keysym.sym == SDLK_d)
+					{
+						// E has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
+
+					}
+
+					//JAW left
+					if (event.key.keysym.sym == SDLK_a)
+					{
+						// E has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
+
+					}
+					//ROLL RIGHT
+					if (event.key.keysym.sym == SDLK_e)
+					{
+						// T has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
+
+					}
+
+					//ROLL LEFT
+					if (event.key.keysym.sym == SDLK_q)
+					{
+						// T has been pressed
+						scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
+
+					}
+					//CAMERA UP
+					if (event.key.keysym.sym == SDLK_PAGEUP)
+					{
+						// T has been pressed
+						window.camera.eye = window.camera.eye - window.camera.up;
 
 
-                }
-                //camera forward
-                if (event.key.keysym.sym == SDLK_UP)
-               {
-                   // A has been pressed
-                   //window.camera.eye = helper.getTranslationMatrix(0, 0, -0.5) * window.camera.eye;
-                    window.camera.eye = window.camera.eye - window.camera.direction;
-               }
-                //camera backward
-               if (event.key.keysym.sym == SDLK_DOWN)
-               {
-                   // A has been pressed
-                   window.camera.eye = window.camera.eye + window.camera.direction;
-               }
-               //camera left
-               if (event.key.keysym.sym == SDLK_LEFT)
-               {
-                   // A has been pressed
-                   //window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
-                   window.camera.eye = window.camera.eye - window.camera.right;
+					}
+					//CAMERA DOWN
+					if (event.key.keysym.sym == SDLK_PAGEDOWN)
+					{
+						// T has been pressed
+						window.camera.eye = window.camera.eye + window.camera.up;
 
 
-               }
-               //camera right
-               if (event.key.keysym.sym == SDLK_RIGHT)
-               {
-                   // A has been pressed
-                   window.camera.eye = window.camera.eye + window.camera.right;
+					}
+					//camera forward
+					if (event.key.keysym.sym == SDLK_UP)
+					{
+						// A has been pressed
+						//window.camera.eye = helper.getTranslationMatrix(0, 0, -0.5) * window.camera.eye;
+						window.camera.eye = window.camera.eye - window.camera.direction;
+					}
+					//camera backward
+					if (event.key.keysym.sym == SDLK_DOWN)
+					{
+						// A has been pressed
+						window.camera.eye = window.camera.eye + window.camera.direction;
+					}
+					//camera left
+					if (event.key.keysym.sym == SDLK_LEFT)
+					{
+						// A has been pressed
+						//window.camera.eye = helper.getTranslationMatrix(-0.5, 0, 0) * window.camera.eye;
+						window.camera.eye = window.camera.eye - window.camera.right;
+
+
+					}
+					//camera right
+					if (event.key.keysym.sym == SDLK_RIGHT)
+					{
+						// A has been pressed
+						window.camera.eye = window.camera.eye + window.camera.right;
 
 
 
-               }
-               
-            }
-         
-        }
-        drawStuff();
-    }
+					}
+
+				}
+
+			}
+			drawStuff();
+		}
+	}
 }
 
 void initWorld() {
-    Spaceship theShip;
-    Cube target;
-    ThreeDObject newTarget = helper.translateMatrix(target, 0, 0, -40);
-    scene.setPlayerShip(theShip);
-    scene.setTarget(newTarget);
-    Cube body1;
-    ThreeDObject newBody1 = helper.translateMatrix(body1, -10, 5, -30);
-    Cube body2;
-    ThreeDObject newBody2 = helper.translateMatrix(body1, 10, 5, -10);
-    Cube body3;
-    ThreeDObject newBody3 = helper.translateMatrix(body1, 7, 9, -5);
-    Cube body4;
-    ThreeDObject newBody4 = helper.translateMatrix(body1, -15, 30, -60);
-    Cube body5;
-    ThreeDObject newBody5 = helper.translateMatrix(body1, 8, -30, -20);
-    Cube body6;
-    ThreeDObject newBody6 = helper.translateMatrix(body1, 15, -10, -15);
+	Spaceship theShip;
+	Cube target;
+	ThreeDObject newTarget = helper.translateMatrix(target, 0, 0, -40);
+	newTarget.pulseData.growCounter = 0;
+	newTarget.pulseData.growMultiplier = 1.05;
+	newTarget.pulseData.isGrowing = true;
+	newTarget.pulseData.growTimes = 30;
+	scene.setPlayerShip(theShip);
+	scene.setTarget(newTarget);
+	Cube body1;
+	ThreeDObject newBody1 = helper.translateMatrix(body1, -10, 5, -30);
+	Cube body2;
+	ThreeDObject newBody2 = helper.translateMatrix(body1, 10, 5, -10);
+	Cube body3;
+	ThreeDObject newBody3 = helper.translateMatrix(body1, 7, 9, -5);
+	Cube body4;
+	ThreeDObject newBody4 = helper.translateMatrix(body1, -15, 30, -60);
+	Cube body5;
+	ThreeDObject newBody5 = helper.translateMatrix(body1, 8, -30, -20);
+	Cube body6;
+	ThreeDObject newBody6 = helper.translateMatrix(body1, 15, -10, -15);
 
-    scene.objectList.push_back(newBody1);
-    scene.objectList.push_back(newBody2);
-    scene.objectList.push_back(newBody3);
-    scene.objectList.push_back(newBody4);
-    scene.objectList.push_back(newBody5);
-    scene.objectList.push_back(newBody6);
-  
-   
+	scene.objectList.push_back(newBody1);
+	scene.objectList.push_back(newBody2);
+	scene.objectList.push_back(newBody3);
+	scene.objectList.push_back(newBody4);
+	scene.objectList.push_back(newBody5);
+	scene.objectList.push_back(newBody6);
+
+
 
 }
 
 
 int main()
 {
-   
-    initWorld();
-    programLoop();
-    return 0;
+
+	initWorld();
+	programLoop();
+	return 0;
 }
 
 

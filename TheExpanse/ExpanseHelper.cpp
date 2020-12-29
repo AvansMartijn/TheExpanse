@@ -267,5 +267,31 @@ Vector ExpanseHelper::correctProjection(const Vector& vector, double screenSizeX
 	return v;
 }
 
+ThreeDObject ExpanseHelper::pulseObject(const ThreeDObject& object)
+{
+	ThreeDObject newObj;
+	PulseData pulseData = object.pulseData;
+	if (pulseData.growTimes > 0) {
+		if (pulseData.isGrowing) {
+			newObj = scaleOnLocation(object, pulseData.growMultiplier, pulseData.growMultiplier, pulseData.growMultiplier);
+			pulseData.growCounter++;
+			if (pulseData.growCounter >= pulseData.growTimes) {
+				pulseData.isGrowing = false;
+			}
+			newObj.pulseData = pulseData;
+			return newObj;
+		}
+		else {
+			newObj = scaleOnLocation(object,1 /pulseData.growMultiplier, 1 / pulseData.growMultiplier, 1 / pulseData.growMultiplier);
+			pulseData.growCounter--;
+			if (pulseData.growCounter <= 0) {
+				pulseData.isGrowing = true;
+			}
+			newObj.pulseData = pulseData;
+			return newObj;
+		}
+	}
+}
+
 
 
