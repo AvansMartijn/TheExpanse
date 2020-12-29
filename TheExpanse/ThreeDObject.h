@@ -11,6 +11,9 @@ public:
 	//ThreeDObject();
 	std::vector<Vector> points;
 	Vector centerPoint;
+	Vector up;
+	Vector right;
+	Vector forward;
 	std::vector<Vertice> lines;
 	PulseData pulseData;
 

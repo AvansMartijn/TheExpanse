@@ -81,7 +81,7 @@ void handlePlayerControls() {
 	if (keystate[SDL_SCANCODE_E])
 	{
 		// T has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Z'));
+		scene.updatePlayerShip(helper.roll(scene.getPlayerShip(), 3));
 
 	}
 
@@ -89,7 +89,7 @@ void handlePlayerControls() {
 	if (keystate[SDL_SCANCODE_Q])
 	{
 		// T has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Z'));
+		scene.updatePlayerShip(helper.roll(scene.getPlayerShip(), -3));
 
 	}
 	//CAMERA UP

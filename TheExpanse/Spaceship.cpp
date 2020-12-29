@@ -107,6 +107,9 @@ Spaceship::Spaceship()
 	lines.push_back({ 27, 31 });
 
 	centerPoint = Vector(2, 2, -4.5);
+	right = { 3,2,-4.5 };
+	forward = { 2,2, -5.5 };
+	up = { 2,3,-4.5 };
 }
 
 

@@ -438,6 +438,15 @@ namespace TheExpanseTests
 
 		}
 
+		TEST_METHOD(ROLL)
+		{
+			//1. Arrange
+			ExpanseHelper helpert;
+			ThreeDObject object;
+			helpert.roll(object, 45);
+
+		}
+
 	};
 
 	TEST_CLASS(VectorTestClass)

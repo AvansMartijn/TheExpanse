@@ -37,6 +37,6 @@ Vector Vector::operator- (int operand) {
 }
 
 //Vermenigvuldigen
-Vector Vector::operator* (int operand) {
+Vector Vector::operator* (double operand) {
     return Vector(this->x * operand, this->y * operand, this->z * operand);
 }

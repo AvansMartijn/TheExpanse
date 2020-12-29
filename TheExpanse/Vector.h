@@ -16,6 +16,6 @@ public:
 	double operator*(const Vector& operand);
 	Vector operator+(int operand);
 	Vector operator-(int operand);
-	Vector operator*(int operand);
+	Vector operator*(double operand);
 };
 

@@ -77,6 +77,9 @@ ThreeDObject ExpanseHelper::scaleOnLocation(const ThreeDObject& object, double x
 	Matrix superMatrix = translationMatrixBack * scalingMatrix * translationMatrixToOrigin;
 
 	//Scaling around centerpoint does not change centerpoint
+	newObject.forward = superMatrix * object.forward;
+	newObject.up = superMatrix * object.up;
+	newObject.right = superMatrix * object.right;
 	for (int i = 0; i < newObject.points.size(); i++)
 	{
 		newObject.points[i] = superMatrix * object.points[i];
@@ -159,6 +162,9 @@ ThreeDObject ExpanseHelper::rotate(const ThreeDObject& object, double degrees, c
 
 	Matrix superMatrix = translationMatrixBack * rotationMatrix * translationMatrixToOrigin;
 	//Rotating around centerpoint does not change centerpoint
+	newObject.forward = superMatrix * object.forward;
+	newObject.up = superMatrix * object.up;
+	newObject.right = superMatrix * object.right;
 	for (int i = 0; i < object.points.size(); i++)
 	{
 		newObject.points[i] = superMatrix * object.points[i];
@@ -187,6 +193,9 @@ ThreeDObject ExpanseHelper::rotateAroundOrigin(const ThreeDObject& object, doubl
 	}
 
 	//Rotate
+	newObject.forward = rotationMatrix * object.forward;
+	newObject.up = rotationMatrix * object.up;
+	newObject.right = rotationMatrix * object.right;
 	newObject.centerPoint = rotationMatrix * object.centerPoint;
 	for (int i = 0; i < object.points.size(); i++)
 	{
@@ -201,6 +210,9 @@ ThreeDObject ExpanseHelper::translateMatrix(const ThreeDObject& object, double x
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
 
 	newObject.centerPoint = translationMatrix * object.centerPoint;
+	newObject.forward = translationMatrix * object.forward;
+	newObject.up = translationMatrix * object.up;
+	newObject.right = translationMatrix * object.right;
 	for (int i = 0; i < object.points.size(); i++)
 	{
 		newObject.points[i] = translationMatrix * object.points[i];
@@ -229,6 +241,138 @@ Vector ExpanseHelper::normalize(const Vector& v) {
 
 	return newVector;
 }
+
+Vector ExpanseHelper::getPerpendicularVector(const Vector& s, const Vector& r)
+{
+	double lambda;
+	Vector perpVector;
+
+
+	//perpVector = s + (r * lambda);
+
+	return perpVector;
+}
+
+ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
+{
+	ThreeDObject newObject = object;
+
+	Matrix rollRotationMatrix = getRollRotationMatrix(object, degrees);
+
+	//Roll Around centerpoint does not change it.
+	newObject.forward = rollRotationMatrix * object.forward;
+	newObject.up = rollRotationMatrix * object.up;
+	newObject.right = rollRotationMatrix * object.right;
+	for (size_t i = 0; i < object.points.size(); i++)
+	{
+		newObject.points[i] = rollRotationMatrix * object.points[i];
+	}
+
+	return newObject;
+}
+
+Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees)
+{
+	//STEP ONE: Rotate to XY
+
+	Vector cp = object.centerPoint;
+	Vector fw = object.forward;
+
+	Vector v = cp - fw;
+
+
+	//1.1 Get Tau1 (Angle between X-axis and bottom of triangle
+	Matrix yRotationMatrix(4, 4);
+	yRotationMatrix.mData[0] = {
+		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0,
+		v.z / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0
+	};
+	yRotationMatrix.mData[1] = {
+		0, 1, 0, 0
+	};
+	yRotationMatrix.mData[2] = {
+		-v.z / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0,
+		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0
+	};
+	yRotationMatrix.mData[3] = {
+		0, 0, 0, 1
+	};
+
+	//STEP FIVE
+	Matrix yRotationMatrixBack(4, 4);
+	yRotationMatrixBack.mData[0] = {
+		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0,
+		-v.z / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0
+	};
+	yRotationMatrixBack.mData[1] = {
+		0, 1, 0, 0
+	};
+	yRotationMatrixBack.mData[2] = {
+		v.z / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0,
+		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
+		0
+	};
+	yRotationMatrixBack.mData[3] = {
+		0, 0, 0, 1
+	};
+
+	//STEP TWO: ROTATE TO X
+	Matrix zRotationMatrix(4, 4);
+	zRotationMatrix.mData[0] = {
+		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		v.y / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		0, 0
+	};
+	zRotationMatrix.mData[1] = {
+		-v.y / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		0, 0
+	};
+	zRotationMatrix.mData[2] = {
+		0, 0, 1, 0
+	};
+	zRotationMatrix.mData[3] = {
+		0, 0, 0, 1
+	};
+
+	//STEP QUATTRO: GET Mirror for returning
+	Matrix zRotationMatrixBack(4, 4);
+	zRotationMatrixBack.mData[0] = {
+		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		-v.y / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		0, 0
+	};
+	zRotationMatrixBack.mData[1] = {
+		v.y / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
+		0, 0
+	};
+	zRotationMatrixBack.mData[2] = {
+		0, 0, 1, 0
+	};
+	zRotationMatrixBack.mData[3] = {
+		0, 0, 0, 1
+	};
+
+
+	//STEP TRES: Rotate around X Axis
+	Matrix xRotationMatrix = getRotationMatrixXAxis(degrees);
+
+	//Translations
+	Matrix toOrigin = getTranslationMatrix(-cp.x, -cp.y, -cp.z);
+	Matrix back = getTranslationMatrix(cp.x, cp.y, cp.z);
+
+	return back * yRotationMatrixBack * zRotationMatrixBack * xRotationMatrix * zRotationMatrix * yRotationMatrix * toOrigin;
+}
+
+
 
 Matrix ExpanseHelper::getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction) {
 	Matrix inverseTransformMatrix(4, 4);

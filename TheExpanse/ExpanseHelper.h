@@ -27,6 +27,12 @@ public:
     Vector getCrossProduct(const Vector& vA, const Vector& vB);
     Vector normalize(const Vector& v);
 
+    //Normaalvector
+    Vector getPerpendicularVector(const Vector& s, const Vector& r);
+
+    ThreeDObject roll(const ThreeDObject&, double degrees);
+    Matrix getRollRotationMatrix(const ThreeDObject&, double degrees);
+
     //transformation
     Matrix getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction);
 
