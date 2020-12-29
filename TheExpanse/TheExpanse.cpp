@@ -32,10 +32,7 @@ void drawStuff() {
 }
 
 void programLoop() {
-    Spaceship theShip;
-    Cube cube;
-    scene.objectList.push_back(cube);
-    scene.setPlayerShip(theShip);
+    
 
     while (true)
     {
@@ -164,20 +161,39 @@ void programLoop() {
 }
 
 void initWorld() {
-    
-    //scene.objectList.push_back(cube);
-    //scene.playerShip = playership;
+    Spaceship theShip;
+    Cube target;
+    ThreeDObject newTarget = helper.translateMatrix(target, 0, 0, -40);
+    scene.setPlayerShip(theShip);
+    scene.setTarget(newTarget);
+    Cube body1;
+    ThreeDObject newBody1 = helper.translateMatrix(body1, -10, 5, -30);
+    Cube body2;
+    ThreeDObject newBody2 = helper.translateMatrix(body1, 10, 5, -10);
+    Cube body3;
+    ThreeDObject newBody3 = helper.translateMatrix(body1, 7, 9, -5);
+    Cube body4;
+    ThreeDObject newBody4 = helper.translateMatrix(body1, -15, 30, -60);
+    Cube body5;
+    ThreeDObject newBody5 = helper.translateMatrix(body1, 8, -30, -20);
+    Cube body6;
+    ThreeDObject newBody6 = helper.translateMatrix(body1, 15, -10, -15);
+
+    scene.objectList.push_back(newBody1);
+    scene.objectList.push_back(newBody2);
+    scene.objectList.push_back(newBody3);
+    scene.objectList.push_back(newBody4);
+    scene.objectList.push_back(newBody5);
+    scene.objectList.push_back(newBody6);
+  
+   
+
 }
 
 
 int main()
 {
-    //threedobj = helper.translateMatrix(threedobj,0, 0, -10);
-    //Spaceship ship;
-    ////spaceShip = ship;
-    //Cube cube;
-    //objectList.push_back(ship);
-    //objectList.push_back(cube);
+   
     initWorld();
     programLoop();
     return 0;

@@ -12,7 +12,11 @@ public:
 	void setPlayerShip(Spaceship playership);
 	void updatePlayerShip(ThreeDObject spaceship);
 	const ThreeDObject& getPlayerShip();
+	void setTarget(ThreeDObject object);
+	void updateTarget(ThreeDObject object);
+	const ThreeDObject& getTarget();
 private:
 	int playerShipIndex;
+	int targetIndex;
 };
 
