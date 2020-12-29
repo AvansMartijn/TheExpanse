@@ -51,7 +51,8 @@ void handlePlayerControls() {
 	if (keystate[SDL_SCANCODE_S])
 	{
 		// R has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'X'));
+		scene.updatePlayerShip(helper.pitch(scene.getPlayerShip(), 3));
+
 
 	}
 
@@ -59,14 +60,14 @@ void handlePlayerControls() {
 	if (keystate[SDL_SCANCODE_W])
 	{
 		// R has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'X'));
+		scene.updatePlayerShip(helper.pitch(scene.getPlayerShip(), -3));
 
 	}
 	//JAW RIGHT
 	if (keystate[SDL_SCANCODE_D])
 	{
 		// E has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), 3, 'Y'));
+		scene.updatePlayerShip(helper.jaw(scene.getPlayerShip(), -3));
 
 	}
 
@@ -74,7 +75,8 @@ void handlePlayerControls() {
 	if (keystate[SDL_SCANCODE_A])
 	{
 		// E has been pressed
-		scene.updatePlayerShip(helper.rotate(scene.getPlayerShip(), -3, 'Y'));
+		scene.updatePlayerShip(helper.jaw(scene.getPlayerShip(), 3));
+
 
 	}
 	//ROLL RIGHT

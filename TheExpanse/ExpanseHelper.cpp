@@ -257,10 +257,15 @@ ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
 {
 	ThreeDObject newObject = object;
 
-	Matrix rollRotationMatrix = getRollRotationMatrix(object, degrees);
+	Vector cp = object.centerPoint;
+	Vector up = object.forward;
 
-	//Roll Around centerpoint does not change it.
-	newObject.forward = rollRotationMatrix * object.forward;
+	Vector v = cp - up;
+
+	Matrix rollRotationMatrix = getRollRotationMatrix(object, degrees, v);
+
+	//Roll Around centerpoint and Forward does not change it.
+	//newObject.forward = rollRotationMatrix * object.forward;
 	newObject.up = rollRotationMatrix * object.up;
 	newObject.right = rollRotationMatrix * object.right;
 	for (size_t i = 0; i < object.points.size(); i++)
@@ -271,15 +276,55 @@ ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
 	return newObject;
 }
 
-Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees)
+ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 {
-	//STEP ONE: Rotate to XY
+	ThreeDObject newObject = object;
 
 	Vector cp = object.centerPoint;
-	Vector fw = object.forward;
+	Vector up = object.up;
 
-	Vector v = cp - fw;
+	Vector v = cp - up;
 
+	Matrix rollRotationMatrix = getRollRotationMatrix(object, degrees, v);
+
+	//Roll Around centerpoint and up does not change it.
+	//newObject.up = rollRotationMatrix * object.up;
+	newObject.forward = rollRotationMatrix * object.forward;
+	newObject.right = rollRotationMatrix * object.right;
+	for (size_t i = 0; i < object.points.size(); i++)
+	{
+		newObject.points[i] = rollRotationMatrix * object.points[i];
+	}
+
+	return newObject;
+}
+
+ThreeDObject ExpanseHelper::jaw(const ThreeDObject& object, double degrees)
+{
+	ThreeDObject newObject = object;
+
+	Vector cp = object.centerPoint;
+	Vector up = object.right;
+
+	Vector v = cp - up;
+
+	Matrix rollRotationMatrix = getRollRotationMatrix(object, degrees, v);
+
+	//Roll Around centerpoint and right does not change it.
+	//newObject.right = rollRotationMatrix * object.right;
+	newObject.forward = rollRotationMatrix * object.forward;
+	newObject.up = rollRotationMatrix * object.up;
+	for (size_t i = 0; i < object.points.size(); i++)
+	{
+		newObject.points[i] = rollRotationMatrix * object.points[i];
+	}
+
+	return newObject;
+}
+
+Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees, const Vector& v)
+{
+	//STEP ONE: Rotate to XY
 
 	//1.1 Get Tau1 (Angle between X-axis and bottom of triangle
 	Matrix yRotationMatrix(4, 4);
@@ -366,8 +411,8 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	Matrix xRotationMatrix = getRotationMatrixXAxis(degrees);
 
 	//Translations
-	Matrix toOrigin = getTranslationMatrix(-cp.x, -cp.y, -cp.z);
-	Matrix back = getTranslationMatrix(cp.x, cp.y, cp.z);
+	Matrix toOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
+	Matrix back = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
 
 	return back * yRotationMatrixBack * zRotationMatrixBack * xRotationMatrix * zRotationMatrix * yRotationMatrix * toOrigin;
 }

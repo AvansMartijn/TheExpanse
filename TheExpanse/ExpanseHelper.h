@@ -31,7 +31,9 @@ public:
     Vector getPerpendicularVector(const Vector& s, const Vector& r);
 
     ThreeDObject roll(const ThreeDObject&, double degrees);
-    Matrix getRollRotationMatrix(const ThreeDObject&, double degrees);
+    ThreeDObject pitch(const ThreeDObject&, double degrees);
+    ThreeDObject jaw(const ThreeDObject&, double degrees);
+    Matrix getRollRotationMatrix(const ThreeDObject&, double degrees, const Vector& v);
 
     //transformation
     Matrix getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction);
