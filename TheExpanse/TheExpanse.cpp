@@ -154,6 +154,7 @@ void handlePlayerControls() {
 			bullet.velocity.z = bullet.velocity.z + spaceShipForward.z;
 		}
 		ThreeDObject newObj = helper.translateMatrix(bullet, -bullet.centerPoint.x, -bullet.centerPoint.y, -bullet.centerPoint.z);
+		newObj = helper.scaleOnLocation(newObj, 0.5, 0.5, 0.5);
 		newObj = helper.translateMatrix(newObj, scene.getPlayerShip().forward.x, scene.getPlayerShip().forward.y, scene.getPlayerShip().forward.z);
 		//bullet.
 		scene.objectList.push_back(newObj);
