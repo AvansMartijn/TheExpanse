@@ -84,6 +84,7 @@ ThreeDObject ExpanseHelper::scaleOnLocation(const ThreeDObject& object, double x
 	{
 		newObject.points[i] = superMatrix * object.points[i];
 	}
+	newObject.calculateAABB();
 
 	return newObject;
 }
@@ -217,6 +218,7 @@ ThreeDObject ExpanseHelper::translateMatrix(const ThreeDObject& object, double x
 	{
 		newObject.points[i] = translationMatrix * object.points[i];
 	}
+	newObject.calculateAABB();
 	return newObject;
 }
 
@@ -272,7 +274,7 @@ ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
 	{
 		newObject.points[i] = rollRotationMatrix * object.points[i];
 	}
-
+	newObject.calculateAABB();
 	return newObject;
 }
 
@@ -295,6 +297,7 @@ ThreeDObject ExpanseHelper::jaw(const ThreeDObject& object, double degrees)
 	{
 		newObject.points[i] = rollRotationMatrix * object.points[i];
 	}
+	newObject.calculateAABB();
 
 	return newObject;
 }
@@ -318,6 +321,7 @@ ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 	{
 		newObject.points[i] = rollRotationMatrix * object.points[i];
 	}
+	newObject.calculateAABB();
 
 	return newObject;
 }
@@ -495,6 +499,41 @@ Vector ExpanseHelper::getForwardVector(const ThreeDObject& object)
 	Vector fw = object.forward;
 	Vector cp = object.centerPoint;
 	return fw - cp;
+}
+
+AABB ExpanseHelper::findAABB(const ThreeDObject& object) {
+	Vector min = object.centerPoint;
+	Vector max = object.centerPoint;
+	for (const Vector& point : object.points) {
+		
+		if (point.x < min.x) {
+			min.x = point.x;
+		}
+		if (point.y < min.y) {
+			min.y = point.y;
+		}
+		if (point.z < min.z) {
+			min.z = point.z;
+		}
+
+		if (point.x > max.x) {
+			max.x = point.x;
+		}
+		if (point.y > max.y) {
+			max.y = point.y;
+		}
+		if (point.z > max.z) {
+			max.z = point.z;
+		}
+	}
+
+	return { min, max };
+}
+
+bool ExpanseHelper::intersects(AABB a,AABB b) {
+	return (a.min.x <= b.max.x && a.max.x >= b.min.x) &&
+		(a.min.y <= b.max.y && a.max.y >= b.min.y) &&
+		(a.min.z <= b.max.z && a.max.z >= b.min.z);
 }
 
 

@@ -36,6 +36,10 @@ ThreeDObject Camera::createPerspective(const ThreeDObject& object)
 
 	Matrix cameraPerspectiveMatrix = inverseTransformationMatrix * toOrigin;
 
+	//bounding box 
+	//viewObject.AABB.min = cameraPerspectiveMatrix * object.AABB.min;
+	//viewObject.AABB.max = cameraPerspectiveMatrix * object.AABB.max;
+
 	//Camera
 	viewObject.centerPoint = cameraPerspectiveMatrix * object.centerPoint;
 	for (size_t i = 0; i < object.points.size(); i++)
@@ -46,6 +50,12 @@ ThreeDObject Camera::createPerspective(const ThreeDObject& object)
 	//Perspectief
 	Matrix pers = helper.getProjectionMatrix(near, far, fovY);
 
+	/*viewObject.AABB.min = pers * viewObject.AABB.min;
+	viewObject.AABB.min = helper.correctProjection(viewObject.AABB.min, 1080, 720);
+
+	viewObject.AABB.max = pers * viewObject.AABB.max;
+	viewObject.AABB.max = helper.correctProjection(viewObject.AABB.max, 1080, 720);*/
+
 	viewObject.centerPoint = pers * viewObject.centerPoint;
 	viewObject.centerPoint = helper.correctProjection(viewObject.centerPoint, 1080, 720);
 	for (size_t i = 0; i < viewObject.points.size(); i++)
@@ -53,6 +63,7 @@ ThreeDObject Camera::createPerspective(const ThreeDObject& object)
 		Vector newView = pers * viewObject.points[i];
 		viewObject.points[i] = helper.correctProjection(newView, 1080, 720);
 	}
+
 
 	return viewObject;
 }

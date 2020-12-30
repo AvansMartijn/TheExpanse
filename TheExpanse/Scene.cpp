@@ -43,7 +43,7 @@ void Scene::moveObjects()
 			else {
 				ExpanseHelper helper;
 				//Vector v = helper.getForwardVector(*it);
-				*it = helper.translateMatrix(*it, it->velocity.x, it->velocity.y,it->velocity.z);
+				*it = helper.translateMatrix(*it, it->velocity.x, it->velocity.y, it->velocity.z);
 				it->moveCounter++;
 				++it;
 			}
@@ -52,4 +52,73 @@ void Scene::moveObjects()
 			++it;
 		}
 	}
+}
+
+void Scene::checkCollisions()
+{
+
+	/*std::vector<ThreeDObject> newObjectList;
+	ExpanseHelper helper;
+	for (int i = 0; i < objectList.size(); i++) {
+		for (int j = 0; j < objectList.size(); j++) {
+			if (i == j) {
+				continue;
+			}
+			if (helper.intersects(objectList[i].AABB, objectList[j].AABB)) {
+				if (i == playerShipIndex) {
+					newObjectList.push_back(objectList[i]);
+				}
+				
+			}
+			else {
+				newObjectList.push_back(objectList[i]);
+			}
+		}
+	}*/
+
+	//objectList = newObjectList;
+	//for (auto i = objectList.begin(); i != objectList.end(); /* NOTHING */)
+	//{
+	//	bool deleted = false;
+	//
+	//	for (auto j = objectList.begin(); j != objectList.end(); /* NOTHING */)
+	//	{
+	//		if (i == j) {
+	//			j++;
+	//			continue;
+	//		}
+	//		if (helper.intersects(i->AABB, j->AABB)) {
+	//			//collision
+	//			//delete both
+
+	//			bool dec_i = false;
+
+	//			if (i < j) { 
+	//				--j;
+	//			}
+	//			else {
+	//				dec_i = true;
+	//			}
+
+	//			i = objectList.erase(i);
+	//			j = objectList.erase(j);
+
+	//			if (dec_i) { 
+	//				--i; 
+	//			}
+	//			deleted = true;
+	//			break;
+	//		}
+	//		else {
+	//			++j;
+	//		}
+	//		
+	//		
+	//	}
+	//	if (!deleted) {
+	//		++i;
+	//	}
+	//}
+
+	
 }

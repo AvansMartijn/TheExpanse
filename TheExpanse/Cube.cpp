@@ -35,4 +35,6 @@ Cube::Cube()
 	right = { 3, 2, -2 };
 	velocity = {0,0,0};
 	moveCounter = 0;
+	calculateAABB();
+	
 }

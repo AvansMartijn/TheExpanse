@@ -2,6 +2,7 @@
 #include <iostream>
 #include "TwoDObject.h"
 #include "ThreeDObject.h"
+#include "AABB.h"
 
 #pragma once
 class ExpanseHelper
@@ -47,6 +48,8 @@ public:
 
     Vector getForwardVector(const ThreeDObject& object);
 
+    AABB findAABB(const ThreeDObject& object);
+    bool intersects(AABB a, AABB b);
 
 private:
 

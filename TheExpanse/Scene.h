@@ -16,6 +16,7 @@ public:
 	void updateTarget(ThreeDObject object);
 	const ThreeDObject& getTarget();
 	void moveObjects();
+	void checkCollisions();
 private:
 	int playerShipIndex;
 	int targetIndex;

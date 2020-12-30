@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "Vertice.h"
 #include "PulseData.h"
+#include "AABB.h"
 
 class ThreeDObject
 {
@@ -18,6 +19,11 @@ public:
 	PulseData pulseData;
 	Vector velocity;
 	int moveCounter;
+	AABB AABB;
+	void calculateAABB();
+	
+	
+
 
 };
 

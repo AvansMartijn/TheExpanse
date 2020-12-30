@@ -18,6 +18,7 @@
 ThreeDWindow window{ 1080, 720 };
 Scene scene;
 ExpanseHelper helper;
+bool showBoundingBoxes;
 //std::vector<ThreeDObject> objectList;
 
 
@@ -27,6 +28,9 @@ void drawStuff() {
 	for (const ThreeDObject& obj : scene.objectList)
 	{
 		window.drawObject(obj);
+		if (showBoundingBoxes) {
+			window.drawAABB(obj);
+		}
 	}
 	window.renderPresent();
 
@@ -159,12 +163,14 @@ void handlePlayerControls() {
 		//bullet.
 		scene.objectList.push_back(newObj);
 	}
+	
 }
 
 void onTick() {
 	handlePlayerControls();
 	scene.updateTarget(helper.pulseObject(scene.getTarget()));
 	scene.moveObjects();
+	scene.checkCollisions();
 
 }
 void programLoop() {
@@ -189,6 +195,16 @@ void programLoop() {
 				{
 					// Break out of the loop on quit
 					break;
+				}
+				if (event.type == SDL_KEYDOWN) {
+					if (event.key.keysym.sym == SDLK_h) {
+						if (showBoundingBoxes) {
+							showBoundingBoxes = false;
+						}
+						else {
+							showBoundingBoxes = true;
+						}
+					}
 				}
 
 			}

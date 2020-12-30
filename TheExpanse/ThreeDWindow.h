@@ -14,6 +14,7 @@ public:
 	void renderPresent();
 	void clear();
 	void drawObject(const ThreeDObject& object);
+	void drawAABB(const ThreeDObject& object);
 
 };
 

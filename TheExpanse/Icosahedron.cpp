@@ -98,6 +98,9 @@ Icosahedron::Icosahedron()
 	centerPoint = { 0,0,0 };
 	velocity = {0,0,0};
 	moveCounter = 0;
+	calculateAABB();
+
+	
 
 
 	/*double g = (1 + sqrt(5)) / 2;

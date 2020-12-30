@@ -112,6 +112,8 @@ Spaceship::Spaceship()
 	up = { 2,3,-4.5 };
 	moveCounter = 0;
 	velocity = { 0,0,0 };
+	calculateAABB();
+
 }
 
 
