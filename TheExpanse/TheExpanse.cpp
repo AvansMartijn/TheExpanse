@@ -143,11 +143,27 @@ void handlePlayerControls() {
 		v = helper.normalize(v);
 		scene.updatePlayerShip(helper.translateMatrix(scene.getPlayerShip(),v.x, v.y, v.z));
 	}
+	if (keystate[SDL_SCANCODE_SPACE]) {
+		Icosahedron bullet;
+		Vector spaceShipForward = helper.getForwardVector(scene.getPlayerShip());
+		spaceShipForward = helper.normalize(spaceShipForward);
+		bullet.velocity = spaceShipForward;
+		if (keystate[SDL_SCANCODE_LSHIFT]) {
+			bullet.velocity.x = bullet.velocity.x + spaceShipForward.x;
+			bullet.velocity.y = bullet.velocity.y + spaceShipForward.y;
+			bullet.velocity.z = bullet.velocity.z + spaceShipForward.z;
+		}
+		ThreeDObject newObj = helper.translateMatrix(bullet, -bullet.centerPoint.x, -bullet.centerPoint.y, -bullet.centerPoint.z);
+		newObj = helper.translateMatrix(newObj, scene.getPlayerShip().forward.x, scene.getPlayerShip().forward.y, scene.getPlayerShip().forward.z);
+		//bullet.
+		scene.objectList.push_back(newObj);
+	}
 }
 
 void onTick() {
 	handlePlayerControls();
 	scene.updateTarget(helper.pulseObject(scene.getTarget()));
+	scene.moveObjects();
 
 }
 void programLoop() {

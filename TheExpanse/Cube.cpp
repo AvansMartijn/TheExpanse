@@ -30,4 +30,9 @@ Cube::Cube()
 	lines.push_back({ 3, 7 });
 
 	centerPoint = Vector( 2, 2, -2 );
+	forward = {2, 2, -3};
+	up = {2, 3, -2};
+	right = { 3, 2, -2 };
+	velocity = {0,0,0};
+	moveCounter = 0;
 }

@@ -15,6 +15,7 @@ public:
 	void setTarget(ThreeDObject object);
 	void updateTarget(ThreeDObject object);
 	const ThreeDObject& getTarget();
+	void moveObjects();
 private:
 	int playerShipIndex;
 	int targetIndex;

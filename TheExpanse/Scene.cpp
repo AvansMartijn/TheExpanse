@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "ExpanseHelper.h"
 
 void Scene::setPlayerShip(Spaceship spaceship)
 {
@@ -30,4 +31,25 @@ void Scene::updateTarget(ThreeDObject object)
 const ThreeDObject& Scene::getTarget()
 {
 	return objectList.at(targetIndex);
+}
+
+void Scene::moveObjects()
+{
+	for (auto it = objectList.begin(); it != objectList.end(); /* NOTHING */)
+	{
+		if (it->velocity.x != 0 || it->velocity.y != 0 || it->velocity.z != 0) {
+			if (it->moveCounter > 20)
+				it = objectList.erase(it);
+			else {
+				ExpanseHelper helper;
+				//Vector v = helper.getForwardVector(*it);
+				*it = helper.translateMatrix(*it, it->velocity.x, it->velocity.y,it->velocity.z);
+				it->moveCounter++;
+				++it;
+			}
+		}
+		else {
+			++it;
+		}
+	}
 }

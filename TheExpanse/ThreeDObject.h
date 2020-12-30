@@ -16,6 +16,8 @@ public:
 	Vector forward;
 	std::vector<Vertice> lines;
 	PulseData pulseData;
+	Vector velocity;
+	int moveCounter;
 
 };
 

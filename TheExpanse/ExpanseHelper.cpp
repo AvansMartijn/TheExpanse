@@ -276,7 +276,7 @@ ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
 	return newObject;
 }
 
-ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
+ThreeDObject ExpanseHelper::jaw(const ThreeDObject& object, double degrees)
 {
 	ThreeDObject newObject = object;
 
@@ -299,7 +299,7 @@ ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 	return newObject;
 }
 
-ThreeDObject ExpanseHelper::jaw(const ThreeDObject& object, double degrees)
+ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 {
 	ThreeDObject newObject = object;
 

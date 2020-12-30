@@ -6,6 +6,6 @@ class Spaceship: public ThreeDObject
 {
 public:
 	Spaceship();
-	Vector getForward();
+	//Vector getForward();
 };
 

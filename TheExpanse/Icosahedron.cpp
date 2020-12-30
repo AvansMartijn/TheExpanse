@@ -96,7 +96,8 @@ Icosahedron::Icosahedron()
 	lines.push_back({ 11, 7 });
 
 	centerPoint = { 0,0,0 };
-
+	velocity = {0,0,0};
+	moveCounter = 0;
 
 
 	/*double g = (1 + sqrt(5)) / 2;
