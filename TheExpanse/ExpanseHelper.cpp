@@ -484,6 +484,7 @@ ThreeDObject ExpanseHelper::pulseObject(const ThreeDObject& object)
 			return newObj;
 		}
 	}
+	return object;
 }
 
 Vector ExpanseHelper::getForwardVector(const ThreeDObject& object)

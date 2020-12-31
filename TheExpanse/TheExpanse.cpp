@@ -167,50 +167,19 @@ void handlePlayerControls() {
 }
 
 void onTick() {
-	handlePlayerControls();
-	scene.updateTarget(helper.pulseObject(scene.getTarget()));
-	scene.moveObjects();
-	scene.checkCollisions();
+	if (!scene.gameOver) {
+		handlePlayerControls();
+		scene.pulseObjects();
+		scene.moveObjects();
+		scene.checkCollisions();
+	}
 
 }
-void programLoop() {
 
-	unsigned int a = SDL_GetTicks();
-	unsigned int b = SDL_GetTicks();
-	double delta = 0;
-
-	while (true)
-	{
-		a = SDL_GetTicks();
-		delta = a - b;
-		if (delta > 1000 / 60) {
-			b = a;
-
-			onTick();
-			// Get the next event
-			SDL_Event event;
-			if (SDL_PollEvent(&event))
-			{
-				if (event.type == SDL_QUIT)
-				{
-					// Break out of the loop on quit
-					break;
-				}
-				if (event.type == SDL_KEYDOWN) {
-					if (event.key.keysym.sym == SDLK_h) {
-						if (showBoundingBoxes) {
-							showBoundingBoxes = false;
-						}
-						else {
-							showBoundingBoxes = true;
-						}
-					}
-				}
-
-			}
-			drawStuff();
-		}
-	}
+void reset() {
+	Scene newScene;
+	scene = newScene;
+	//initWorld();
 }
 
 void initWorld() {
@@ -243,10 +212,55 @@ void initWorld() {
 	scene.objectList.push_back(newBody4);
 	scene.objectList.push_back(newBody5);
 	scene.objectList.push_back(newBody6);
+} 
 
+void programLoop() {
 
+	unsigned int a = SDL_GetTicks();
+	unsigned int b = SDL_GetTicks();
+	double delta = 0;
 
+	while (true)
+	{
+		a = SDL_GetTicks();
+		delta = a - b;
+		if (delta > 1000 / 60) {
+			b = a;
+
+			onTick();
+			// Get the next event
+			SDL_Event event;
+			if (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					// Break out of the loop on quit
+					break;
+				}
+				if (event.type == SDL_KEYDOWN) {
+					if (event.key.keysym.sym == SDLK_h) {
+						if (showBoundingBoxes) {
+							showBoundingBoxes = false;
+						}
+						else {
+							showBoundingBoxes = true;
+						}
+					}
+					if (event.key.keysym.sym == SDLK_ESCAPE) {
+						reset();
+						initWorld();
+					}
+				}
+
+			}
+			drawStuff();
+		}
+	}
 }
+
+
+
+
 
 
 int main()

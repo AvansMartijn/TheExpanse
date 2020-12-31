@@ -17,5 +17,7 @@ public:
 	Vector operator+(int operand);
 	Vector operator-(int operand);
 	Vector operator*(double operand);
+
+	bool operator==(const Vector& operand);
 };
 

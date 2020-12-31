@@ -40,3 +40,12 @@ Vector Vector::operator- (int operand) {
 Vector Vector::operator* (double operand) {
     return Vector(this->x * operand, this->y * operand, this->z * operand);
 }
+
+bool Vector::operator==(const Vector& operand)
+{
+    if (this->x == operand.x && this->y == operand.y && this->z == operand.z) {
+        return true;
+    }
+
+    return false;
+}

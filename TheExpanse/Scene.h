@@ -17,6 +17,8 @@ public:
 	const ThreeDObject& getTarget();
 	void moveObjects();
 	void checkCollisions();
+	void pulseObjects();
+	bool gameOver = false;
 private:
 	int playerShipIndex;
 	int targetIndex;

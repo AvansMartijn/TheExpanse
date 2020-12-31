@@ -35,8 +35,10 @@ const ThreeDObject& Scene::getTarget()
 
 void Scene::moveObjects()
 {
+	ExpanseHelper helper;
 	for (auto it = objectList.begin(); it != objectList.end(); /* NOTHING */)
 	{
+		
 		if (it->velocity.x != 0 || it->velocity.y != 0 || it->velocity.z != 0) {
 			if (it->moveCounter > 20)
 				it = objectList.erase(it);
@@ -58,7 +60,6 @@ void Scene::checkCollisions()
 {
 
 	/*std::vector<ThreeDObject> newObjectList;
-	ExpanseHelper helper;
 	for (int i = 0; i < objectList.size(); i++) {
 		for (int j = 0; j < objectList.size(); j++) {
 			if (i == j) {
@@ -77,48 +78,68 @@ void Scene::checkCollisions()
 	}*/
 
 	//objectList = newObjectList;
-	//for (auto i = objectList.begin(); i != objectList.end(); /* NOTHING */)
-	//{
-	//	bool deleted = false;
-	//
-	//	for (auto j = objectList.begin(); j != objectList.end(); /* NOTHING */)
-	//	{
-	//		if (i == j) {
-	//			j++;
-	//			continue;
-	//		}
-	//		if (helper.intersects(i->AABB, j->AABB)) {
-	//			//collision
-	//			//delete both
+	ExpanseHelper helper;
+	for (auto i = objectList.begin(); i != objectList.end(); /* NOTHING */)
+	{
+		bool deleted = false;
+	
+		for (auto j = objectList.begin(); j != objectList.end(); /* NOTHING */)
+		{
+			if (i == j) {
+				j++;
+				continue;
+			}
+			if (helper.intersects(i->AABB, j->AABB)) {
+				//collision
+				//delete both
 
-	//			bool dec_i = false;
+				bool dec_i = false;
 
-	//			if (i < j) { 
-	//				--j;
-	//			}
-	//			else {
-	//				dec_i = true;
-	//			}
+				/*if (i < j) { 
+					--j;
+				}
+				else {
+					dec_i = true;
+				}*/
+				if (i->centerPoint == getPlayerShip().centerPoint || j->centerPoint == getPlayerShip().centerPoint) {
+					gameOver = true;
+					return;
+				}
 
-	//			i = objectList.erase(i);
-	//			j = objectList.erase(j);
+				if (i < j) {
+					j = objectList.erase(j);
+					i = objectList.erase(i);
+				}
+				else {
+					i = objectList.erase(i);
+					j = objectList.erase(j);
+				}
 
-	//			if (dec_i) { 
-	//				--i; 
-	//			}
-	//			deleted = true;
-	//			break;
-	//		}
-	//		else {
-	//			++j;
-	//		}
-	//		
-	//		
-	//	}
-	//	if (!deleted) {
-	//		++i;
-	//	}
-	//}
+				/*if (dec_i) { 
+					--i; 
+				}*/
+				deleted = true;
+				break;
+			}
+			else {
+				++j;
+			}
+			
+			
+		}
+		if (!deleted) {
+			++i;
+		}
+	}
 
 	
+}
+
+void Scene::pulseObjects()
+{
+	ExpanseHelper helper;
+	for (int i = 0; i < objectList.size(); i++) {
+		objectList[i] = helper.pulseObject(objectList[i]);
+		//*it = helper.pulseObject(*it);
+	}
 }
