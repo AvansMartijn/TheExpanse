@@ -326,12 +326,18 @@ ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 	return newObject;
 }
 
-Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees, const Vector& v)
+Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees, const Vector& vec)
 {
 	//STEP ONE: Rotate to XY
-
+	Vector v = vec;
+	//if both are 0, turn it ever so slightly to prevent undefined behaviour
+	if (v.x == 0 && v.z == 0) {
+		v.x = 0.00000000000001;
+		v.z = 0.00000000000001;
+	}
 	//1.1 Get Tau1 (Angle between X-axis and bottom of triangle
 	Matrix yRotationMatrix(4, 4);
+
 	yRotationMatrix.mData[0] = {
 		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
 		0,
@@ -372,6 +378,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 		0, 0, 0, 1
 	};
 
+
 	//STEP TWO: ROTATE TO X
 	Matrix zRotationMatrix(4, 4);
 	zRotationMatrix.mData[0] = {
@@ -390,6 +397,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	zRotationMatrix.mData[3] = {
 		0, 0, 0, 1
 	};
+
 
 	//STEP QUATTRO: GET Mirror for returning
 	Matrix zRotationMatrixBack(4, 4);
@@ -411,14 +419,17 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	};
 
 
+
 	//STEP TRES: Rotate around X Axis
 	Matrix xRotationMatrix = getRotationMatrixXAxis(degrees);
+
 
 	//Translations
 	Matrix toOrigin = getTranslationMatrix(-object.centerPoint.x, -object.centerPoint.y, -object.centerPoint.z);
 	Matrix back = getTranslationMatrix(object.centerPoint.x, object.centerPoint.y, object.centerPoint.z);
+	Matrix final = back * yRotationMatrixBack * zRotationMatrixBack * xRotationMatrix * zRotationMatrix * yRotationMatrix * toOrigin;
 
-	return back * yRotationMatrixBack * zRotationMatrixBack * xRotationMatrix * zRotationMatrix * yRotationMatrix * toOrigin;
+	return final;
 }
 
 
@@ -448,9 +459,7 @@ Matrix ExpanseHelper::getProjectionMatrix(double near, double far, double fovY)
 
 Vector ExpanseHelper::correctProjection(const Vector& vector, double screenSizeX, double screenSizeY)
 {
-	//if (vector.w <= 0) {
-	//	return {0,0,0};
-	//}
+	
 	Vector v;
 	v.x = (screenSizeX / 2) + (vector.x / vector.w) * (screenSizeX / 2);
 	v.y = (screenSizeY / 2) + (vector.y / vector.w) * (screenSizeY / 2);
@@ -536,6 +545,7 @@ bool ExpanseHelper::intersects(AABB a,AABB b) {
 		(a.min.y <= b.max.y && a.max.y >= b.min.y) &&
 		(a.min.z <= b.max.z && a.max.z >= b.min.z);
 }
+
 
 
 

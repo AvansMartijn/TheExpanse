@@ -2,13 +2,6 @@
 
 Icosahedron::Icosahedron()
 {
-	//The Cartesian coordinates of an origin - centered regular icosahedron of edge length 2 are:
-	//
-	//	(0, +-1, +-G)
-	//	(+-1, +-G, 0)
-	//	(+-G, 0, +-1)
-	//where G = (1 + sqrt(5)) / 2 is the Golden Ratio.
-
 	double X = .525731112119133606f;
 	double Z = .850650808352039932f;
 	double N = 0.f;
@@ -99,14 +92,4 @@ Icosahedron::Icosahedron()
 	velocity = {0,0,0};
 	moveCounter = 0;
 	calculateAABB();
-
-	
-
-
-	/*double g = (1 + sqrt(5)) / 2;
-	points.push_back({ 0, 1, g });
-	points.push_back({ 1, g, 0 });
-	points.push_back({ 0, 1, g });*/
-
-	//centerPoint = { 0,0,0 };
 }

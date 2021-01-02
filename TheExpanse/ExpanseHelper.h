@@ -50,7 +50,6 @@ public:
 
     AABB findAABB(const ThreeDObject& object);
     bool intersects(AABB a, AABB b);
-
 private:
 
     const double PI = atan(1) * 4;
