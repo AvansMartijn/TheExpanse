@@ -59,23 +59,6 @@ void Scene::moveObjects()
 void Scene::checkCollisions()
 {
 
-	/*std::vector<ThreeDObject> newObjectList;
-	for (int i = 0; i < objectList.size(); i++) {
-		for (int j = 0; j < objectList.size(); j++) {
-			if (i == j) {
-				continue;
-			}
-			if (helper.intersects(objectList[i].AABB, objectList[j].AABB)) {
-				if (i == playerShipIndex) {
-					newObjectList.push_back(objectList[i]);
-				}
-				
-			}
-			else {
-				newObjectList.push_back(objectList[i]);
-			}
-		}
-	}*/
 
 	//objectList = newObjectList;
 	ExpanseHelper helper;
@@ -95,12 +78,6 @@ void Scene::checkCollisions()
 
 				bool dec_i = false;
 
-				/*if (i < j) { 
-					--j;
-				}
-				else {
-					dec_i = true;
-				}*/
 				if (i->centerPoint == getPlayerShip().centerPoint || j->centerPoint == getPlayerShip().centerPoint) {
 					gameOver = true;
 					return;

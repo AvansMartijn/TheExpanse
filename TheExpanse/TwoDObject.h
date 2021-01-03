@@ -8,7 +8,6 @@ class TwoDObject
 {
 public:
 	TwoDObject();
-	//std::vector<Line> lines;
 	Vector getCenter();
 };
 

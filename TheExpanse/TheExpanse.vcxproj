@@ -166,6 +166,7 @@
     <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="ExpanseController.cpp" />
     <ClCompile Include="ExpanseHelper.cpp" />
     <ClCompile Include="Icosahedron.cpp" />
     <ClCompile Include="PulseData.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="ExpanseController.h" />
     <ClInclude Include="ExpanseHelper.h" />
     <ClInclude Include="Icosahedron.h" />
     <ClInclude Include="PulseData.h" />

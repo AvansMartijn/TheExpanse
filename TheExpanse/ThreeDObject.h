@@ -9,7 +9,6 @@
 class ThreeDObject
 {
 public:
-	//ThreeDObject();
 	std::vector<Vector> points;
 	Vector centerPoint;
 	Vector up;
