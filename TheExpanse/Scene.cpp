@@ -36,15 +36,17 @@ const ThreeDObject& Scene::getTarget()
 void Scene::moveObjects()
 {
 	ExpanseHelper helper;
+	//loop through all objects
 	for (auto it = objectList.begin(); it != objectList.end(); /* NOTHING */)
 	{
-		
+		//at least velocity on 1 axis is not 0
 		if (it->velocity.x != 0 || it->velocity.y != 0 || it->velocity.z != 0) {
+			//if it reached max moves delete it (mostly for bullets)
 			if (it->moveCounter > 20)
 				it = objectList.erase(it);
 			else {
+				//move object
 				ExpanseHelper helper;
-				//Vector v = helper.getForwardVector(*it);
 				*it = helper.translateMatrix(*it, it->velocity.x, it->velocity.y, it->velocity.z);
 				it->moveCounter++;
 				++it;
@@ -60,7 +62,6 @@ void Scene::checkCollisions()
 {
 
 
-	//objectList = newObjectList;
 	ExpanseHelper helper;
 	for (auto i = objectList.begin(); i != objectList.end(); /* NOTHING */)
 	{
@@ -73,9 +74,6 @@ void Scene::checkCollisions()
 				continue;
 			}
 			if (helper.intersects(i->AABB, j->AABB)) {
-				//collision
-				//delete both
-
 				bool dec_i = false;
 
 				if (i->centerPoint == getPlayerShip().centerPoint || j->centerPoint == getPlayerShip().centerPoint) {
@@ -91,10 +89,7 @@ void Scene::checkCollisions()
 					i = objectList.erase(i);
 					j = objectList.erase(j);
 				}
-
-				/*if (dec_i) { 
-					--i; 
-				}*/
+			
 				deleted = true;
 				break;
 			}

@@ -81,7 +81,7 @@ void Window::drawTwoDObject(const TwoDObject& object, std::string face)
 
 }
 
-void Window::drawThreeDObject(const ThreeDObject& object, std::string face)
+void Window::drawThreeDObject(const ThreeDObject& object)
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     for (int i = 0; i < object.lines.size(); i++) {
@@ -89,25 +89,6 @@ void Window::drawThreeDObject(const ThreeDObject& object, std::string face)
         double yS = 0;
         double xE = 0;
         double yE = 0;
-       /* if (face == "top") {
-            xS = object.lines[i].start.x;
-            yS = object.lines[i].start.z;
-            xE = object.lines[i].end.x;
-            yE = object.lines[i].end.z;
-        }
-        else if (face == "right") {
-            xS = object.lines[i].start.z;
-            yS = object.lines[i].start.y;
-            xE = object.lines[i].end.z;
-            yE = object.lines[i].end.y;
-
-        }
-        else {
-            xS = object.lines[i].start.x;
-            yS = object.lines[i].start.y;
-            xE = object.lines[i].end.x;
-            yE = object.lines[i].end.y;
-        }*/
 
         int xStart = (int)(offset + (xS * scale));
         int yStart = (int)(offset + (yS * -1 * scale));
@@ -128,18 +109,4 @@ void Window::clear() {
 
 void Window::renderPresent() {
     SDL_RenderPresent(renderer);
-}
-
-void Window::addViewport(std::string key, double width, double height, double x, double y) {
-    SDL_Rect rect;
-    rect.w = width;
-    rect.h = height;
-    rect.x = x;
-    rect.y = y;
-    viewportMap.insert(std::pair<std::string, SDL_Rect>(key, rect));
-}
-
-void Window::renderSetViewport(std::string key) {
-    SDL_Rect rect = viewportMap.at(key);
-    SDL_RenderSetViewport(renderer, &rect);
 }

@@ -26,21 +26,13 @@ void ThreeDWindow::drawObject(const ThreeDObject& object) {
 
     ThreeDObject persObject = camera.createPerspective(object);
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-    //drawAABB(persObject);
-   /* double offset = 200;
-    double scale = 20;*/
 
     for (int i = 0; i < object.lines.size(); i++) {
 
-        /*if (persObject.lines[i].end.w < 0 && persObject.lines[i].end.w < 0) {
-            continue;
-        }*/
-        
         double xS = persObject.points[persObject.lines[i].start].x;
         double yS = persObject.points[persObject.lines[i].start].y;
         double xE = persObject.points[persObject.lines[i].end].x;
         double yE = persObject.points[persObject.lines[i].end].y;
-
        
         if (persObject.points[persObject.lines[i].start].w > 0 && persObject.points[persObject.lines[i].end].w > 0) {
             SDL_RenderDrawLine(renderer, xS, yS, xE, yE);

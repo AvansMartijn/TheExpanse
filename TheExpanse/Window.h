@@ -23,8 +23,6 @@ public:
 	void drawLine(const Vector& start, const Vector& end, bool highlighted);
 	void drawLine(const Vector& end);
 	void drawTwoDObject(const TwoDObject& object, std::string face = "front");
-	void drawThreeDObject(const ThreeDObject& object, std::string face = "front");
-	void addViewport(std::string key, double width, double height, double x, double y);
-	void renderSetViewport(std::string key);
+	void drawThreeDObject(const ThreeDObject& object);
 };
 
