@@ -2,7 +2,6 @@
 
 Cube::Cube()
 {
-	//BOX <-----------------------------------
 	points.push_back({ 1, 1, -1 });
 	points.push_back({ 1, 3, -1 });
 	points.push_back({ 3, 3, -1 });
@@ -13,7 +12,6 @@ Cube::Cube()
 	points.push_back({ 3, 3, -3 });
 	points.push_back({ 3, 1, -3 });
 
-	//BOX
 	lines.push_back({ 0, 1 });
 	lines.push_back({ 1, 2 });
 	lines.push_back({ 2, 3 });

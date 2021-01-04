@@ -1,20 +1,5 @@
 #include "ExpanseHelper.h"
 
-void ExpanseHelper::printMatrix(const Matrix& m)
-{
-	std::vector<std::vector<double>> newData;
-	for (size_t i = 0; i < m.mData.size(); i++)
-	{
-		std::vector<double> newRow;
-		for (size_t j = 0; j < m.mData.at(i).size(); j++)
-		{
-			std::cout << (m.mData.at(i).at(j)) << " ";
-		}
-		std::cout << "\n";
-	}
-	std::cout << "\n";
-}
-
 Matrix ExpanseHelper::getTranslationMatrix(double xChange, double yChange, double zChange)
 {
 	Matrix translationMatrix(4, 4);
@@ -417,8 +402,6 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	zRotationMatrixBack.mData[3] = {
 		0, 0, 0, 1
 	};
-
-
 
 	//STEP TRES: Rotate around X Axis
 	Matrix xRotationMatrix = getRotationMatrixXAxis(degrees);
