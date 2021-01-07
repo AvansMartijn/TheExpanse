@@ -144,7 +144,6 @@ void ExpanseController::handlePlayerControls()
 	{
 		scene.updatePlayerShip(helper.roll(scene.getPlayerShip(), 3));
 	}
-
 	//ROLL LEFT
 	if (keystate[SDL_SCANCODE_Q])
 	{
@@ -153,33 +152,32 @@ void ExpanseController::handlePlayerControls()
 	//CAMERA UP
 	if (keystate[SDL_SCANCODE_PAGEUP])
 	{
-		window.camera.eye = window.camera.eye - window.camera.up;
+		window.camera.eye = helper.getTranslationMatrix(0, -1, 0) * window.camera.eye;
 	}
 	//CAMERA DOWN
 	if (keystate[SDL_SCANCODE_PAGEDOWN])
 	{
-		window.camera.eye = window.camera.eye + window.camera.up;
+		window.camera.eye = helper.getTranslationMatrix(0, 1, 0) * window.camera.eye;
 	}
 	//camera forward
 	if (keystate[SDL_SCANCODE_UP])
 	{
-		window.camera.eye = window.camera.eye - window.camera.direction;
+		window.camera.eye = helper.getTranslationMatrix(0, 0, -1) * window.camera.eye;
 	}
 	//camera backward
 	if (keystate[SDL_SCANCODE_DOWN])
 	{
-		window.camera.eye = window.camera.eye + window.camera.direction;
+		window.camera.eye = helper.getTranslationMatrix(0, 0, 1) * window.camera.eye;
 	}
 	//camera left
 	if (keystate[SDL_SCANCODE_LEFT])
 	{
-		window.camera.eye = window.camera.eye - window.camera.right;
-
+		window.camera.eye = helper.getTranslationMatrix(-1, 0, 0) * window.camera.eye;
 	}
 	//camera right
 	if (keystate[SDL_SCANCODE_RIGHT])
 	{
-		window.camera.eye = window.camera.eye + window.camera.right;
+		window.camera.eye = helper.getTranslationMatrix(1, 0, 0) * window.camera.eye;
 	}
 	if (keystate[SDL_SCANCODE_LSHIFT]) {
 		Vector v = helper.getForwardVector(scene.getPlayerShip());
