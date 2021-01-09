@@ -303,6 +303,15 @@ ThreeDObject ExpanseHelper::pitch(const ThreeDObject& object, double degrees)
 
 Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double degrees, const Vector& vec)
 {
+	//This is a seven step operation.
+	//1. Translate to origin (so that the line goes through origin)
+	//2. Rotate from XYZ to XY
+	//3. Rotate from XY to X
+	//4. Rotate around X
+	//5. Rotate Back from X to XY (same as 3 but the other way around)
+	//6. Rotate Back from XY to XYZ (same as 2 but other way around)
+	//7. Translate back (same as 1 but other way around)
+
 	//STEP ONE: Rotate to XY
 	Vector v = vec;
 	//if both are 0, turn it ever so slightly to prevent undefined behaviour
