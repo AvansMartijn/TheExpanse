@@ -2,6 +2,7 @@
 
 ThreeDWindow::ThreeDWindow(int width, int height)
 {
+    //SDL Specific construction
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("The Expanse",
         SDL_WINDOWPOS_CENTERED,
@@ -12,6 +13,7 @@ ThreeDWindow::ThreeDWindow(int width, int height)
 }
 
 void ThreeDWindow::clear() {
+    //Clear the window
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
 }
@@ -19,6 +21,7 @@ void ThreeDWindow::clear() {
 
 
 void ThreeDWindow::renderPresent() {
+    //Show what has been drawn
     SDL_RenderPresent(renderer);
 }
 

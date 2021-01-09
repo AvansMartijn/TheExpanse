@@ -191,10 +191,11 @@ ThreeDObject ExpanseHelper::rotateAroundOrigin(const ThreeDObject& object, doubl
 	return newObject;
 }
 
-ThreeDObject ExpanseHelper::translateMatrix(const ThreeDObject& object, double xChange, double yChange, double zChange) {
+ThreeDObject ExpanseHelper::translate(const ThreeDObject& object, double xChange, double yChange, double zChange) {
 	ThreeDObject newObject = object;
 	Matrix translationMatrix = getTranslationMatrix(xChange, yChange, zChange);
 
+	//Also translate center, forward, up and right
 	newObject.centerPoint = translationMatrix * object.centerPoint;
 	newObject.forward = translationMatrix * object.forward;
 	newObject.up = translationMatrix * object.up;
@@ -227,17 +228,6 @@ Vector ExpanseHelper::normalize(const Vector& v) {
 	}
 
 	return newVector;
-}
-
-Vector ExpanseHelper::getPerpendicularVector(const Vector& s, const Vector& r)
-{
-	double lambda;
-	Vector perpVector;
-
-
-	//perpVector = s + (r * lambda);
-
-	return perpVector;
 }
 
 ThreeDObject ExpanseHelper::roll(const ThreeDObject& object, double degrees)
@@ -342,7 +332,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 		0, 0, 0, 1
 	};
 
-	//STEP FIVE
+	//STEP Five
 	Matrix yRotationMatrixBack(4, 4);
 	yRotationMatrixBack.mData[0] = {
 		v.x / sqrt(pow(v.x, 2) + pow(v.z, 2)),
@@ -364,7 +354,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	};
 
 
-	//STEP TWO: ROTATE TO X
+	//STEP Two: ROTATE TO X
 	Matrix zRotationMatrix(4, 4);
 	zRotationMatrix.mData[0] = {
 		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
@@ -384,7 +374,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 	};
 
 
-	//STEP QUATTRO: GET Mirror for returning
+	//STEP Four: GET Mirror for returning
 	Matrix zRotationMatrixBack(4, 4);
 	zRotationMatrixBack.mData[0] = {
 		sqrt(pow(v.x, 2) + pow(v.z, 2)) / sqrt(pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2)),
@@ -403,7 +393,7 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 		0, 0, 0, 1
 	};
 
-	//STEP TRES: Rotate around X Axis
+	//STEP Three: Rotate around X Axis
 	Matrix xRotationMatrix = getRotationMatrixXAxis(degrees);
 
 
@@ -414,8 +404,6 @@ Matrix ExpanseHelper::getRollRotationMatrix(const ThreeDObject& object, double d
 
 	return final;
 }
-
-
 
 Matrix ExpanseHelper::getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction) {
 	Matrix inverseTransformMatrix(4, 4);
@@ -520,7 +508,3 @@ bool ExpanseHelper::intersects(AABB a,AABB b) {
 		(a.min.y <= b.max.y && a.max.y >= b.min.y) &&
 		(a.min.z <= b.max.z && a.max.z >= b.min.z);
 }
-
-
-
-

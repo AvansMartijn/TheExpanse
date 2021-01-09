@@ -47,7 +47,7 @@ void Scene::moveObjects()
 			else {
 				//move object
 				ExpanseHelper helper;
-				*it = helper.translateMatrix(*it, it->velocity.x, it->velocity.y, it->velocity.z);
+				*it = helper.translate(*it, it->velocity.x, it->velocity.y, it->velocity.z);
 				it->moveCounter++;
 				++it;
 			}
@@ -112,6 +112,5 @@ void Scene::pulseObjects()
 	ExpanseHelper helper;
 	for (int i = 0; i < objectList.size(); i++) {
 		objectList[i] = helper.pulseObject(objectList[i]);
-		//*it = helper.pulseObject(*it);
 	}
 }

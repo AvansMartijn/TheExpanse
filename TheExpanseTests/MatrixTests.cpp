@@ -19,6 +19,9 @@
 #include "../TheExpanse/Vertice.h"
 #include "../TheExpanse/Vertice.cpp"
 
+#include "../TheExpanse/PulseData.h"
+#include "../TheExpanse/PulseData.cpp"
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace TheExpanseTests

@@ -17,7 +17,7 @@ void ExpanseController::initWorld()
 {
 	Spaceship theShip;
 	Icosahedron target;
-	ThreeDObject newTarget = helper.translateMatrix(target, 0, 0, -40);
+	ThreeDObject newTarget = helper.translate(target, 0, 0, -40);
 	newTarget.pulseData.growCounter = 0;
 	newTarget.pulseData.growMultiplier = 1.05;
 	newTarget.pulseData.isGrowing = true;
@@ -25,17 +25,17 @@ void ExpanseController::initWorld()
 	scene.setPlayerShip(theShip);
 	scene.setTarget(newTarget);
 	Cube body1;
-	ThreeDObject newBody1 = helper.translateMatrix(body1, -10, 5, -30);
+	ThreeDObject newBody1 = helper.translate(body1, -10, 5, -30);
 	Cube body2;
-	ThreeDObject newBody2 = helper.translateMatrix(body1, 10, 5, -10);
+	ThreeDObject newBody2 = helper.translate(body1, 10, 5, -10);
 	Cube body3;
-	ThreeDObject newBody3 = helper.translateMatrix(body1, 7, 9, -5);
+	ThreeDObject newBody3 = helper.translate(body1, 7, 9, -5);
 	Cube body4;
-	ThreeDObject newBody4 = helper.translateMatrix(body1, -15, 30, -60);
+	ThreeDObject newBody4 = helper.translate(body1, -15, 30, -60);
 	Cube body5;
-	ThreeDObject newBody5 = helper.translateMatrix(body1, 8, -30, -20);
+	ThreeDObject newBody5 = helper.translate(body1, 8, -30, -20);
 	Cube body6;
-	ThreeDObject newBody6 = helper.translateMatrix(body1, 15, -10, -15);
+	ThreeDObject newBody6 = helper.translate(body1, 15, -10, -15);
 
 
 	scene.objectList.push_back(newBody1);
@@ -182,7 +182,7 @@ void ExpanseController::handlePlayerControls()
 	if (keystate[SDL_SCANCODE_LSHIFT]) {
 		Vector v = helper.getForwardVector(scene.getPlayerShip());
 		v = helper.normalize(v);
-		scene.updatePlayerShip(helper.translateMatrix(scene.getPlayerShip(), v.x, v.y, v.z));
+		scene.updatePlayerShip(helper.translate(scene.getPlayerShip(), v.x, v.y, v.z));
 	}
 	if (keystate[SDL_SCANCODE_SPACE]) {
 		Icosahedron bullet;
@@ -194,10 +194,10 @@ void ExpanseController::handlePlayerControls()
 			bullet.velocity.y = bullet.velocity.y + spaceShipForward.y;
 			bullet.velocity.z = bullet.velocity.z + spaceShipForward.z;
 		}
-		ThreeDObject newObj = helper.translateMatrix(bullet, -bullet.centerPoint.x, -bullet.centerPoint.y, -bullet.centerPoint.z);
+		ThreeDObject newObj = helper.translate(bullet, -bullet.centerPoint.x, -bullet.centerPoint.y, -bullet.centerPoint.z);
 		newObj = helper.scaleOnLocation(newObj, 0.2, 0.2, 0.2);
-		newObj = helper.translateMatrix(newObj, scene.getPlayerShip().forward.x, scene.getPlayerShip().forward.y, scene.getPlayerShip().forward.z);
-		newObj = helper.translateMatrix(newObj, bullet.velocity.x, bullet.velocity.y, bullet.velocity.z);
+		newObj = helper.translate(newObj, scene.getPlayerShip().forward.x, scene.getPlayerShip().forward.y, scene.getPlayerShip().forward.z);
+		newObj = helper.translate(newObj, bullet.velocity.x, bullet.velocity.y, bullet.velocity.z);
 		//bullet.
 		scene.objectList.push_back(newObj);
 

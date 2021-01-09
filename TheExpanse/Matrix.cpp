@@ -5,11 +5,11 @@ Matrix::Matrix(int rows, int cols)
 {
 	_rows = rows;
 	_cols = cols;
-
+	//When a Matrix is created, also create the mData
 	for (int i = 0; i < rows; i++)
 	{
 		std::vector<double> newRow;
-		for (int i = 0; i < cols; i++)
+		for (int j = 0; j < cols; j++)
 		{
 			newRow.push_back(0);
 		}
@@ -85,6 +85,7 @@ Matrix Matrix::operator*(int scalar)
 
 Vector Matrix::operator*(const Vector& operand)
 {
+	//Create a temporary matrix from the vector to do the calculation
 	Matrix tempMatrix(_rows, 1);
 	tempMatrix.mData[0][0] = operand.x;
 	tempMatrix.mData[1][0] = operand.y;

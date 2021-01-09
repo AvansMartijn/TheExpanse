@@ -10,7 +10,7 @@ class ExpanseHelper
 public:
     //Translation
     Matrix getTranslationMatrix(double xChange, double yChange, double zChange);
-    ThreeDObject translateMatrix(const ThreeDObject& object, double xChange, double yChange, double zChange);
+    ThreeDObject translate(const ThreeDObject& object, double xChange, double yChange, double zChange);
 
     //Scale
     Matrix getScalingMatrix(double xScale, double yScale, double zScale);
@@ -30,9 +30,6 @@ public:
     //CrossProduct
     Vector getCrossProduct(const Vector& vA, const Vector& vB);
     Vector normalize(const Vector& v);
-
-    //Normaalvector
-    Vector getPerpendicularVector(const Vector& s, const Vector& r);
 
     //transformation
     Matrix getInverseTransformationMatrix(const Vector& right, const Vector& up, const Vector& direction);

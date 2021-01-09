@@ -34,18 +34,6 @@ Vector TwoDObject::getCenter()
 
 	// For all vertices
 	int i = 0;
-	/*for (i = 0; i < lines.size(); ++i)
-	{
-		x0 = lines[i].start.x;
-		y0 = lines[i].start.y;
-		x1 = lines[i].end.x;
-		y1 = lines[i].end.y;
-		a = x0 * y1 - x1 * y0;
-		signedArea += a;
-		double centroidX = centroid.x + (x0 + x1) * a;
-		double centroidY = centroid.y + (y0 + y1) * a;
-		centroid = { centroidX, centroidY, 1 };
-	}*/
 
 	signedArea *= 0.5;
 
